@@ -1,0 +1,55 @@
+seed: 7
+environment:
+  map_name: small_loop
+  domain_rand: false
+  max_steps: 1500
+  frame_skip: 1
+  user_tile_start: null
+  goal_tile: null
+state:
+  stop_lateral_limit: 0.40
+  stop_orientation_cos: 0.70710678
+  sign_to_line_offset: 0.20
+  stop_max_distance: 3.0
+  stop_zone: 0.45
+  stop_pass_distance: 0.55
+  stop_speed: 0.02
+  tile_lookahead: 0.30
+  duck_max_distance: 2.0
+  duck_near_distance: 0.60
+  duck_corridor_width: 0.35
+actions:
+  v_fast: 0.40
+  v_slow: 0.15
+  w0: 1.50
+  wheel_base: 0.102
+duck_controller:
+  p_cross: 0.02
+  make_dynamic: true
+  require_duck: true
+reward:
+  alpha_progress: 1.0
+  alpha_lateral: 10.0
+  alpha_heading: 2.0
+  step_cost: 0.01
+  collision_duck: -100.0
+  other_collision: -50.0
+  offroad: -50.0
+  stop_violation: -20.0
+  full_stop: 10.0
+  goal: 50.0
+q_learning:
+  gamma: 0.99
+  alpha_lr: 0.10
+  epsilon_start: 1.0
+  epsilon_end: 0.05
+  epsilon_decay_steps: 50000
+training:
+  episodes: 100
+  log_every: 5
+  moving_average_window: 100
+  output_dir: results
+evaluation:
+  episodes: 100
+  seeds: [101, 202, 303, 404, 505]
+

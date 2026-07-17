@@ -1,0 +1,76 @@
+algorithm: q_learning
+seed: 72
+environment:
+  map_name: small_loop
+  domain_rand: false
+  max_steps: 1500
+  frame_skip: 6
+  render_observations: false
+  accept_start_angle_deg: 10
+  spawn_max_abs_d: 0.08
+  spawn_max_abs_phi: 0.175
+  spawn_attempts: 50
+  user_tile_start: null
+  goal_tile: null
+state:
+  stop_lateral_limit: 0.40
+  stop_orientation_cos: 0.70710678
+  sign_to_line_offset: 0.20
+  stop_max_distance: 3.0
+  stop_zone: 0.45
+  stop_pass_distance: 0.55
+  stop_speed: 0.02
+  tile_lookahead: 0.30
+  curvature_threshold: 0.05
+  duck_max_distance: 0.80
+  duck_near_distance: 0.60
+  duck_corridor_width: 0.35
+actions:
+  v_fast: 0.41
+  v_slow: 0.17
+  w0: 1.50
+  wheel_base: 0.102
+duck_controller:
+  p_cross: 0.0
+  make_dynamic: false
+  require_duck: false
+  inject_if_missing: false
+reward:
+  alpha_progress: 1.0
+  alpha_lateral: 2.0
+  alpha_heading: 0.5
+  step_cost: 0.01
+  collision_duck: -200.0
+  other_collision: -200.0
+  offroad: -200.0
+  stop_violation: -20.0
+  full_stop: 10.0
+  goal: 50.0
+q_learning:
+  gamma: 0.99
+  alpha_lr: 0.10
+  # Tahap konsolidasi setelah eksplorasi 0.50 -> 0.02, tetap tanpa teacher.
+  epsilon_start: 0.02
+  epsilon_end: 0.02
+  epsilon_decay_steps: 1
+  allowed_actions: [0, 1, 2, 3, 4, 5]
+lane_teacher:
+  enabled: false
+  full_control_episodes: 0
+  decay_episodes: 0
+  min_probability: 0.0
+  d_gain: 1.0
+  error_threshold: 0.10
+transition_model:
+  enabled: false
+training:
+  episodes: 1500
+  log_every: 10
+  moving_average_window: 50
+  checkpoint_every: 25
+  milestone_episodes: [500, 1000, 1500]
+  initial_q_table: results_small_loop_lane_q_no_teacher_v2/q_table.npy
+  output_dir: results_small_loop_lane_q_no_teacher_v3
+evaluation:
+  episodes: 30
+  seeds: [101, 202, 303, 404, 505]

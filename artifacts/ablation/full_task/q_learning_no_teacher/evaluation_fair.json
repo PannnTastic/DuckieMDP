@@ -1,0 +1,30 @@
+{
+  "algorithm": "q_learning",
+  "episodes": 30,
+  "mean_return": -64.20002445689651,
+  "duck_collision_rate": 0.0,
+  "other_collision_rate": 0.0,
+  "offroad_rate": 0.0,
+  "timeout_rate": 1.0,
+  "task_success_rate": 0.7,
+  "success_min_progress_m": 5.0,
+  "success_max_brake_ratio": 0.25,
+  "goal_rate": 0.0,
+  "termination_counts": {
+    "timeout": 30
+  },
+  "stop_compliance_rate": 1.0,
+  "stop_opportunities": 23,
+  "duck_crossing_encounters": 26,
+  "duck_encounter_episode_rate": 0.8666666666666667,
+  "duck_crossing_exposure_steps": 182,
+  "duck_yield_step_rate": 0.6263736263736264,
+  "mean_abs_d": 0.043851879548516,
+  "p95_abs_d": 0.10871246114033356,
+  "mean_episode_length": 250.0,
+  "mean_physics_steps": 1500.0,
+  "mean_forward_progress_m": 5.0388198489001885,
+  "mean_moving_step_ratio": 0.8401333333333333,
+  "mean_brake_ratio": 0.26239999999999997,
+  "mean_tile_transitions": 8.933333333333334
+}

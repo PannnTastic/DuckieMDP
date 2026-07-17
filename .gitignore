@@ -1,0 +1,106 @@
+# -----------------------------------------------------------------------------
+# Python environments
+# -----------------------------------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+
+# -----------------------------------------------------------------------------
+# Python bytecode and tool caches
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# -----------------------------------------------------------------------------
+# Packaging and build output
+# -----------------------------------------------------------------------------
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# -----------------------------------------------------------------------------
+# Local secrets and machine-specific environment variables
+# Keep a sanitized .env.example if one is added later.
+# -----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# -----------------------------------------------------------------------------
+# Experiment output
+# Historical artifacts selected for the report live in artifacts/ablation/
+# and are intentionally tracked. New runs/checkpoints belong under runs/.
+# -----------------------------------------------------------------------------
+runs/
+results/
+results_*/
+outputs/
+checkpoints/
+wandb/
+mlruns/
+lightning_logs/
+
+# Interrupted/temporary training writes outside runs/ (defensive patterns)
+q_table_checkpoint*.npy
+q_table_checkpoint*.tmp.npy
+training_partial.csv
+transition_model.tmp.npz
+*.tmp
+*.partial
+
+# -----------------------------------------------------------------------------
+# Logs, profiles, notebooks, and scratch files
+# -----------------------------------------------------------------------------
+*.log
+*.out
+*.prof
+*.trace
+.ipynb_checkpoints/
+scratch/
+tmp/
+temp/
+
+# Raw render output. Curated GIF/MP4 files under docs/assets/ remain tracked.
+raw_media/
+renders/
+*.avi
+*.mkv
+*.webm
+
+# -----------------------------------------------------------------------------
+# Editors and operating systems
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*.swo
+*~
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# -----------------------------------------------------------------------------
+# Native/debug artifacts
+# -----------------------------------------------------------------------------
+*.so
+*.dylib
+*.dll
+*.dSYM/
+core
+core.*

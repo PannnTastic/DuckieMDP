@@ -1,0 +1,11 @@
+{
+  "observed_states": 93,
+  "observed_state_action_pairs": 209,
+  "state_action_coverage": 0.37455197132616486,
+  "transition_outcomes": 723,
+  "samples": 62500,
+  "iterations": 1687,
+  "final_residual": 9.959965296957307e-09,
+  "gamma": 0.99,
+  "warning": "Unobserved state-action pairs are excluded from maximization."
+}

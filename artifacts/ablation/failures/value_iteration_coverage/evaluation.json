@@ -1,0 +1,21 @@
+{
+  "episodes": 30,
+  "mean_return": -199.76562144282104,
+  "duck_collision_rate": 0.0,
+  "other_collision_rate": 0.0,
+  "offroad_rate": 1.0,
+  "timeout_rate": 0.0,
+  "goal_rate": 0.0,
+  "termination_counts": {
+    "offroad": 30
+  },
+  "stop_compliance_rate": 1.0,
+  "mean_abs_d": 0.09762777845175523,
+  "p95_abs_d": 0.25,
+  "mean_episode_length": 48.8,
+  "mean_physics_steps": 292.8,
+  "mean_forward_progress_m": 1.3171970051997504,
+  "mean_moving_step_ratio": 1.0,
+  "mean_brake_ratio": 0.0,
+  "mean_tile_transitions": 2.0
+}

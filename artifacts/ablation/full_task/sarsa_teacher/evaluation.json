@@ -1,0 +1,28 @@
+{
+  "algorithm": "sarsa",
+  "episodes": 30,
+  "mean_return": 36.05320407619379,
+  "duck_collision_rate": 0.0,
+  "other_collision_rate": 0.0,
+  "offroad_rate": 0.03333333333333333,
+  "timeout_rate": 0.9666666666666667,
+  "goal_rate": 0.0,
+  "termination_counts": {
+    "timeout": 29,
+    "offroad": 1
+  },
+  "stop_compliance_rate": 1.0,
+  "stop_opportunities": 30,
+  "duck_crossing_encounters": 119,
+  "duck_encounter_episode_rate": 1.0,
+  "duck_crossing_exposure_steps": 804,
+  "duck_yield_step_rate": 0.722636815920398,
+  "mean_abs_d": 0.03039873657223543,
+  "p95_abs_d": 0.07297131232642198,
+  "mean_episode_length": 242.7,
+  "mean_physics_steps": 1456.2,
+  "mean_forward_progress_m": 6.804434619670406,
+  "mean_moving_step_ratio": 0.9158666666666666,
+  "mean_brake_ratio": 0.11720860215053766,
+  "mean_tile_transitions": 11.766666666666667
+}
