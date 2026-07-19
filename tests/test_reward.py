@@ -29,6 +29,28 @@ def test_compliant_stop_does_not_become_violation():
     assert not sigma and event.passed_stop and not event.stop_violation
 
 
+def test_stop_requires_configured_consecutive_hold_steps():
+    tracker = StopTracker(hold_steps=3)
+    previous = state(0.1, 0.3)
+    for expected_steps in (1, 2):
+        sigma, event = tracker.update(previous, state(0.0, 0.3), 2, 2)
+        assert not sigma and not event.full_stop
+        assert tracker.hold_steps == expected_steps
+        assert tracker.hold_progress == pytest.approx(expected_steps / 3.0)
+        previous = state(0.0, 0.3)
+    sigma, event = tracker.update(previous, state(0.0, 0.3), 2, 2)
+    assert sigma and event.full_stop
+    assert tracker.hold_progress == pytest.approx(1.0)
+
+
+def test_stop_hold_must_be_consecutive():
+    tracker = StopTracker(hold_steps=3)
+    tracker.update(state(0.1, 0.3), state(0.0, 0.3), 2, 2)
+    tracker.update(state(0.0, 0.3), state(0.1, 0.3), 2, 2)
+    assert tracker.hold_steps == 0
+    assert tracker.hold_progress == 0.0
+
+
 def test_event_rewards():
     full = compute_reward(state(), EventFlags(full_stop=True))
     violation = compute_reward(state(), EventFlags(stop_violation=True))
@@ -62,3 +84,19 @@ def test_unnecessary_stop_penalty_exempts_crossing_and_required_stop():
     assert idle.stagnation == pytest.approx(-0.5)
     assert crossing.stagnation == pytest.approx(0.0)
     assert required_stop.stagnation == pytest.approx(0.0)
+
+
+def test_straight_steering_penalty_uses_action_but_exempts_curves():
+    cfg = RewardConfig(straight_steer_penalty=0.5, max_steer_command=1.5)
+    straight = compute_reward(
+        state(v=0.2), EventFlags(), cfg, action_omega=1.5, curvature=0.0
+    )
+    gentle = compute_reward(
+        state(v=0.2), EventFlags(), cfg, action_omega=0.3, curvature=0.0
+    )
+    curve = compute_reward(
+        state(v=0.2), EventFlags(), cfg, action_omega=1.5, curvature=2.0
+    )
+    assert straight.steering == pytest.approx(-0.5)
+    assert gentle.steering == pytest.approx(-0.5 * (0.3 / 1.5) ** 2)
+    assert curve.steering == pytest.approx(0.0)

@@ -21,6 +21,10 @@ class DuckControllerConfig:
     # Full task memakai satu crossing agar Duckie tidak langsung berbalik arah
     # ketika ego masih sedang yield di lokasi yang sama.
     max_crossings_per_episode: int = 0
+    # Jika >0, crossing berulang baru di-arm setelah ego menjauh sejauh ini
+    # dari titik tengah zebra crossing. Ini mencegah Duckie langsung berbalik
+    # ketika ego masih yield di lokasi yang sama.
+    repeat_rearm_distance: float = 0.0
     inject_stop_if_missing: bool = False
     require_stop: bool = False
     stop_spawn_pos: Sequence[float] = (1.20, 2.10)
@@ -127,6 +131,7 @@ class DuckController:
                 duck.walk_distance = float(cfg.walk_distance)
         self.initial = [self._snapshot(duck) for duck in self.ducks]
         self.crossings_started = [0 for _ in self.ducks]
+        self.crossing_armed = [True for _ in self.ducks]
 
     @staticmethod
     def _snapshot(duck: Any) -> Dict[str, Any]:
@@ -157,6 +162,12 @@ class DuckController:
             duck.pedestrian_wait_time = float("inf")
             duck.time = 0.0
             self.crossings_started[index] = 0
+            self.crossing_armed[index] = True
+
+    def crossing_available(self, index: int) -> bool:
+        limit = int(self.cfg.max_crossings_per_episode)
+        below_limit = limit <= 0 or self.crossings_started[index] < limit
+        return below_limit and self.crossing_armed[index]
 
     def before_step(self) -> None:
         for index, duck in enumerate(self.ducks):
@@ -169,6 +180,12 @@ class DuckController:
                 crossing = np.asarray(duck.start, dtype=float) + 0.5 * float(duck.walk_distance) * motion
                 rel = crossing - np.asarray(self.env.cur_pos, dtype=float)
                 distance = float(np.linalg.norm(rel[[0, 2]]))
+                rearm_distance = float(self.cfg.repeat_rearm_distance)
+                if not self.crossing_armed[index]:
+                    if rearm_distance > 0.0 and distance >= rearm_distance:
+                        self.crossing_armed[index] = True
+                    else:
+                        continue
                 _, tangent = self.env.closest_curve_point(self.env.cur_pos, self.env.cur_angle)
                 ahead = tangent is not None and float(np.dot(rel, np.asarray(tangent, dtype=float))) > 0.0
                 eligible = (
@@ -179,3 +196,5 @@ class DuckController:
                     duck.pedestrian_active = True
                     duck.time = 0.0
                     self.crossings_started[index] += 1
+                    if rearm_distance > 0.0:
+                        self.crossing_armed[index] = False

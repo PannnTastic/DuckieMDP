@@ -11,7 +11,8 @@ distribution rho_0; step() menghasilkan transition, reward, dan kondisi akhir.
 """
 
 from dataclasses import asdict, replace
-from typing import Any, Dict, Optional, Tuple
+from math import cos, sin
+from typing import Any, Dict, Optional, Sequence, Tuple
 
 import gym
 import numpy as np
@@ -45,6 +46,56 @@ def _any_collision(env: Any) -> bool:
     return bool(env._collision(get_agent_corners(env.cur_pos, env.cur_angle)))
 
 
+def route_circulation_score(
+    position: Sequence[float],
+    angle: float,
+    center: Sequence[float],
+) -> float:
+    """Return alignment with the clockwise tangent around ``center``.
+
+    Duckietown uses ``[cos(angle), -sin(angle)]`` as the forward vector in the
+    world x-z plane.  Positive values mean clockwise travel, negative values
+    mean counter-clockwise travel, and the magnitude is the tangent alignment.
+    This is used only to constrain rho_0 on loop maps; it does not enter S.
+    """
+    point = np.asarray(position, dtype=float).reshape(-1)
+    if point.size == 3:
+        point = point[[0, 2]]
+    if point.size != 2:
+        raise ValueError("position must contain x,z or x,y,z coordinates")
+    center_xz = np.asarray(center, dtype=float).reshape(-1)
+    if center_xz.size != 2:
+        raise ValueError("route center must contain x,z coordinates")
+    radial = point - center_xz
+    radial_norm = float(np.linalg.norm(radial))
+    if radial_norm <= 1e-9:
+        return 0.0
+    clockwise_tangent = np.array([radial[1], -radial[0]], dtype=float) / radial_norm
+    forward = np.array([cos(float(angle)), -sin(float(angle))], dtype=float)
+    return float(np.dot(forward, clockwise_tangent))
+
+
+def position_in_bounds_xz(
+    position: Sequence[float],
+    bounds: Sequence[float],
+) -> bool:
+    """Check an x-z spawn rectangle encoded as [xmin, xmax, zmin, zmax]."""
+    point = np.asarray(position, dtype=float).reshape(-1)
+    if point.size == 3:
+        x, z = float(point[0]), float(point[2])
+    elif point.size == 2:
+        x, z = float(point[0]), float(point[1])
+    else:
+        raise ValueError("position must contain x,z or x,y,z coordinates")
+    limits = np.asarray(bounds, dtype=float).reshape(-1)
+    if limits.size != 4:
+        raise ValueError("spawn_position_bounds_xz must contain four values")
+    xmin, xmax, zmin, zmax = (float(value) for value in limits)
+    if xmin > xmax or zmin > zmax:
+        raise ValueError("spawn position bounds must satisfy min <= max")
+    return xmin <= x <= xmax and zmin <= z <= zmax
+
+
 class DuckieMDPEnv(gym.Wrapper):
     """Finite-action MDP interface di atas simulator kontinu Duckietown."""
     def __init__(
@@ -60,6 +111,10 @@ class DuckieMDPEnv(gym.Wrapper):
         spawn_max_abs_d: Optional[float] = None,
         spawn_max_abs_phi: Optional[float] = None,
         spawn_attempts: int = 50,
+        spawn_route_direction: Optional[str] = None,
+        spawn_route_center: Optional[Tuple[float, float]] = None,
+        spawn_min_route_alignment: float = 0.50,
+        spawn_position_bounds_xz: Optional[Tuple[float, float, float, float]] = None,
     ) -> None:
         super().__init__(env)
         self.action_cfg = action_cfg
@@ -70,9 +125,35 @@ class DuckieMDPEnv(gym.Wrapper):
         self.spawn_max_abs_d = spawn_max_abs_d
         self.spawn_max_abs_phi = spawn_max_abs_phi
         self.spawn_attempts = spawn_attempts
+        direction = (
+            None
+            if spawn_route_direction is None
+            else str(spawn_route_direction).strip().lower()
+        )
+        if direction not in {None, "clockwise", "counterclockwise"}:
+            raise ValueError(
+                "spawn_route_direction must be clockwise, counterclockwise, or null"
+            )
+        if not 0.0 <= float(spawn_min_route_alignment) <= 1.0:
+            raise ValueError("spawn_min_route_alignment must be in [0, 1]")
+        self.spawn_route_direction = direction
+        self.spawn_route_center = spawn_route_center
+        self.spawn_min_route_alignment = float(spawn_min_route_alignment)
+        if spawn_position_bounds_xz is not None:
+            # Validate once during construction; reset only performs the check.
+            position_in_bounds_xz((0.0, 0.0), spawn_position_bounds_xz)
+            self.spawn_position_bounds_xz = tuple(
+                float(value) for value in spawn_position_bounds_xz
+            )
+        else:
+            self.spawn_position_bounds_xz = None
+        self.last_spawn_route_alignment = np.nan
         self.action_space = spaces.Discrete(7)
         self.stop_tracker = StopTracker(
-            state_cfg.stop_zone, state_cfg.stop_speed, state_cfg.stop_pass_distance
+            state_cfg.stop_zone,
+            state_cfg.stop_speed,
+            state_cfg.stop_pass_distance,
+            state_cfg.stop_hold_steps,
         )
         self.duck_controller = DuckController(env, duck_cfg, seed)
         self._last_state: Optional[RawState] = None
@@ -84,7 +165,33 @@ class DuckieMDPEnv(gym.Wrapper):
     def _spawn_is_accepted(self, state: RawState) -> bool:
         d_ok = self.spawn_max_abs_d is None or abs(state.d) <= self.spawn_max_abs_d
         phi_ok = self.spawn_max_abs_phi is None or abs(state.phi) <= self.spawn_max_abs_phi
-        return d_ok and phi_ok
+        position_ok = (
+            self.spawn_position_bounds_xz is None
+            or position_in_bounds_xz(
+                self.env.cur_pos,
+                self.spawn_position_bounds_xz,
+            )
+        )
+        route_ok = True
+        self.last_spawn_route_alignment = np.nan
+        if self.spawn_route_direction is not None:
+            center = self.spawn_route_center
+            if center is None:
+                center = (
+                    self.env.grid_width * self.env.road_tile_size / 2.0,
+                    self.env.grid_height * self.env.road_tile_size / 2.0,
+                )
+            score = route_circulation_score(
+                self.env.cur_pos,
+                self.env.cur_angle,
+                center,
+            )
+            self.last_spawn_route_alignment = score
+            if self.spawn_route_direction == "clockwise":
+                route_ok = score >= self.spawn_min_route_alignment
+            else:
+                route_ok = score <= -self.spawn_min_route_alignment
+        return d_ok and phi_ok and position_ok and route_ok
 
     def reset(self, seed: int = None) -> RawState:
         """Sample s_0 dari rho_0 dengan curriculum pada d dan phi."""
@@ -102,7 +209,9 @@ class DuckieMDPEnv(gym.Wrapper):
         else:
             raise RuntimeError(
                 "Could not sample a curriculum spawn satisfying "
-                f"|d|<={self.spawn_max_abs_d}, |phi|<={self.spawn_max_abs_phi}"
+                f"|d|<={self.spawn_max_abs_d}, |phi|<={self.spawn_max_abs_phi}, "
+                f"route={self.spawn_route_direction}, "
+                f"bounds_xz={self.spawn_position_bounds_xz}"
             )
         self.stop_tracker.reset()
         self._last_state = candidate
@@ -225,4 +334,18 @@ def build_env(config: Dict[str, Any], seed: int) -> DuckieMDPEnv:
         spawn_max_abs_d=env_cfg.get("spawn_max_abs_d"),
         spawn_max_abs_phi=env_cfg.get("spawn_max_abs_phi"),
         spawn_attempts=int(env_cfg.get("spawn_attempts", 50)),
+        spawn_route_direction=env_cfg.get("spawn_route_direction"),
+        spawn_route_center=(
+            tuple(env_cfg["spawn_route_center"])
+            if env_cfg.get("spawn_route_center") is not None
+            else None
+        ),
+        spawn_min_route_alignment=float(
+            env_cfg.get("spawn_min_route_alignment", 0.50)
+        ),
+        spawn_position_bounds_xz=(
+            tuple(env_cfg["spawn_position_bounds_xz"])
+            if env_cfg.get("spawn_position_bounds_xz") is not None
+            else None
+        ),
     )

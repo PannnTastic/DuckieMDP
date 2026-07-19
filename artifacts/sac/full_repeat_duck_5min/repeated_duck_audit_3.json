@@ -1,0 +1,230 @@
+{
+  "override": {
+    "max_crossings_per_episode": 0,
+    "repeat_rearm_distance": 1.0
+  },
+  "episodes": 3,
+  "episodes_with_repeated_crossing": 3,
+  "mean_crossings_per_episode": 6.0,
+  "records": [
+    {
+      "episode": 0,
+      "seed": 20101,
+      "termination_reason": "timeout",
+      "decisions": 1500,
+      "forward_progress_m": 28.749428693991995,
+      "crossings_started": 6,
+      "observed_crossing_rising_edges": [
+        {
+          "decision": 95,
+          "physics_step": 570,
+          "ego_xz": [
+            1.5254212372821088,
+            1.2854544756836828
+          ],
+          "duck_longitudinal": 0.3323190925681764,
+          "duck_lateral": -0.5152665387972295
+        },
+        {
+          "decision": 353,
+          "physics_step": 2118,
+          "ego_xz": [
+            1.642140312041579,
+            1.2176508416871399
+          ],
+          "duck_longitudinal": 0.34369550996364523,
+          "duck_lateral": 0.06997465065894987
+        },
+        {
+          "decision": 570,
+          "physics_step": 3420,
+          "ego_xz": [
+            1.4971985433408967,
+            1.2870791685776066
+          ],
+          "duck_longitudinal": 0.33350179690244347,
+          "duck_lateral": -0.49091816581535963
+        },
+        {
+          "decision": 825,
+          "physics_step": 4950,
+          "ego_xz": [
+            1.6423102062755226,
+            1.2186306612710576
+          ],
+          "duck_longitudinal": 0.3446665723990953,
+          "duck_lateral": 0.06976029531328817
+        },
+        {
+          "decision": 1042,
+          "physics_step": 6252,
+          "ego_xz": [
+            1.4990864396806292,
+            1.2764204082296968
+          ],
+          "duck_longitudinal": 0.3321180161358958,
+          "duck_lateral": -0.48469513696800587
+        },
+        {
+          "decision": 1299,
+          "physics_step": 7794,
+          "ego_xz": [
+            1.6429935650748224,
+            1.2109107886572383
+          ],
+          "duck_longitudinal": 0.3364152408929616,
+          "duck_lateral": 0.07185206890344727
+        }
+      ],
+      "duck_active_steps": 42,
+      "duck_yield_step_rate": 0.6904761904761905,
+      "stop_violations": 0
+    },
+    {
+      "episode": 1,
+      "seed": 20102,
+      "termination_reason": "timeout",
+      "decisions": 1500,
+      "forward_progress_m": 28.766349214377364,
+      "crossings_started": 6,
+      "observed_crossing_rising_edges": [
+        {
+          "decision": 90,
+          "physics_step": 540,
+          "ego_xz": [
+            1.532938332726519,
+            1.2709390680687553
+          ],
+          "duck_longitudinal": 0.33132088058236847,
+          "duck_lateral": -0.5113389097370605
+        },
+        {
+          "decision": 347,
+          "physics_step": 2082,
+          "ego_xz": [
+            1.6420330875975346,
+            1.216970549258137
+          ],
+          "duck_longitudinal": 0.3430208086592798,
+          "duck_lateral": 0.07011275576474535
+        },
+        {
+          "decision": 564,
+          "physics_step": 3384,
+          "ego_xz": [
+            1.497177083126884,
+            1.2873296882868046
+          ],
+          "duck_longitudinal": 0.33375244031458445,
+          "duck_lateral": -0.4909381294180516
+        },
+        {
+          "decision": 819,
+          "physics_step": 4914,
+          "ego_xz": [
+            1.642973722912483,
+            1.2118550742137042
+          ],
+          "duck_longitudinal": 0.33735959246966324,
+          "duck_lateral": 0.07183566697863428
+        },
+        {
+          "decision": 1036,
+          "physics_step": 6216,
+          "ego_xz": [
+            1.492489730481226,
+            1.2962497885071413
+          ],
+          "duck_longitudinal": 0.3334075130875239,
+          "duck_lateral": -0.49460805767181015
+        },
+        {
+          "decision": 1293,
+          "physics_step": 7758,
+          "ego_xz": [
+            1.642635991250524,
+            1.2122704186276398
+          ],
+          "duck_longitudinal": 0.3377875888477656,
+          "duck_lateral": 0.07215721442149214
+        }
+      ],
+      "duck_active_steps": 42,
+      "duck_yield_step_rate": 0.6904761904761905,
+      "stop_violations": 0
+    },
+    {
+      "episode": 2,
+      "seed": 20103,
+      "termination_reason": "timeout",
+      "decisions": 1500,
+      "forward_progress_m": 28.7436180287858,
+      "crossings_started": 6,
+      "observed_crossing_rising_edges": [
+        {
+          "decision": 84,
+          "physics_step": 504,
+          "ego_xz": [
+            1.5295779267552243,
+            1.2733905548366322
+          ],
+          "duck_longitudinal": 0.3318565829676077,
+          "duck_lateral": -0.5098350311361746
+        },
+        {
+          "decision": 340,
+          "physics_step": 2040,
+          "ego_xz": [
+            1.6432181611601733,
+            1.2099617194977546
+          ],
+          "duck_longitudinal": 0.33545825342560964,
+          "duck_lateral": 0.0716640511958521
+        },
+        {
+          "decision": 557,
+          "physics_step": 3342,
+          "ego_xz": [
+            1.4924408610512496,
+            1.296137776509733
+          ],
+          "duck_longitudinal": 0.3333064098797308,
+          "duck_lateral": -0.49453940601397484
+        },
+        {
+          "decision": 814,
+          "physics_step": 4884,
+          "ego_xz": [
+            1.6421404880313621,
+            1.21741989743703
+          ],
+          "duck_longitudinal": 0.34346479747450526,
+          "duck_lateral": 0.0699849959470581
+        },
+        {
+          "decision": 1031,
+          "physics_step": 6186,
+          "ego_xz": [
+            1.4968845741519978,
+            1.287470734350554
+          ],
+          "duck_longitudinal": 0.33393959898128167,
+          "duck_lateral": -0.4906727483223263
+        },
+        {
+          "decision": 1286,
+          "physics_step": 7716,
+          "ego_xz": [
+            1.6424269343823479,
+            1.2187817559281124
+          ],
+          "duck_longitudinal": 0.34481219241552885,
+          "duck_lateral": 0.06963680500141135
+        }
+      ],
+      "duck_active_steps": 42,
+      "duck_yield_step_rate": 0.7142857142857143,
+      "stop_violations": 0
+    }
+  ]
+}

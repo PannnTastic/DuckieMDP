@@ -60,6 +60,9 @@ class StateConfig:
     stop_zone: float = 0.45
     stop_pass_distance: float = 0.55
     stop_speed: float = 0.02
+    # Jumlah macro-decision lambat berturut-turut di zona stop sebelum
+    # sigma_stop menjadi True. Default 1 mempertahankan eksperimen tabular lama.
+    stop_hold_steps: int = 1
     tile_lookahead: float = 0.30
     curvature_threshold: float = 0.05
     duck_max_distance: float = 2.0

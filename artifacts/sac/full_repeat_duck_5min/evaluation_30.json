@@ -1,0 +1,32 @@
+{
+  "stage": "full",
+  "episodes": 30,
+  "mean_return": 97.95635690197001,
+  "mean_forward_progress_m": 28.050773686992656,
+  "mean_abs_d": 0.06273116584965478,
+  "p95_abs_d": 0.10484822565265413,
+  "mean_brake_ratio": 0.023866666666666665,
+  "task_success_rate": 0.8333333333333334,
+  "timeout_rate": 1.0,
+  "offroad_rate": 0.0,
+  "duck_collision_rate": 0.0,
+  "other_collision_rate": 0.0,
+  "total_failure_rate": 0.0,
+  "stop_compliance_rate": 0.9759615384615384,
+  "stop_opportunities": 208,
+  "stop_opportunity_episode_rate": 1.0,
+  "stop_compliant_episode_rate": 0.8333333333333334,
+  "mean_completed_stop_hold_decisions": 3.0,
+  "mean_completed_stop_hold_seconds": 0.6000000000000001,
+  "mean_episode_max_stop_hold_decisions": 3.0,
+  "mean_abs_omega_on_straight": 0.5134260135078541,
+  "false_stop_rate": 0.00011111111111111112,
+  "spin_in_place_rate": 0.01411111111111111,
+  "duck_yield_step_rate": 0.8571428571428571,
+  "resume_after_clear_rate": 1.0,
+  "resume_opportunities": 30,
+  "minimum_duck_distance_m": 0.29196603027368495,
+  "termination_counts": {
+    "timeout": 30
+  }
+}

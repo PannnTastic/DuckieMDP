@@ -776,21 +776,19 @@ state-action model belum cukup tinggi.
 
 ## 23. DQN
 
-`src/agents/dqn.py` adalah scaffold opsional. Isinya mencakup:
+`src/agents/dqn.py` dan `src/train_dqn.py` membentuk ablation opsional. Isinya
+mencakup:
 
-- encoder privileged state 13 dimensi;
+- continuous privileged observation 15 dimensi dari wrapper SAC;
 - replay buffer;
 - online Q-network;
 - target Q-network;
 - Huber loss dan satu training step.
 
-DQN belum terhubung ke pipeline karena belum memiliki:
-
-- `train_dqn.py`;
-- exploration loop lengkap;
-- config DQN;
-- save/load model lengkap;
-- evaluator dan renderer DQN.
+DQN sekarang memiliki exploration loop epsilon-greedy, action mask lane,
+checkpoint save/load atomik, dan config yang mewarisi environment serta reward
+kanonis dari `sac_lane.yaml`. Evaluator/renderer khusus DQN tetap ditunda sampai
+hasil M9 dibekukan karena DQN adalah ablation, bukan solver utama.
 
 DQN tersebut juga belum visuomotor karena menerima privileged state, bukan
 gambar kamera.
@@ -884,4 +882,3 @@ policy kembali memilih action bergerak.
 | Value Iteration | Implementasi tersedia, coverage model belum memadai |
 | DQN privileged-state | Scaffold, belum menjadi eksperimen lengkap |
 | Visuomotor policy | Tahap pengembangan berikutnya |
-

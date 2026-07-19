@@ -1,5 +1,17 @@
 # Duckie MDP
 
+> Tahap lanjutan state/action kontinu dan SAC dirinci di
+> [continuous SAC plan](docs/continuous_sac_plan.md). Baseline tabular pada
+> README ini tetap menjadi acuan ablation.
+>
+> Jika Anda ingin mengetik implementasinya sendiri, seluruh scaffold dan kode
+> per file tersedia di
+> [continuous SAC implementation code](docs/continuous_sac_implementation_code.md).
+
+Walkthrough terpadu dari formulasi MDP, Q-learning/SARSA, state-action
+kontinu, actor-critic SAC, YAML training, evaluation, sampai rendering tersedia
+di [complete codebase MDP–SAC walkthrough](docs/complete_codebase_mdp_sac_walkthrough.md).
+
 Implementasi finite-state MDP berbasis privileged simulator state untuk tiga
 perilaku Duckiebot pada `gym-duckietown-daffy`:
 
@@ -187,6 +199,22 @@ lane, stop distance, atau crossing. Transition hasil action itu tetap dipelajari
 dengan update solver biasa. Probabilitas teacher menurun menurut episode dan
 menjadi nol pada fase akhir.
 
+Teacher adalah heuristic controller atas privileged `RawState`, bukan PID
+kontinu. Prioritasnya adalah brake untuk Duckie yang sedang crossing, brake di
+stop line yang belum dipenuhi, koreksi berdasarkan `phi + d_gain*d`, kemudian
+aksi curvature/lurus. Pada Q-learning urutan behavior-nya adalah:
+
+1. student memilih action epsilon-greedy;
+2. teacher meng-override dengan probabilitas episode `beta`;
+3. action akhir dieksekusi;
+4. Q-update memakai transition dan action akhir tersebut.
+
+Karena Q-learning off-policy, behavior campuran ini sah, tetapi hasilnya harus
+disebut **teacher-guided Q-learning**, bukan vanilla Q-learning. Trade-off-nya:
+teacher mempercepat pengalaman aman tetapi dapat mengurangi coverage state
+recovery yang berbahaya. Detail schedule, reward regime, dan rencana pembanding
+SAC tersedia di [continuous SAC plan](docs/continuous_sac_plan.md).
+
 Pada evaluasi:
 
 - `greedy=True`;
@@ -264,6 +292,49 @@ python -m src.train --config configs/small_loop_lane_q_no_teacher_finetune.yaml
 python -m src.train --config configs/small_loop_stop_duck_q_no_teacher_explore.yaml
 python -m src.train --config configs/small_loop_stop_duck_q_no_teacher.yaml
 ```
+
+### SAC kontinu tanpa teacher (M7–M9)
+
+SAC memakai privileged observation kontinu 15 dimensi dan action kontinu
+`[v_cmd, omega_cmd]`. Environment terpisah menjaga dependency baseline tabular:
+
+```bash
+python -m venv .venv-sac
+.venv-sac/bin/python -m pip install -r requirements-sac.txt
+
+# Gate regresi dan compatibility CUDA
+.venv-sac/bin/python -m pytest -q -p no:warnings
+.venv-sac/bin/python -m scripts.check_sac_compatibility \
+  --config configs/sac_lane.yaml --transitions 1000
+
+# Curriculum teacher-free: lane -> stop -> stop + Duckie
+.venv-sac/bin/python -m src.train_sac --config configs/sac_lane.yaml
+.venv-sac/bin/python -m src.select_sac_checkpoint \
+  --config configs/sac_lane.yaml \
+  --checkpoint-dir runs/sac_lane/checkpoints \
+  --output runs/sac_lane/sac_best.pt
+.venv-sac/bin/python -m src.train_sac --config configs/sac_stop.yaml
+.venv-sac/bin/python -m src.train_sac --config configs/sac_full.yaml
+
+# Dashboard seperti baseline: camera + BEV + full-loop vantage + trajectory
+.venv-sac/bin/python -m src.render_sac_multiview_video \
+  --config configs/sac_lane.yaml \
+  --checkpoint runs/sac_lane/sac_best.pt \
+  --output runs/sac_lane/sac_best_multiview_20fps.mp4 \
+  --seed 10101 --fps 20 --max-steps 1500
+```
+
+Config kanonis memakai `frame_skip=6` dan RTX/CUDA (`device: cuda`). Timeout
+disimpan ke replay sebagai truncation, bukan terminal, sehingga target critic
+tetap bootstrap. Evaluasi checkpoint selalu deterministic dan teacher-free.
+Kode, formula, sentinel observation, hyperparameter, dan acceptance bar ada di
+[continuous SAC plan](docs/continuous_sac_plan.md).
+
+Checkpoint SAC terpilih yang bertahan lima menit serta laporan evaluasi dan
+audit repeated Duckie tersedia di
+[artifacts/sac/full_repeat_duck_5min](artifacts/sac/full_repeat_duck_5min/README.md).
+Video tidak disimpan di Git; perintah untuk merender ulang video 1080p/20 FPS
+tersedia di manifest artifact tersebut.
 
 Run baru ditulis ke `runs/`, yang diabaikan Git. Exact historical config untuk
 angka pada README berada bersama artifact masing-masing.

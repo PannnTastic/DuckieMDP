@@ -14,4 +14,15 @@
 - Episode timeout adalah truncation: loop episode berhenti, tetapi TD target tetap
   bootstrap. Duck collision, other collision, offroad, dan goal adalah termination.
 - Termination reason dicatat eksplisit untuk training dan evaluation.
-
+- Tahap lanjutan continuous-control mengikuti
+  `docs/continuous_sac_plan.md`. Baseline tabular dan artefak ablation dibekukan;
+  SAC memakai wrapper baru agar kontrak `DuckieMDPEnv` tidak berubah.
+- Curvature ego-relative kategorikal sudah tersedia. M7 menambahkan signed
+  continuous curvature tanpa mengganti fitur kategorikal baseline.
+- Reward utama SAC dipertahankan sama dengan tabular. Smoothness penalty hanya
+  ablation dan mewajibkan previous action menjadi bagian state.
+- "Reward sama" untuk track utama berarti config full-task Q-learning
+  **tanpa teacher**, termasuk `duck_unsafe=-5` dan `unnecessary_stop=-2`.
+  Teacher-guided tabular adalah track assisted terpisah.
+- M9 utama memakai SAC teacher-free. Demonstration-assisted SAC hanya ablation;
+  evaluasi semua regime selalu deterministic dan tanpa live teacher.

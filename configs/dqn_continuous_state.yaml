@@ -1,0 +1,26 @@
+# M10 optional ablation. Inherits environment, continuous observation,
+# canonical reward, and evaluation manifest from sac_lane.yaml.
+base_config: sac_lane.yaml
+algorithm: dqn
+stage: lane
+seed: 73
+dqn:
+  gamma: 0.99
+  lr: 0.001
+  batch_size: 256
+  replay_size: 300000
+  target_update: 1000
+  hidden_size: 256
+  # Brake remains part of the seven-action space but is masked for lane-only,
+  # matching the tabular lane baseline's anti-stall action mask.
+  allowed_actions: [0, 1, 2, 3, 4, 5]
+training:
+  total_steps: 300000
+  warmup_steps: 5000
+  epsilon_start: 0.50
+  epsilon_end: 0.05
+  epsilon_decay_steps: 100000
+  checkpoint_interval: 25000
+  log_interval: 1000
+  output_dir: runs/dqn_continuous_lane
+  device: cuda

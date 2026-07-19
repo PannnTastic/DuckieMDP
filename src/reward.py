@@ -36,6 +36,11 @@ class RewardConfig:
     unnecessary_stop: float = 0.0
     idle_speed: float = 0.04
     stop_exemption_distance: float = 0.45
+    # Penalti action-conditioned khusus ruas lurus. Nilai nol menjaga seluruh
+    # baseline lama identik; eksperimen warm-start mengaktifkannya dari YAML.
+    straight_steer_penalty: float = 0.0
+    straight_curvature_threshold: float = 0.05
+    max_steer_command: float = 1.5
     goal: float = 50.0
 
 
@@ -60,6 +65,7 @@ class RewardBreakdown:
     time: float
     pedestrian: float
     stagnation: float
+    steering: float
     events: float
     total: float
 
@@ -70,15 +76,29 @@ class RewardBreakdown:
 class StopTracker:
     """Menjaga sigma_stop agar bonus full-stop hanya diberikan satu kali."""
     def __init__(
-        self, zone: float = 0.45, speed: float = 0.02, pass_distance: float = 0.55
+        self,
+        zone: float = 0.45,
+        speed: float = 0.02,
+        pass_distance: float = 0.55,
+        hold_steps: int = 1,
     ) -> None:
         self.zone = zone
         self.speed = speed
         self.pass_distance = max(zone, pass_distance)
+        self.hold_steps_required = max(1, int(hold_steps))
+        self.hold_steps = 0
         self.sigma_stop = False
+
+    @property
+    def hold_progress(self) -> float:
+        """Progres dwell ternormalisasi; fitur ini membuat proses tetap Markov."""
+        if self.sigma_stop:
+            return 1.0
+        return min(1.0, self.hold_steps / self.hold_steps_required)
 
     def reset(self) -> None:
         self.sigma_stop = False
+        self.hold_steps = 0
 
     def update(
         self,
@@ -88,18 +108,11 @@ class StopTracker:
         current_stop_id: Optional[int] = None,
     ) -> Tuple[bool, EventFlags]:
         events = EventFlags()
-        near = current.d_stop is not None and current.d_stop <= self.zone
-        if near and current.v < self.speed and not self.sigma_stop:
-            self.sigma_stop = True
-            events.full_stop = True
-
         ids_available = previous_stop_id is not None or current_stop_id is not None
         if ids_available:
             stop_changed = previous_stop_id is not None and previous_stop_id != current_stop_id
             passed = stop_changed and previous.d_stop is not None
             passed = passed and previous.d_stop <= self.pass_distance
-            if stop_changed and not passed:
-                self.sigma_stop = False
         else:
             passed = previous.d_stop is not None and previous.d_stop <= self.pass_distance
             passed = passed and (
@@ -110,11 +123,36 @@ class StopTracker:
             events.passed_stop = True
             events.stop_violation = not self.sigma_stop
             self.sigma_stop = False
+            self.hold_steps = 0
+            return self.sigma_stop, events
+
+        if ids_available and stop_changed:
+            # Kandidat berubah tanpa melewati sign lama (misalnya sign hilang
+            # dari filter); memori stop lama tidak boleh dibawa ke sign baru.
+            self.sigma_stop = False
+            self.hold_steps = 0
+
+        near = current.d_stop is not None and current.d_stop <= self.zone
+        slow = current.v < self.speed
+        if not self.sigma_stop:
+            if near and slow:
+                self.hold_steps += 1
+                if self.hold_steps >= self.hold_steps_required:
+                    self.sigma_stop = True
+                    self.hold_steps = self.hold_steps_required
+                    events.full_stop = True
+            else:
+                # Dwell harus berurutan, bukan akumulasi beberapa brake singkat.
+                self.hold_steps = 0
         return self.sigma_stop, events
 
 
 def compute_reward(
-    state: RawState, events: EventFlags, cfg: RewardConfig = RewardConfig()
+    state: RawState,
+    events: EventFlags,
+    cfg: RewardConfig = RewardConfig(),
+    action_omega: float = 0.0,
+    curvature: Optional[float] = None,
 ) -> RewardBreakdown:
     """Menghitung komponen reward terpisah agar mudah diaudit di log."""
     # Kemajuan sepanjang tangent lajur; cos(phi) mengecil saat ego tidak sejajar.
@@ -143,6 +181,18 @@ def compute_reward(
     # selama crossing atau ketika kewajiban stop belum dipenuhi.
     unnecessary_idle = state.v < cfg.idle_speed and not crossing and not must_stop
     stagnation = cfg.unnecessary_stop if unnecessary_idle else 0.0
+    # phi menghukum HASIL ketika heading sudah melenceng. Suku ini menghukum
+    # PENYEBAB lebih awal: perintah steer besar pada geometri jalan lurus.
+    # Curvature berasal dari s_t, sehingga reward tetap berbentuk R(s, a, s').
+    steering = 0.0
+    if (
+        curvature is not None
+        and abs(curvature) <= cfg.straight_curvature_threshold
+        and cfg.straight_steer_penalty != 0.0
+    ):
+        steer_scale = max(abs(cfg.max_steer_command), 1e-9)
+        normalized_steer = min(1.0, abs(action_omega) / steer_scale)
+        steering = -abs(cfg.straight_steer_penalty) * normalized_steer ** 2
     # Event keselamatan/kepatuhan berskala lebih besar daripada shaping dense.
     event = (
         cfg.collision_duck * events.collision_duck
@@ -152,13 +202,15 @@ def compute_reward(
         + cfg.full_stop * events.full_stop
         + cfg.goal * events.goal
     )
+    total = progress + lateral + heading + time + pedestrian + stagnation + steering + event
     return RewardBreakdown(
-        progress,
-        lateral,
-        heading,
-        time,
-        pedestrian,
-        stagnation,
-        event,
-        progress + lateral + heading + time + pedestrian + stagnation + event,
+        progress=progress,
+        lateral=lateral,
+        heading=heading,
+        time=time,
+        pedestrian=pedestrian,
+        stagnation=stagnation,
+        steering=steering,
+        events=event,
+        total=total,
     )
