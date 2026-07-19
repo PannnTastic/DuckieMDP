@@ -64,78 +64,78 @@ GIF individual dan video 720p dipisahkan secara eksplisit:
 
 Task dimodelkan sebagai:
 
-\[
+$$
 \mathcal M=(\mathcal S,\mathcal A,P,R,\gamma,\rho_0,\mathcal T).
-\]
+$$
 
-- \(\mathcal S\): state lane, stop sign, dan pedestrian;
-- \(\mathcal A\): tujuh macro-action differential drive;
-- \(P(s'\mid s,a)\): dinamika fisika dan objek dari simulator;
-- \(R(s,a,s')\): progress, stabilitas lane, keselamatan, dan kepatuhan;
-- \(\gamma=0.99\): discount factor;
-- \(\rho_0\): distribusi spawn dengan batas error lateral dan heading;
-- \(\mathcal T\): off-road, collision, atau goal. Timeout adalah truncation.
+- $\(\mathcal S\)$: state lane, stop sign, dan pedestrian;
+- $\(\mathcal A\)$: tujuh macro-action differential drive;
+- $\(P(s'\mid s,a)\)$: dinamika fisika dan objek dari simulator;
+- $\(R(s,a,s')\)$: progress, stabilitas lane, keselamatan, dan kepatuhan;
+- $\(\gamma=0.99\)$: discount factor;
+- $\(\rho_0\)$: distribusi spawn dengan batas error lateral dan heading;
+- $\(\mathcal T\)$: off-road, collision, atau goal. Timeout adalah truncation.
 
 Simulator berfungsi sebagai **generative transition model**. Solver model-free
-tidak menyimpan seluruh matriks \(P\); setiap `env.step(action)` menghasilkan
-satu sampel transition \((s,a,r,s')\). Transition empiris dapat direkam untuk
+tidak menyimpan seluruh matriks $\(P\)$; setiap `env.step(action)` menghasilkan
+satu sampel transition $\((s,a,r,s')\)$. Transition empiris dapat direkam untuk
 Value Iteration, tetapi bukan syarat Q-learning maupun SARSA.
 
 ### State
 
 Raw state policy adalah:
 
-\[
+$$
 s_t=(d_t,\phi_t,v_t,\kappa_t,d_t^{stop},\sigma_t^{stop},h_t^{duck}).
-\]
+$$
 
 | Komponen | Makna |
 |---|---|
-| \(d\) | error lateral terhadap centerline lane |
-| \(\phi\) | error heading terhadap tangent lane |
-| \(v\) | kecepatan aktual ego |
-| \(\kappa\) | kurva 0,3 m di depan: lurus, kiri, atau kanan, ego-relative |
-| \(d^{stop}\) | jarak longitudinal ke stop line relevan |
-| \(\sigma^{stop}\) | satu bit memori: kewajiban stop sudah dipenuhi atau belum |
-| \(h^{duck}\) | `NONE`, `SIDE_FAR`, `SIDE_NEAR`, `CROSSING_FAR`, atau `CROSSING_NEAR` |
+| $\(d\)$ | error lateral terhadap centerline lane |
+| $\(\phi\)$ | error heading terhadap tangent lane |
+| $\(v\)$ | kecepatan aktual ego |
+| $\(\kappa\)$ | kurva 0,3 m di depan: lurus, kiri, atau kanan, ego-relative |
+| $\(d^{stop}\)$ | jarak longitudinal ke stop line relevan |
+| $\(\sigma^{stop}\)$ | satu bit memori: kewajiban stop sudah dipenuhi atau belum |
+| $\(h^{duck}\)$ | `NONE`, `SIDE_FAR`, `SIDE_NEAR`, `CROSSING_FAR`, atau `CROSSING_NEAR` |
 
 Untuk Q-table, heading digabung dengan lateral error menjadi tracking error
-\(e=\phi+d\). State diskrit adalah:
+$\(e=\phi+d\)$. State diskrit adalah:
 
-\[
+$$
 \bar s=(bin(d),bin(e),bin(v),\kappa,bin(d^{stop}),\sigma^{stop},h^{duck}).
-\]
+$$
 
-Ukuran setiap dimensi adalah \((5,5,3,3,4,2,5)\), sehingga terdapat
-\(5\times5\times3\times3\times4\times2\times5=9.000\) state dan
+Ukuran setiap dimensi adalah $\((5,5,3,3,4,2,5)\)$, sehingga terdapat
+$\(5\times5\times3\times3\times4\times2\times5=9.000\)$ state dan
 63.000 pasangan state-action. Implementasinya ada di
 [`src/state.py`](src/state.py) dan [`src/discretizer.py`](src/discretizer.py).
 
 State ini bersifat privileged karena dibaca langsung dari simulator. Untuk
-visuomotor policy, gambar kamera menjadi observation \(o_t\), sedangkan state
+visuomotor policy, gambar kamera menjadi observation $\(o_t\)$, sedangkan state
 di atas tetap menjadi latent state; formulasi tersebut berubah menjadi POMDP.
 
 ### Action
 
 Duckiebot menggunakan differential drive, bukan steering angle Ackermann.
-Action fisik adalah \((v_{cmd},\omega_{cmd})\), lalu dikonversi menjadi command
+Action fisik adalah $\((v_{cmd},\omega_{cmd})\)$, lalu dikonversi menjadi command
 roda:
 
-\[
+$$
 u_L=v-\frac{L\omega}{2},\qquad
 u_R=v+\frac{L\omega}{2}.
-\]
+$$
 
 Action diskritnya:
 
-| ID | Action | \(v\) | \(\omega\) |
+| ID | Action | $\(v\)$ | $\(\omega\)$ |
 |---:|---|---:|---:|
-| 0 | `fast_left` | \(v_{fast}\) | \(+\omega_0\) |
-| 1 | `fast_straight` | \(v_{fast}\) | 0 |
-| 2 | `fast_right` | \(v_{fast}\) | \(-\omega_0\) |
-| 3 | `slow_left` | \(v_{slow}\) | \(+\omega_0\) |
-| 4 | `slow_straight` | \(v_{slow}\) | 0 |
-| 5 | `slow_right` | \(v_{slow}\) | \(-\omega_0\) |
+| 0 | `fast_left` | $\(v_{fast}\)$ | $\(+\omega_0\)$ |
+| 1 | `fast_straight` | $\(v_{fast}\$) | 0 |
+| 2 | `fast_right` | $\(v_{fast}\)$ | $\(-\omega_0\)$ |
+| 3 | `slow_left` | $\(v_{slow}\)$ | $\(+\omega_0\)$ |
+| 4 | `slow_straight` | $\(v_{slow}\)$ | 0 |
+| 5 | `slow_right` | $\(v_{slow}\)$ | $\(-\omega_0\)$ |
 | 6 | `brake` | 0 | 0 |
 
 Lane-only memask action 6 agar diam tidak menjadi solusi palsu. Full-task
@@ -146,10 +146,10 @@ bukan klaim kecepatan SI. Lihat [`src/actions.py`](src/actions.py).
 
 Reward dense dasarnya:
 
-\[
+$$
 r_t=\alpha_p v_t\cos(\phi_t)-\alpha_d d_t^2
 -\alpha_\phi\phi_t^2-c_{step}+r_{pedestrian}+r_{idle}+r_{event}.
-\]
+$$
 
 - progress positif mendorong kendaraan maju sejajar tangent lane;
 - penalti lateral dan heading menjaga lane;
@@ -226,14 +226,14 @@ Pada evaluasi:
 
 Q-learning adalah off-policy TD control:
 
-\[
+$$
 Q(s,a)\leftarrow Q(s,a)+\alpha
 \left[r+\gamma\max_{a'}Q(s',a')-Q(s,a)\right].
-\]
+$$
 
-Untuk terminal sejati, target hanya \(r\). Behavior training menggunakan
+Untuk terminal sejati, target hanya $\(r\)$. Behavior training menggunakan
 epsilon-greedy dengan random tie-breaking, sedangkan target memakai action
-greedy pada \(s'\). Implementasi ada di
+greedy pada $\(s'\)$. Implementasi ada di
 [`src/agents/q_learning.py`](src/agents/q_learning.py).
 
 No-teacher memakai dua teknik yang tetap model-free:
@@ -246,13 +246,13 @@ No-teacher memakai dua teknik yang tetap model-free:
 
 SARSA adalah on-policy TD control:
 
-\[
+$$
 Q(s,a)\leftarrow Q(s,a)+\alpha
 \left[r+\gamma Q(s',a')-Q(s,a)\right],
-\]
+$$
 
-dengan \(a'\) benar-benar dipilih oleh behavior policy. Nama SARSA berasal dari
-tuple \((S,A,R,S',A')\). Berbeda dari Q-learning, target ikut mencerminkan
+dengan $\(a'\)$ benar-benar dipilih oleh behavior policy. Nama SARSA berasal dari
+tuple $\((S,A,R,S',A')\)$. Berbeda dari Q-learning, target ikut mencerminkan
 eksplorasi epsilon. Implementasinya ada di
 [`src/agents/sarsa.py`](src/agents/sarsa.py).
 
@@ -346,12 +346,13 @@ controller satu-crossing, progress minimal 5 m, dan brake ratio maksimal 25%.
 
 ### Lane following
 
-| Solver | Teacher saat training | Timeout | Mean \(|d|\) | Progress | Brake |
-|---|---:|---:|---:|---:|---:|
-| Q-learning | Ya | 100% | 0,0282 m | 7,96 m | 0% |
-| SARSA | Ya | 100% | 0,0282 m | 7,96 m | 0% |
-| Q-learning | Tidak | 100% | 0,0465 m | 5,56 m | 0% |
-| SARSA | Tidak | Belum tersedia | — | — | — |
+| Solver     | Teacher saat Training |        Timeout | Mean (\lvert d \rvert) | Progress | Brake |
+| ---------- | --------------------- | -------------: | ---------------------: | -------: | ----: |
+| Q-learning | Ya                    |           100% |               0,0282 m |   7,96 m |    0% |
+| SARSA      | Ya                    |           100% |               0,0282 m |   7,96 m |    0% |
+| Q-learning | Tidak                 |           100% |               0,0465 m |   5,56 m |    0% |
+| SARSA      | Tidak                 | Belum tersedia |                      — |        — |     — |
+
 
 ### Full task: fair evaluation
 
