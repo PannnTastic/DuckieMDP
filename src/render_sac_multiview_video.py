@@ -21,6 +21,10 @@ import yaml
 from .actions import ActionConfig, build_action_table
 from .agents.sac import SACAgent, SACConfig
 from .continuous_env import build_continuous_env
+from .decorations import attach_kfupm_small_loop_decorations
+from .explainability.schema import CanonicalAction, SolverKind
+from .explainability.semantic_state import canonical_from_continuous_state
+from .explainability.video_overlay import sac_video_explanation
 from .render_multiview_video import (
     BOTTOM_HEIGHT,
     HEIGHT,
@@ -29,6 +33,7 @@ from .render_multiview_video import (
     _put_line,
     add_title,
     letterbox,
+    explanation_view_panel,
     trajectory_panel,
 )
 
@@ -155,12 +160,19 @@ def sac_dashboard_panel(
     termination_reason: str,
     action_low: np.ndarray,
     action_high: np.ndarray,
+    explanation=None,
     width: int = WIDTH // 2,
     height: int = BOTTOM_HEIGHT,
 ) -> np.ndarray:
     panel = np.full((height, width, 3), (13, 18, 25), dtype=np.uint8)
     panel = add_title(panel, "STATE, SAC ACTION & CRITIC")
     _put_line(panel, "SOLVER: SAC / TEACHER-FREE", 670, 29, 0.50, (245, 248, 250), 2)
+    if explanation is not None:
+        color = (80, 95, 255) if explanation.undesirable else (72, 230, 120)
+        _put_line(
+            panel, f"PRIMITIVE: {explanation.primitive}", 350, 29,
+            0.45, color, 2,
+        )
 
     stop_distance = "None" if state.d_stop is None else f"{state.d_stop:.3f} m"
     lines_left = [
@@ -197,7 +209,13 @@ def sac_dashboard_panel(
         if termination_reason in {"in_progress", "timeout"}
         else (255, 92, 92)
     )
-    _put_line(panel, f"status: {termination_reason}", 28, 289, 0.59, status_color, 2)
+    status_text = f"status: {termination_reason}"
+    if explanation is not None:
+        status_text += f"  |  trigger: {explanation.trigger}"
+    _put_line(
+        panel, status_text, 28, 289,
+        0.43 if explanation is not None else 0.59, status_color, 2,
+    )
     _put_line(
         panel,
         "EXECUTED CONTINUOUS ACTION (held for 6 physics ticks)",
@@ -242,9 +260,14 @@ def sac_dashboard_panel(
         397,
         0.51,
     )
+    probe_header = (
+        "CRITIC PROBES (supporting evidence; actor remains continuous)"
+        if explanation is None
+        else f"FOIL: {explanation.foil_label}  {explanation.separation_label}"
+    )
     _put_line(
         panel,
-        "CRITIC PROBES AT CURRENT STATE (reference; actor remains continuous)",
+        probe_header,
         28,
         425,
         0.47,
@@ -255,12 +278,16 @@ def sac_dashboard_panel(
     value_min, value_max = float(values.min()), float(values.max())
     span = max(1e-9, value_max - value_min)
     best = int(np.argmax(values))
+    foil = (
+        None if explanation is None
+        else int(explanation.foil_label.split("/", 1)[0])
+    )
     bar_x, bar_width = 258, 620
     for row, (name, value) in enumerate(zip(probe_names, values)):
         y = 439 + row * 21
-        marker = ">" if row == best else " "
-        color = (56, 214, 104) if row == best else (64, 137, 204)
-        _put_line(panel, f"{marker} {row}: {name:14s}", 28, y + 15, 0.43, thickness=2 if row == best else 1)
+        marker = "F" if row == foil else (">" if row == best else " ")
+        color = (255, 174, 44) if row == foil else ((56, 214, 104) if row == best else (64, 137, 204))
+        _put_line(panel, f"{marker} {row}: {name:14s}", 28, y + 15, 0.43, thickness=2 if row in {best, foil} else 1)
         cv2.rectangle(panel, (bar_x, y), (bar_x + bar_width, y + 15), (31, 40, 51), -1)
         normalized = (float(value) - value_min) / span
         cv2.rectangle(panel, (bar_x, y), (bar_x + int(bar_width * normalized), y + 15), color, -1)
@@ -268,7 +295,9 @@ def sac_dashboard_panel(
     return panel
 
 
-def compose_frame(camera, bev, vantage, trajectory, dashboard) -> np.ndarray:
+def compose_frame(
+    camera, bev, vantage, trajectory, dashboard, explanation_view=None
+) -> np.ndarray:
     frame = np.zeros((HEIGHT, WIDTH, 3), dtype=np.uint8)
     frame[:TOP_HEIGHT, 0:640] = add_title(
         letterbox(camera, 640, TOP_HEIGHT), "AGENT CAMERA"
@@ -276,9 +305,14 @@ def compose_frame(camera, bev, vantage, trajectory, dashboard) -> np.ndarray:
     frame[:TOP_HEIGHT, 640:1280] = add_title(
         letterbox(bev, 640, TOP_HEIGHT), "BEV / FULL MAP"
     )
-    frame[:TOP_HEIGHT, 1280:1920] = add_title(
-        letterbox(vantage, 640, TOP_HEIGHT), "VANTAGE / FULL LOOP"
-    )
+    if explanation_view is None:
+        frame[:TOP_HEIGHT, 1280:1920] = add_title(
+            letterbox(vantage, 640, TOP_HEIGHT), "VANTAGE / FULL LOOP"
+        )
+    else:
+        frame[:TOP_HEIGHT, 1280:1920] = letterbox(
+            explanation_view, 640, TOP_HEIGHT
+        )
     frame[TOP_HEIGHT:, :960] = letterbox(trajectory, 960, BOTTOM_HEIGHT)
     frame[TOP_HEIGHT:, 960:] = letterbox(dashboard, 960, BOTTOM_HEIGHT)
     cv2.line(frame, (640, 0), (640, TOP_HEIGHT), (75, 84, 94), 2)
@@ -298,6 +332,8 @@ def render_sac_multiview_video(
     duration_seconds: float = 0.0,
     repeat_duck: bool = False,
     repeat_rearm_distance: float = 1.0,
+    decorate_kfupm: bool = False,
+    replace_vantage_with_explanation: bool = False,
 ) -> None:
     warnings.filterwarnings("ignore")
     logging.getLogger().setLevel(logging.WARNING)
@@ -328,6 +364,11 @@ def render_sac_multiview_video(
         raise RuntimeError("Renderer meminta CUDA tetapi CUDA tidak tersedia")
 
     env = build_continuous_env(config, seed)
+    if decorate_kfupm:
+        if str(config["environment"].get("map_name", "")) != "small_loop":
+            raise ValueError("KFUPM decoration layout is defined only for small_loop")
+        asset_dir = Path(__file__).resolve().parents[1] / "assets"
+        attach_kfupm_small_loop_decorations(env, asset_dir)
     agent = SACAgent(
         env.observation_space.shape[0],
         env.action_space.low,
@@ -373,7 +414,7 @@ def render_sac_multiview_video(
         int(round(duration_seconds * fps)) if duration_seconds > 0.0 else 0
     )
 
-    def write_frame(action, decision_observation, diagnostics) -> None:
+    def write_frame(action, decision_observation, diagnostics, explanation) -> None:
         nonlocal frames
         if target_frames and frames >= target_frames:
             return
@@ -401,10 +442,23 @@ def render_sac_multiview_video(
             termination_reason,
             env.action_space.low,
             env.action_space.high,
+            explanation=explanation,
         )
-        writer.append_data(
-            compose_frame(camera, bev, vantage, trajectory_view, dashboard)
-        )
+        explanation_view = None
+        if replace_vantage_with_explanation:
+            selected_label = (
+                f"v={float(action[0]):+.3f}, "
+                f"omega={float(action[1]):+.3f}"
+            )
+            explanation_view = explanation_view_panel(
+                explanation,
+                selected_label,
+                "SOLVER: SAC / DETERMINISTIC ACTOR MEAN",
+            )
+        writer.append_data(compose_frame(
+            camera, bev, vantage, trajectory_view, dashboard,
+            explanation_view=explanation_view,
+        ))
         frames += 1
 
     try:
@@ -431,9 +485,22 @@ def render_sac_multiview_video(
                 diagnostics = critic_diagnostics(
                     agent, decision_observation, action, probes
                 )
+                canonical_action = CanonicalAction(
+                    solver=SolverKind.SAC,
+                    v_cmd=float(action[0]),
+                    omega_cmd=float(action[1]),
+                )
+                explanation = sac_video_explanation(
+                    canonical_from_continuous_state(env.current_state),
+                    canonical_action,
+                    probe_names,
+                    probes,
+                    diagnostics["q_min"],
+                    diagnostics["probe_q"],
+                )
                 decisions += 1
                 if episode_physics_steps == 0:
-                    write_frame(action, decision_observation, diagnostics)
+                    write_frame(action, decision_observation, diagnostics, explanation)
                 for _ in range(policy_repeat):
                     if (
                         done
@@ -451,7 +518,7 @@ def render_sac_multiview_video(
                     )
                     video_clock += fps * float(simulator.delta_time)
                     while video_clock >= 1.0:
-                        write_frame(action, decision_observation, diagnostics)
+                        write_frame(action, decision_observation, diagnostics, explanation)
                         video_clock -= 1.0
             if not target_frames:
                 break
@@ -493,6 +560,16 @@ def main() -> None:
         default=1.0,
         help="Jarak ego dari crossing sebelum Duckie boleh menyeberang lagi.",
     )
+    parser.add_argument(
+        "--decorate-kfupm",
+        action="store_true",
+        help="Tambahkan logo KFUPM di tengah dan billboard JISR3 di kiri spawn.",
+    )
+    parser.add_argument(
+        "--explanation-panel",
+        action="store_true",
+        help="Ganti vantage view dengan explanation keputusan saat ini.",
+    )
     args = parser.parse_args()
     render_sac_multiview_video(
         args.config,
@@ -504,6 +581,8 @@ def main() -> None:
         args.duration_seconds,
         args.repeat_duck,
         args.repeat_rearm_distance,
+        args.decorate_kfupm,
+        args.explanation_panel,
     )
 
 

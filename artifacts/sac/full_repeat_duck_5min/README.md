@@ -90,8 +90,13 @@ inference pada mesin tanpa CUDA.
   --output runs/sac_best_repeat_duck_multiview_5min_20fps.mp4 \
   --seed 30101 \
   --fps 20 \
+  --decorate-kfupm \
   --max-steps 9000
 ```
+
+Flag `--decorate-kfupm` hanya menambahkan logo pusat dan billboard JISR3
+non-collidable saat rendering. Flag ini tidak mengubah observation, reward,
+transition, action policy, atau checkpoint SAC.
 
 Output berada di `runs/`, yang sengaja diabaikan Git.
 

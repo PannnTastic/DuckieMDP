@@ -1,0 +1,74 @@
+{
+  "stage": "M6",
+  "method": "valid-manifold state counterfactuals and cross-solver response curves",
+  "validated_at": "2026-07-20",
+  "status": "accepted",
+  "policy_modes": {
+    "q_learning": "greedy_teacher_free",
+    "sac": "deterministic_actor_mean"
+  },
+  "anchor_contract": {
+    "real_rollout_anchors": true,
+    "lane": {"seed": 701, "decision_step": 5},
+    "stop": {"seed": 30101, "decision_step": 21},
+    "duck": {"seed": 30101, "decision_step": 82}
+  },
+  "validation_contract": {
+    "physical_validation_before_solver_projection": true,
+    "rejected_points_never_queried": true,
+    "valid_and_rejected_reports_separate": true,
+    "dependent_fields_repaired": true,
+    "anchor_hash_recorded_per_point": true,
+    "q_support_status": "unknown_no_visit_count_artifact",
+    "single_feature_intervention": true
+  },
+  "coverage": {
+    "curves": 20,
+    "valid_manifold_queries": 114,
+    "rejected_audit_queries": 22,
+    "action_flip_points": 76,
+    "primitive_flip_points": 60,
+    "features": [
+      "d",
+      "phi",
+      "curvature",
+      "stop_distance",
+      "stop_hold_progress",
+      "duck_longitudinal",
+      "duck_lateral",
+      "duck_present",
+      "duck_active",
+      "duck_crossing_available"
+    ]
+  },
+  "key_observations": {
+    "q_curvature_action_flips": 0,
+    "q_stop_distance_action_flips": 0,
+    "sac_stop_distance_action_flips": 7,
+    "q_duck_longitudinal_minimal_primitive_flip_m": 0.24220443150726906,
+    "sac_duck_longitudinal_minimal_primitive_flip_m": 0.5422044315072692,
+    "negative_results_retained": true
+  },
+  "q_table_shape": [5, 5, 3, 3, 4, 2, 5, 7],
+  "tests": {
+    "focused_m6_passed": 12,
+    "full_regression_passed": 113,
+    "full_regression_failed": 0
+  },
+  "artifacts": {
+    "summary": {
+      "path": "runs/explanations/m6_response_curves/m6_summary.json",
+      "sha256": "5b2d9d7181fb13dc5e26ce5ac1bbcd063f4ee263fd30f2cf9766afdff6ac74ed"
+    },
+    "figure_pdf": {
+      "path": "figures/fig_m6_response_curves.pdf",
+      "sha256": "e43bdc01d6f283bdc807743ebee89d1c2a8d775c0309e5c1bd9c58d392673570"
+    },
+    "figure_png": {
+      "path": "figures/fig_m6_response_curves.png",
+      "sha256": "221c3f837beb2b2ebc89e92ad33155baae025c34acc58e89496e65f4e9e90ddc"
+    },
+    "counterfactual_code_sha256": "0401516f5dabe19c8c9d2fa9a650b2aa6a7f4f6ac27e6d13a982142a02db7478",
+    "response_curve_code_sha256": "15f3631846995f042ada93e102e8a728c154d22d1f5e20f2b39705be9f38eb6b"
+  }
+}

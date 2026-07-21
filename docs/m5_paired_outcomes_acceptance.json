@@ -1,0 +1,68 @@
+{
+  "stage": "M5",
+  "method": "COViz-inspired paired simulator action outcomes",
+  "validated_at": "2026-07-20",
+  "primitive_schema_version": "1.0.1",
+  "world_semantics": "reactive_world",
+  "single_rollout_is_probability": false,
+  "branch_contract": {
+    "same_manifest": true,
+    "same_policy_selected_action_at_branch": true,
+    "only_first_action_forced": true,
+    "selected_and_foil_differ": true,
+    "teacher_active": false
+  },
+  "reports": {
+    "q_lane_correction": {
+      "manifest_id": "1bbc6c2df9f94c454b0651bc703807bb10500188795d9e0c164419ac44a1c63b",
+      "checkpoint_sha256": "59929f4e2c1968d274e9d3aa6c83ccb2cd7c915c632093cfaba6b544340906dd",
+      "config_sha256": "cd83a466ca3fdab25a5e2a368e929fd2fbe30f7bb66248c40d2a397afdb08b0d",
+      "selected_primitive": "LaneCorrectLeft",
+      "foil_primitive": "CruiseCurveRight",
+      "selected_discounted_return_h30": 1.9125729861714216,
+      "foil_discounted_return_h30": 1.8374434253611118
+    },
+    "q_stop_hold": {
+      "manifest_id": "2b1b638d1646ae9fcfcc98706357af7ac7ea2555cbd6cb1ad07b6141cb8eb516",
+      "selected_primitive": "StopHold",
+      "foil_primitive": "DecelerateStop",
+      "selected_discounted_return_h30": 18.053970236210034,
+      "foil_discounted_return_h30": 18.006772486561903
+    },
+    "q_pedestrian_yield": {
+      "manifest_id": "433a35431d7efa105615887dc3285215ab1a49370e1499b7df346ce62a70c820",
+      "selected_primitive": "YieldHold",
+      "foil_primitive": "YieldDecelerate",
+      "selected_discounted_return_h30": 3.116810065853327,
+      "foil_discounted_return_h30": 3.191051155343523,
+      "negative_result_retained": true
+    },
+    "sac_lane_correction": {
+      "manifest_id": "1363808be8ea73ce9789a637954e40636af9e4581e1ba5db2f33355ad8f027c9",
+      "selected_primitive": "LaneCorrectLeft",
+      "foil_primitive": "CruiseStraight",
+      "selected_discounted_return_h30": -33.687785708765475,
+      "foil_discounted_return_h30": -33.24602359472809,
+      "negative_result_retained": true
+    },
+    "sac_stop_hold": {
+      "manifest_id": "98f6a6a4fe0b57ae2d458443dd35cc9b49122f8f9436b4e1374d7ddf112e3c16",
+      "selected_primitive": "StopHold",
+      "foil_primitive": "DecelerateStop",
+      "selected_discounted_return_h30": 12.35778871354242,
+      "foil_discounted_return_h30": 12.093476992203245
+    },
+    "sac_pedestrian_yield": {
+      "manifest_id": "88acf5884871296c138a82ac19f933b8510bd77ed1069cb505219f7f33a82210",
+      "selected_primitive": "YieldHold",
+      "foil_primitive": "PrematureResume",
+      "selected_discounted_return_h30": -0.5828801851273675,
+      "foil_discounted_return_h30": -10.408550597455962
+    }
+  },
+  "tests": {
+    "full_regression_passed": 101,
+    "full_regression_failed": 0,
+    "primitive_unit_tests_passed": 15
+  }
+}

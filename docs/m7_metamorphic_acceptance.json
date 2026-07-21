@@ -1,0 +1,37 @@
+{
+  "stage": "M7",
+  "status": "accepted_with_policy_findings",
+  "method": "LEGIBLE-inspired metamorphic policy testing",
+  "relations": [
+    "MR-STOP",
+    "MR-PEDESTRIAN",
+    "MR-CURVATURE",
+    "MR-LANE-SYMMETRY"
+  ],
+  "validation": {
+    "generated_pairs": 48,
+    "manifold_valid_pairs": 48,
+    "applicable_pairs": 48,
+    "not_applicable": 0,
+    "rejected_state_policy_queries": 0,
+    "full_regression_passed": 120
+  },
+  "policy_results": {
+    "q_learning": {
+      "pass": 21,
+      "fail": 3,
+      "support_status": "unknown_no_visit_count_artifact"
+    },
+    "sac": {
+      "pass": 15,
+      "fail": 9,
+      "support_status": "real_anchor_synthetic_pairs_not_reachability_proven"
+    }
+  },
+  "checkpoint_sha256": {
+    "q_learning": "59929f4e2c1968d274e9d3aa6c83ccb2cd7c915c632093cfaba6b544340906dd",
+    "sac": "0b01447edd85e539de57f9a304fc287d26d5d7c4e73a5a51cd493fea2f4c4f2b"
+  },
+  "policy_failures_are_scientific_findings": true,
+  "next_stage": "M8 exact Q-table characterization and verification"
+}

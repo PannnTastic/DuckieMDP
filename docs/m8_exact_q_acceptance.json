@@ -1,0 +1,46 @@
+{
+  "stage": "M8",
+  "status": "accepted_with_policy_coverage_findings",
+  "checkpoint_sha256": "59929f4e2c1968d274e9d3aa6c83ccb2cd7c915c632093cfaba6b544340906dd",
+  "q_shape": [5, 5, 3, 3, 4, 2, 5, 7],
+  "validation": {
+    "representable_states": 9000,
+    "valid_manifold_states": 7875,
+    "reachable_states": 201,
+    "supported_states_evaluation_proxy": 138,
+    "decision_states_observed": 7241,
+    "rollout_episodes": 30,
+    "training_visit_counts_available": false,
+    "historical_support_threshold": 3,
+    "index_round_trip_passed": 9000,
+    "full_regression_passed": 125
+  },
+  "safety_supported": {
+    "P-DUCK-CROSSING-NEAR-NO-FAST": {
+      "applicable": 10,
+      "violations": 0
+    },
+    "P-STOP-NEAR-UNSATISFIED-NO-FAST": {
+      "applicable": 4,
+      "violations": 0
+    }
+  },
+  "safety_reachable": {
+    "P-DUCK-CROSSING-NEAR-NO-FAST": {
+      "applicable": 20,
+      "violations": 4
+    },
+    "P-STOP-NEAR-UNSATISFIED-NO-FAST": {
+      "applicable": 8,
+      "violations": 0
+    }
+  },
+  "claims": {
+    "teacher_active_during_m8": false,
+    "evaluation_support_is_not_training_visitation": true,
+    "q_margin_is_not_probability": true,
+    "whole_table_violation_rate_is_not_deployment_failure_rate": true,
+    "unsupported_violations_retained_for_audit": true
+  },
+  "next_stage": "M9 SAC internal diagnostics"
+}

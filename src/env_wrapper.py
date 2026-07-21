@@ -197,10 +197,14 @@ class DuckieMDPEnv(gym.Wrapper):
         """Sample s_0 dari rho_0 dengan curriculum pada d dan phi."""
         if seed is not None:
             self.env.seed(seed)
-        self.duck_controller.reset(seed)
         candidate = None
         for _ in range(max(1, self.spawn_attempts)):
             self.env.reset()
+            # Simulator.reset() memulihkan atribut object dari map, termasuk
+            # Duckie.visible. Reset controller harus dilakukan setelahnya agar
+            # state controller dan mode spawn-on-proximity benar-benar menjadi
+            # kondisi awal episode yang diamati policy.
+            self.duck_controller.reset(seed)
             self.env._mdp_sigma_stop = False
             self.env._mdp_last_lane_position = (1.0, 1.0)
             candidate = get_raw_state(self.env, False, self.state_cfg)

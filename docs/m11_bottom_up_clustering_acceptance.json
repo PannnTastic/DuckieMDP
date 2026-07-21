@@ -1,0 +1,61 @@
+{
+  "stage": "M11",
+  "status": "complete",
+  "main_result_eligible": true,
+  "method": "label-free fixed-window signatures, HDBSCAN primary, K-means sensitivity",
+  "samples": {
+    "decision_steps": 2500,
+    "windows": 500,
+    "q_learning": 250,
+    "sac": 250,
+    "development": 300,
+    "heldout": 200,
+    "features": 37,
+    "window_size": 5
+  },
+  "checks": {
+    "all_windows_receive_frozen_primitive_evaluation_label": true,
+    "development_and_heldout_seeds_are_disjoint": true,
+    "feature_names_pass_label_leakage_guard": true,
+    "fixed_windows_do_not_use_m12_primitive_boundaries": true,
+    "hdbscan_coverage_ge_0_50": true,
+    "hdbscan_has_at_least_two_clusters": true,
+    "hdbscan_is_deterministic": true,
+    "kmeans_sensitivity_has_at_least_two_clusters": true,
+    "lexicon_frozen_before_clustering": true,
+    "primitive_labels_not_used_for_hyperparameter_selection": true
+  },
+  "hdbscan": {
+    "clusters": 11,
+    "coverage": 0.694,
+    "noise_rate": 0.306,
+    "silhouette": 0.44830012193094626,
+    "purity": 0.5994236311239193,
+    "normalized_mutual_information": 0.4299166234452673,
+    "adjusted_rand_index": 0.19672113965339585,
+    "heldout_purity": 0.5942028985507246,
+    "heldout_normalized_mutual_information": 0.44073141098912466,
+    "heldout_adjusted_rand_index": 0.1859432522218157
+  },
+  "kmeans_sensitivity": {
+    "clusters": 9,
+    "coverage": 1.0,
+    "silhouette": 0.30623630989761097,
+    "purity": 0.482,
+    "normalized_mutual_information": 0.36255631316326253,
+    "adjusted_rand_index": 0.16747568843339472
+  },
+  "claims": {
+    "alignment_has_no_pass_fail_threshold": true,
+    "bottom_up_support_is_partial_and_solver_dependent": true,
+    "rare_stop_and_yield_primitives_are_not_validated_by_this_ensemble": true,
+    "clusters_are_not_local_decision_explanations": true,
+    "policies_retrained": false,
+    "checkpoints_changed": false
+  },
+  "tests": {
+    "m11_unit_tests_passed": 5,
+    "m11_unit_tests_failed": 0
+  },
+  "next": "larger scenario-stratified stop/pedestrian ensemble before inferential thesis claim"
+}

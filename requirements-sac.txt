@@ -2,3 +2,6 @@
 --extra-index-url https://download.pytorch.org/whl/cu121
 torch==2.1.2+cu121
 wandb==0.26.1
+scikit-learn==1.6.1
+joblib==1.4.2
+threadpoolctl==3.5.0

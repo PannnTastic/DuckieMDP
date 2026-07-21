@@ -1,0 +1,60 @@
+{
+  "stage": "M9",
+  "status": "accepted_with_internal_diagnostic_caveats",
+  "checkpoint_sha256": "0b01447edd85e539de57f9a304fc287d26d5d7c4e73a5a51cd493fea2f4c4f2b",
+  "policy_mode": "deterministic_actor_mean",
+  "teacher_active": false,
+  "development_rollout": {
+    "seeds": [2101, 2202, 2303, 2404, 2505],
+    "real_states": 2000,
+    "real_cruise_straight_states_for_empirical_baseline": 57
+  },
+  "integrated_gradients": {
+    "main_integration_steps": 1024,
+    "max_absolute_completeness_residual": 0.0020537376403808594,
+    "acceptance_limit": 0.005,
+    "outputs_explained_separately": ["v_cmd", "omega_cmd"],
+    "baselines": [
+      "neutral_canonical",
+      "empirical_cruise_straight_centroid"
+    ],
+    "dominant_concept_claims_stable": {
+      "lane_v_cmd": false,
+      "lane_omega_cmd": false,
+      "stop_v_cmd": true,
+      "stop_omega_cmd": false,
+      "duck_v_cmd": true,
+      "duck_omega_cmd": true
+    }
+  },
+  "attribution_stability": {
+    "anchors": 12,
+    "near_boundary_anchors": 9,
+    "non_boundary_comparisons": 64,
+    "median_distance": 0.0007563080387182897,
+    "p95_distance": 0.004655256170246536,
+    "acceptance_limit": 0.1,
+    "passed": true
+  },
+  "critic_probe_contract": {
+    "double_critic_loaded": true,
+    "replay_snapshot_available": false,
+    "reference_support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT",
+    "called_advantage_or_confidence": false,
+    "largest_actor_probe_disagreement": 32.599,
+    "primary_outcome_evidence": false
+  },
+  "validation": {
+    "all_acceptance_checks_passed": true,
+    "invalid_boundary_states_queried": false,
+    "full_regression_passed": 132
+  },
+  "claims": {
+    "ig_is_internal_actor_diagnostic_not_causal_proof": true,
+    "critic_probes_are_heuristic": true,
+    "baseline_unstable_dominant_concepts_are_not_claimed": true,
+    "boundary_cases_are_reported_separately": true,
+    "failed_outputs_would_be_retained_for_audit": true
+  },
+  "next_stage": "M10 solver-aware rule extraction"
+}

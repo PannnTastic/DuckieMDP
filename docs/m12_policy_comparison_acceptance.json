@@ -1,0 +1,80 @@
+{
+  "stage": "M12",
+  "status": "accepted_machine_readable_comparison_and_unified_report",
+  "policies_retrained": false,
+  "surrogate_actions_used": false,
+  "comparison": {
+    "map": "small_loop",
+    "seeds": [20101, 20202, 20303, 20404, 20505],
+    "episodes_per_policy": 5,
+    "decision_steps_per_policy": 1250,
+    "frame_skip": 6,
+    "max_physics_steps": 1500,
+    "initial_pose_match_atol": 1e-7,
+    "initial_pose_match": true,
+    "teacher_active": false,
+    "q_policy_mode": "greedy_teacher_free_lowest_id_tie_break",
+    "sac_policy_mode": "deterministic_actor_mean",
+    "reward_parity": {
+      "straight_steer_penalty_neutralized": true,
+      "reason": "legacy Q wrapper does not provide continuous action_omega"
+    }
+  },
+  "q_learning": {
+    "timeout_rate": 1.0,
+    "mean_return": 44.6335088309222,
+    "stop_compliance_rate": 1.0,
+    "pedestrian_yield_command_rate": 1.0,
+    "unsafe_proceed_rate": 0.0,
+    "unnecessary_brake_rate": 0.0,
+    "undesirable_primitive_rate": 0.0696,
+    "first_brake_distance_mean_m": 0.3259045774702974,
+    "straight_mean_abs_omega": 0.4797794117647059,
+    "straight_lane_error_omega_correlation": 0.7585761219532202
+  },
+  "sac": {
+    "timeout_rate": 1.0,
+    "mean_return": 17.82193614759312,
+    "stop_compliance_rate": 1.0,
+    "pedestrian_yield_command_rate": 1.0,
+    "unsafe_proceed_rate": 0.0,
+    "unnecessary_brake_rate": 0.0,
+    "undesirable_primitive_rate": 0.0,
+    "first_brake_distance_mean_m": 0.25076832809053295,
+    "straight_mean_abs_omega": 0.5404088427721699,
+    "straight_lane_error_omega_correlation": 0.6550458888670132
+  },
+  "unified_report": {
+    "accepted": true,
+    "local_cases": 6,
+    "all_local_branches_valid": true,
+    "all_source_stage_checks_passed": true,
+    "all_local_cases_use_canonical_checkpoint_hash": true,
+    "all_local_cases_use_canonical_checkpoint_path": true,
+    "m6_through_m10_use_canonical_policy_checkpoints": true,
+    "surrogate_never_used_as_original_policy": true,
+    "json": "runs/explanations/m12_unified_report/unified_explanation_report.json",
+    "csv": "runs/explanations/m12_unified_report/local_explanation_index.csv"
+  },
+  "validation": {
+    "primitive_coverage_q_learning": 1.0,
+    "primitive_coverage_sac": 1.0,
+    "full_regression_passed": 147,
+    "video_overlay_smoke": {
+      "q_learning": {"frames": 20, "physics_steps": 30, "fps": 20},
+      "sac": {"frames": 20, "physics_steps": 30, "fps": 20},
+      "resolution": "1920x1080",
+      "passed": true
+    }
+  },
+  "claims": {
+    "comparison_is_descriptive_not_solver_isolation": true,
+    "influence_signatures_are_qualitative_cross_solver": true,
+    "approach_crossing_is_not_equivalent_to_yielding": true,
+    "steering_magnitude_and_steering_reversal_are_separate_metrics": true,
+    "five_seeds_are_not_population_level_inference": true,
+    "original_policies_remain_the_explanation_targets": true
+  },
+  "m11_bottom_up_clustering": "completed_post_m12_partial_solver_dependent_support",
+  "next_stage": "MDP explanation pipeline complete; optional long presentation render"
+}

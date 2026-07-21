@@ -17,6 +17,11 @@ class DuckControllerConfig:
     walk_distance: float = 0.90
     trigger_min_ego_distance: float = 0.55
     trigger_max_ego_distance: float = 1.10
+    # Mode eksperimen: Duckie tetap menjadi object map/controller, tetapi
+    # disembunyikan dari renderer dan state encoder sampai crossing point
+    # memasuki jendela jarak pemicu ego. Default False menjaga semua artefak
+    # training/evaluasi lama tetap identik.
+    spawn_on_ego_proximity: bool = False
     # Nol mempertahankan perilaku lama (crossing berulang tanpa batas).
     # Full task memakai satu crossing agar Duckie tidak langsung berbalik arah
     # ketika ego masih sedang yield di lokasi yang sama.
@@ -143,6 +148,7 @@ class DuckController:
             "corners": np.array(duck.obj_corners, copy=True),
             "norm": np.array(duck.obj_norm, copy=True),
             "vel": float(getattr(duck, "vel", 0.02)),
+            "visible": bool(getattr(duck, "visible", True)),
         }
 
     def reset(self, seed: int = None) -> None:
@@ -158,6 +164,11 @@ class DuckController:
             duck.obj_corners = np.array(saved["corners"], copy=True)
             duck.obj_norm = np.array(saved["norm"], copy=True)
             duck.vel = saved["vel"]
+            duck.visible = (
+                False
+                if self.cfg.spawn_on_ego_proximity
+                else bool(saved["visible"])
+            )
             duck.pedestrian_active = False
             duck.pedestrian_wait_time = float("inf")
             duck.time = 0.0
@@ -192,6 +203,18 @@ class DuckController:
                     ahead
                     and self.cfg.trigger_min_ego_distance <= distance <= self.cfg.trigger_max_ego_distance
                 )
+                if self.cfg.spawn_on_ego_proximity and not bool(
+                    getattr(duck, "visible", True)
+                ):
+                    if not eligible:
+                        continue
+                    # Secara visual/state, momen ini adalah spawn. Object-nya
+                    # sudah dibuat saat interpretasi map agar scene graph/OpenGL
+                    # tidak perlu dimodifikasi di tengah episode.
+                    duck.visible = True
+                    # Beri policy satu decision step untuk mengamati Duckie
+                    # yang baru muncul sebelum controller mulai menyeberang.
+                    continue
                 if eligible and self.rng.random_sample() < self.cfg.p_cross:
                     duck.pedestrian_active = True
                     duck.time = 0.0

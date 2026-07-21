@@ -10,7 +10,11 @@ import yaml
 from .actions import build_action_table, ActionConfig
 from .agents.factory import algorithm_name, build_tabular_agent
 from .discretizer import discretize
+from .decorations import attach_kfupm_small_loop_decorations
 from .env_wrapper import build_env
+from .explainability.schema import CanonicalAction, SolverKind
+from .explainability.semantic_state import canonical_from_raw_state
+from .explainability.video_overlay import q_video_explanation
 
 
 WIDTH, HEIGHT = 1920, 1080
@@ -123,6 +127,74 @@ def _put_line(panel: np.ndarray, text: str, x: int, y: int, scale=0.58, color=(2
     cv2.putText(panel, text, (x, y), cv2.FONT_HERSHEY_SIMPLEX, scale, color, thickness, cv2.LINE_AA)
 
 
+def _wrapped_lines(text: str, limit: int = 54) -> List[str]:
+    words = str(text).split()
+    lines: List[str] = []
+    current = ""
+    for word in words:
+        candidate = word if not current else current + " " + word
+        if len(candidate) <= limit:
+            current = candidate
+        else:
+            if current:
+                lines.append(current)
+            current = word
+    if current:
+        lines.append(current)
+    return lines or [""]
+
+
+def explanation_view_panel(
+    explanation,
+    selected_label: str,
+    solver_label: str,
+    width: int = 640,
+    height: int = TOP_HEIGHT,
+) -> np.ndarray:
+    """Render a live per-state explanation in place of the vantage view."""
+    panel = np.full((height, width, 3), (12, 17, 24), dtype=np.uint8)
+    panel = add_title(panel, "EXPLANATION / CURRENT DECISION")
+    if explanation is None:
+        _put_line(
+            panel, "No explanation available for this frame.", 24, 92,
+            0.58, (190, 201, 214),
+        )
+        return panel
+
+    accent = (80, 95, 255) if explanation.undesirable else (72, 230, 120)
+    _put_line(panel, solver_label, 24, 70, 0.49, (166, 185, 205), 1)
+    _put_line(
+        panel, f"PRIMITIVE: {explanation.primitive}", 24, 105,
+        0.65, accent, 2,
+    )
+    _put_line(panel, "SELECTED ACTION", 24, 143, 0.43, (242, 198, 79), 1)
+    _put_line(panel, selected_label, 24, 170, 0.58, (245, 248, 250), 2)
+
+    _put_line(panel, "WHY / TRIGGER", 24, 207, 0.43, (242, 198, 79), 1)
+    for index, line in enumerate(_wrapped_lines(explanation.trigger)):
+        _put_line(panel, line, 24, 234 + index * 25, 0.48)
+
+    contrast_y = 294
+    _put_line(panel, "CONTRASTIVE FOIL", 24, contrast_y, 0.43, (242, 198, 79), 1)
+    _put_line(
+        panel, explanation.foil_label, 24, contrast_y + 27,
+        0.53, (224, 231, 239), 2,
+    )
+    _put_line(
+        panel, explanation.separation_label, 24, contrast_y + 56,
+        0.49, (52, 196, 235), 1,
+    )
+    _put_line(
+        panel, f"RULE: {explanation.rule_id}", 24, contrast_y + 88,
+        0.44, (166, 185, 205), 1,
+    )
+    caveat_lines = _wrapped_lines(explanation.caveat, limit=60)[:2]
+    _put_line(panel, "EVIDENCE SCOPE", 24, 414, 0.40, (242, 198, 79), 1)
+    for index, line in enumerate(caveat_lines):
+
+        _put_line(panel, line, 24, 438 + index * 21, 0.40, (166, 185, 205), 1)
+    return panel
+
 def dashboard_panel(
     raw_state,
     discrete_state: Tuple[int, ...],
@@ -136,11 +208,22 @@ def dashboard_panel(
     cumulative_reward: float,
     termination_reason: str,
     teacher_active: bool = False,
+    explanation=None,
     width: int = WIDTH // 2,
     height: int = BOTTOM_HEIGHT,
 ) -> np.ndarray:
     panel = np.full((height, width, 3), (13, 18, 25), dtype=np.uint8)
     panel = add_title(panel, "STATE, ACTION & Q VALUES")
+    if explanation is not None:
+        color = (80, 95, 255) if explanation.undesirable else (72, 230, 120)
+        _put_line(
+            panel, f"PRIMITIVE: {explanation.primitive}", 330, 29,
+            0.47, color, 2,
+        )
+        _put_line(
+            panel, f"trigger: {explanation.trigger}", 28, 250,
+            0.43, (242, 198, 79),
+        )
     tracking_error = raw_state.phi + raw_state.d
     tile_name = getattr(raw_state.tile, "name", str(raw_state.tile))
     duck_name = getattr(raw_state.duck, "name", str(raw_state.duck))
@@ -193,10 +276,15 @@ def dashboard_panel(
         _put_line(panel, f"{float(q_values[action_id]):+.4f}", bar_x + bar_width - 92, y + 17, 0.47, (246, 248, 250))
     _put_line(
         panel,
-        f"ACTIVE (held): {action}/{ACTION_NAMES[action]}    GREEDY NEXT: {greedy_action}/{ACTION_NAMES[greedy_action]}",
+        (
+            f"ACTIVE: {action}/{ACTION_NAMES[action]}  "
+            f"GREEDY NEXT: {greedy_action}/{ACTION_NAMES[greedy_action]}"
+            + ("" if explanation is None else
+               f"  FOIL: {explanation.foil_label}  {explanation.separation_label}")
+        ),
         28,
         height - 24,
-        0.58,
+        0.45,
         (72, 230, 120),
         2,
     )
@@ -209,11 +297,17 @@ def compose_frame(
     vantage: np.ndarray,
     trajectory: np.ndarray,
     dashboard: np.ndarray,
+    explanation_view: np.ndarray = None,
 ) -> np.ndarray:
     frame = np.zeros((HEIGHT, WIDTH, 3), dtype=np.uint8)
     frame[:TOP_HEIGHT, 0:640] = add_title(letterbox(camera, 640, TOP_HEIGHT), "AGENT CAMERA")
     frame[:TOP_HEIGHT, 640:1280] = add_title(letterbox(bev, 640, TOP_HEIGHT), "BEV / FULL MAP")
-    frame[:TOP_HEIGHT, 1280:1920] = add_title(letterbox(vantage, 640, TOP_HEIGHT), "VANTAGE / LOCAL OVERHEAD")
+    if explanation_view is None:
+        frame[:TOP_HEIGHT, 1280:1920] = add_title(
+            letterbox(vantage, 640, TOP_HEIGHT), "VANTAGE / LOCAL OVERHEAD"
+        )
+    else:
+        frame[:TOP_HEIGHT, 1280:1920] = letterbox(explanation_view, 640, TOP_HEIGHT)
     frame[TOP_HEIGHT:, :960] = letterbox(trajectory, 960, BOTTOM_HEIGHT)
     frame[TOP_HEIGHT:, 960:] = letterbox(dashboard, 960, BOTTOM_HEIGHT)
     cv2.line(frame, (640, 0), (640, TOP_HEIGHT), (75, 84, 94), 2)
@@ -230,16 +324,32 @@ def render_multiview_video(
     seed: int = 101,
     fps: int = 20,
     max_steps: int = 1500,
+    decorate_kfupm: bool = False,
+    replace_vantage_with_explanation: bool = False,
 ) -> None:
     config = load_config(config_path)
+    algorithm = algorithm_name(config)
+    solver_kind = (
+        SolverKind.SARSA
+        if algorithm == "sarsa"
+        else SolverKind.Q_LEARNING
+    )
     policy_repeat = int(config["environment"].get("frame_skip", 1))
     config["environment"]["frame_skip"] = 1
     if max_steps > 0:
         config["environment"]["max_steps"] = max_steps
     env = build_env(config, seed)
+    if decorate_kfupm:
+        if str(config["environment"].get("map_name", "")) != "small_loop":
+            raise ValueError("KFUPM decoration layout is defined only for small_loop")
+        asset_dir = Path(__file__).resolve().parents[1] / "assets"
+        attach_kfupm_small_loop_decorations(env, asset_dir)
     agent = build_tabular_agent(config, seed)
     agent.load(q_table_path)
     allowed_actions = tuple(int(action) for action in agent.allowed_actions)
+    action_specs = build_action_table(
+        ActionConfig(**config.get("actions", {}))
+    )
     output_path.parent.mkdir(parents=True, exist_ok=True)
     writer = imageio.get_writer(
         str(output_path), format="FFMPEG", mode="I", fps=fps, codec="libx264",
@@ -256,7 +366,25 @@ def render_multiview_video(
     cumulative_reward = 0.0
     termination_reason = "in_progress"
 
-    def write_frame(action: int) -> None:
+    def explain_decision(raw_state, action_id):
+        state_index = discretize(raw_state)
+        spec = action_specs[action_id]
+        canonical_action = CanonicalAction(
+            solver=solver_kind,
+            action_id=action_id,
+            action_name=spec.name,
+            v_cmd=float(spec.v),
+            omega_cmd=float(spec.omega),
+        )
+        return q_video_explanation(
+            canonical_from_raw_state(raw_state),
+            canonical_action,
+            agent.q[state_index],
+            allowed_actions,
+            action_specs,
+        )
+
+    def write_frame(action: int, explanation) -> None:
         nonlocal frames
         simulator = env.unwrapped
         camera, bev, vantage = capture_views(env)
@@ -269,27 +397,51 @@ def render_multiview_video(
         dashboard = dashboard_panel(
             state, state_index, action, agent.q[state_index], allowed_actions,
             position, float(simulator.cur_angle), decisions, physics_steps,
-            cumulative_reward, termination_reason
+            cumulative_reward, termination_reason,
+            explanation=explanation,
         )
+        teacher_trained = bool(config.get("lane_teacher", {}).get("enabled", False))
+        solver_label = f"SOLVER: {algorithm.upper()}"
+        if teacher_trained:
+            solver_label += " / TEACHER-TRAINED"
         cv2.putText(
             dashboard,
-            f"SOLVER: {algorithm_name(config).upper()}",
-            (735, 29),
+            solver_label,
+            (620 if teacher_trained else 735, 29),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.55,
             (245, 248, 250),
             2,
             cv2.LINE_AA,
         )
-        writer.append_data(compose_frame(camera, bev, vantage, trajectory_view, dashboard))
+        explanation_view = None
+        if replace_vantage_with_explanation:
+            spec = action_specs[action]
+            selected_label = (
+                f"{action}/{spec.name}  "
+                f"(v={float(spec.v):+.2f}, omega={float(spec.omega):+.2f})"
+            )
+            explanation_view = explanation_view_panel(
+                explanation,
+                selected_label,
+                solver_label + " / GREEDY EVALUATION",
+            )
+        writer.append_data(
+            compose_frame(
+                camera, bev, vantage, trajectory_view, dashboard,
+                explanation_view=explanation_view,
+            )
+        )
         frames += 1
 
     try:
         initial_action = agent.select_action(discretize(state), greedy=True)
-        write_frame(initial_action)
+        explanation = explain_decision(state, initial_action)
+        write_frame(initial_action, explanation)
         done = False
         while not done and (max_steps <= 0 or physics_steps < max_steps):
             action = agent.select_action(discretize(state), greedy=True)
+            explanation = explain_decision(state, action)
             decisions += 1
             for _ in range(policy_repeat):
                 if done or (max_steps > 0 and physics_steps >= max_steps):
@@ -301,7 +453,7 @@ def render_multiview_video(
                 trajectory.append((float(env.unwrapped.cur_pos[0]), float(env.unwrapped.cur_pos[2])))
                 video_clock += fps * float(env.unwrapped.delta_time)
                 if video_clock >= 1.0:
-                    write_frame(action)
+                    write_frame(action, explanation)
                     video_clock -= 1.0
     finally:
         writer.close()
@@ -321,8 +473,27 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=101)
     parser.add_argument("--fps", type=int, default=20)
     parser.add_argument("--max-steps", type=int, default=1500)
+    parser.add_argument(
+        "--decorate-kfupm",
+        action="store_true",
+        help="Tambahkan logo KFUPM di tengah dan billboard JISR3 di kiri spawn.",
+    )
+    parser.add_argument(
+        "--explanation-panel",
+        action="store_true",
+        help="Ganti vantage view dengan explanation keputusan saat ini.",
+    )
     args = parser.parse_args()
-    render_multiview_video(args.config, args.q_table, args.output, args.seed, args.fps, args.max_steps)
+    render_multiview_video(
+        args.config,
+        args.q_table,
+        args.output,
+        args.seed,
+        args.fps,
+        args.max_steps,
+        args.decorate_kfupm,
+        args.explanation_panel,
+    )
 
 
 if __name__ == "__main__":

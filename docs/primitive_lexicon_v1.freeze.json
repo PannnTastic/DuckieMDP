@@ -1,0 +1,58 @@
+{
+  "primitive_schema_version": "1.0.1",
+  "freeze_date": "2026-07-20",
+  "freeze_status": "content_hash_frozen",
+  "revision_note": "v1.0.1 makes an unsatisfied stop obligation outrank an inactive/side Duckie; active corridor risk still has highest safety precedence.",
+  "lexicon_commit": null,
+  "git_base_commit": "2f7b148a7b58126573e1fac75ee04375a6a05903",
+  "git_note": "The workspace was intentionally not committed because it contains pre-existing user changes. The content hashes below are the binding freeze evidence.",
+  "files": {
+    "src/explainability/primitives.py": "93c11992568de85135885b55c2c4d3ee06f257f2e41edc53cb2e497a5df8a58a",
+    "tests/test_explainability_primitives.py": "925d571bbe510446a6403b0d8b4a73e765097a5fd78fb55dc6c9c6cbe4ab3743",
+    "docs/explainable_mdp_policy_plan.md": "cbcccfc2bc13d3f922c725952d729530ca89533de312c133565cddd9a43eecb7"
+  },
+  "threshold_config_sha256": "7e61509cd91ffd0f8e74e05230e611f17e5f58154a06b6e34a99b1fc4b86913f",
+  "threshold_config": {
+    "deceleration_delta": 0.02,
+    "duck_approach_longitudinal_min": -0.3,
+    "duck_approach_radius": 1.5,
+    "duck_corridor_half_width": 0.4,
+    "duck_risk_longitudinal_max": 0.8,
+    "duck_risk_longitudinal_min": -0.15,
+    "hold_command_speed": 0.03,
+    "lane_tracking_error": 0.1,
+    "oscillation_omega": 0.5,
+    "severe_heading_error": 0.7,
+    "severe_lateral_error": 0.18,
+    "slow_command_speed": 0.18,
+    "steering_deadband": 0.15,
+    "stop_decelerate_distance": 1.0,
+    "stop_hold_distance": 0.45,
+    "unsafe_proceed_speed": 0.08
+  },
+  "validation": {
+    "primitive_unit_tests": {
+      "passed": 15,
+      "failed": 0
+    },
+    "full_regression": {
+      "passed": 101,
+      "failed": 0
+    },
+    "rollout_coverage": {
+      "q_learning": {
+        "steps": 250,
+        "coverage": 1.0
+      },
+      "sac": {
+        "steps": 300,
+        "coverage": 1.0
+      }
+    }
+  },
+  "independence_contract": {
+    "clustering_executed_before_freeze": false,
+    "primitive_labels_allowed_as_clustering_features": false,
+    "future_rule_changes_require_new_schema_version": true
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "stage": "M10",
+  "status": "accepted_global_rules_with_sac_policy_replacement_denied",
+  "library_manifest": {
+    "scikit_learn": "1.6.1",
+    "joblib": "1.4.2",
+    "numpy": "1.20.0",
+    "random_state": 0,
+    "role": "post_hoc_surrogate_only"
+  },
+  "policies_retrained": false,
+  "q_learning": {
+    "representable_states": 9000,
+    "action_tree_fidelity": 1.0,
+    "primitive_tree_fidelity": 1.0,
+    "action_tree_depth": 15,
+    "action_tree_leaves": 257,
+    "primitive_tree_depth": 15,
+    "primitive_tree_leaves": 138,
+    "rollout_decisions_compared": 1250,
+    "rollout_action_mismatches": 0,
+    "rollout_total_failure_rate": 0.0,
+    "claim": "exact_on_the_explicit_9000_state_table_domain"
+  },
+  "sac": {
+    "development_samples": 2000,
+    "heldout_samples": 2000,
+    "primitive_tree": {
+      "depth": 10,
+      "leaves": 54,
+      "heldout_global_fidelity": 0.949,
+      "heldout_lane_fidelity": 0.9554273728369166,
+      "heldout_pedestrian_fidelity": 0.9428571428571428,
+      "heldout_stop_fidelity": 0.7413793103448276
+    },
+    "continuous_action_tree": {
+      "depth": 14,
+      "leaves": 495,
+      "heldout_mae_v": 0.010290648251907394,
+      "heldout_mae_omega": 0.07966540253324614,
+      "heldout_action_induced_primitive_fidelity": 0.9745,
+      "surrogate_rollout_actor_invocations": 0
+    },
+    "same_seed_closed_loop": {
+      "episodes_each": 5,
+      "actor_total_failure_rate": 0.0,
+      "surrogate_total_failure_rate": 0.0,
+      "actor_mean_return": 106.73947506398164,
+      "surrogate_mean_return": 20.729023013771656,
+      "surrogate_to_actor_return_ratio": 0.19420203257835295,
+      "actor_stop_compliance": 1.0,
+      "surrogate_stop_compliance": 0.8571428571428571,
+      "actor_duck_yield_step_rate": 1.0,
+      "surrogate_duck_yield_step_rate": 0.37142857142857144,
+      "actor_collision_rate": 0.0,
+      "surrogate_collision_rate": 0.0
+    },
+    "global_rule_summary_eligible": true,
+    "continuous_action_tree_policy_replacement_claim_allowed": false
+  },
+  "validation": {
+    "predeclared_structural_and_global_fidelity_gates_passed": true,
+    "closed_loop_safety_gap_retained_as_main_finding": true,
+    "full_regression_passed": 137
+  },
+  "model_sha256": {
+    "q_action_tree": "75936685af5e57ae7cc250feaa3662fecbed6ee9dcaf2a958894760d0138dcc5",
+    "q_primitive_tree": "89089bb5cc2208402e71c874d0ab2d6d0d85ccc5af5dfb2827d2bb230939ed02",
+    "sac_action_tree": "57a30d4ac0c8c50a77306ccfc8a23773d89d6432b09add6547042143b3a7da62",
+    "sac_primitive_tree": "09f425af64bc29e34dfd74856411b6fd2dc69389eb2f47bfa005bbe9f2e496a1"
+  },
+  "claims": {
+    "surrogate_is_not_the_original_policy": true,
+    "global_fidelity_is_not_closed_loop_safety_equivalence": true,
+    "stop_context_is_reported_separately": true,
+    "original_actor_remains_required_for_local_sac_explanations": true
+  },
+  "next_stage": "comparison and presentation artefacts"
+}

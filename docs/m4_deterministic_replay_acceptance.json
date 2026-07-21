@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0.0",
+  "date": "2026-07-20",
+  "status": "passed",
+  "atol": 1e-7,
+  "rtol": 0.0,
+  "comparison_contract": [
+    "continuous_observation",
+    "raw_state_vector",
+    "discrete_state",
+    "action",
+    "reward_total",
+    "reward_terms",
+    "events",
+    "duck_controller_phase",
+    "termination_reason",
+    "termination_step"
+  ],
+  "scenarios": [
+    {
+      "name": "lane",
+      "config": "configs/sac_lane.yaml",
+      "seed": 701,
+      "steps": 120,
+      "crossings_started": 0,
+      "termination_reason": "in_progress",
+      "identical": true
+    },
+    {
+      "name": "stop",
+      "config": "configs/sac_stop.yaml",
+      "seed": 801,
+      "steps": 250,
+      "crossings_started": 0,
+      "termination_reason": "timeout",
+      "identical": true
+    },
+    {
+      "name": "one_crossing",
+      "config": "artifacts/sac/full_repeat_duck_5min/config.yaml",
+      "seed": 30101,
+      "steps": 500,
+      "crossings_started": 1,
+      "termination_reason": "in_progress",
+      "identical": true
+    },
+    {
+      "name": "repeated_crossing",
+      "config": "artifacts/sac/full_repeat_duck_5min/config_repeat_duck.yaml",
+      "seed": 30101,
+      "steps": 1500,
+      "crossings_started": 7,
+      "termination_reason": "timeout",
+      "identical": true
+    }
+  ],
+  "world_semantics": {
+    "default": "reactive_world",
+    "frozen_exogenous": [
+      "reset seed",
+      "initial conditions",
+      "controller parameters",
+      "RNG streams",
+      "action prefix"
+    ],
+    "endogenous": [
+      "Duckie trigger response to ego distance",
+      "crossing rearm response to ego trajectory"
+    ]
+  }
+}

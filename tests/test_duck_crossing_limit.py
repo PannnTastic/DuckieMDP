@@ -99,3 +99,47 @@ def test_repeat_crossing_rearms_only_after_ego_departs():
     controller.before_step()
     assert duck.pedestrian_active
     assert controller.crossings_started == [2]
+
+
+def test_spawn_on_proximity_hides_duck_until_trigger_window():
+    env = _Env()
+    env.cur_pos = np.array([-1.0, 0.0, 0.0])
+    duck = SimpleNamespace(
+        visible=False,
+        pedestrian_active=False,
+        pedestrian_wait_time=float("inf"),
+        heading=np.array([1.0, 0.0, 0.0]),
+        start=np.array([0.05, 0.0, 0.0]),
+        walk_distance=0.90,
+        vel=0.02,
+        time=0.0,
+    )
+    controller = DuckController.__new__(DuckController)
+    controller.env = env
+    controller.cfg = DuckControllerConfig(
+        p_cross=1.0,
+        trigger_min_ego_distance=0.40,
+        trigger_max_ego_distance=0.60,
+        spawn_on_ego_proximity=True,
+    )
+    controller.rng = np.random.RandomState(0)
+    controller.ducks = [duck]
+    controller.crossings_started = [0]
+    controller.crossing_armed = [True]
+
+    controller.before_step()
+    assert not duck.visible
+    assert not duck.pedestrian_active
+    assert controller.crossings_started == [0]
+
+    env.cur_pos = np.array([0.0, 0.0, 0.0])
+    controller.before_step()
+    assert duck.visible
+    assert not duck.pedestrian_active
+    assert controller.crossings_started == [0]
+
+    # Crossing baru dimulai pada decision berikutnya sehingga policy sempat
+    # menerima satu observation dengan duck_present=True.
+    controller.before_step()
+    assert duck.pedestrian_active
+    assert controller.crossings_started == [1]

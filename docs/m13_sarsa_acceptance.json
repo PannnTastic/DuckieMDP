@@ -1,0 +1,34 @@
+{
+  "accepted": true,
+  "checkpoint": {
+    "checkpoint": "artifacts/ablation/full_task/sarsa_teacher/q_table_best.npy",
+    "explanation_and_evaluation": "greedy_teacher_free_lowest_id_tie_break",
+    "sha256": "0266ad6f6fdae71bf2dfb7c7121f66e038d16f75e214a931f8c9d50bc6ad3313",
+    "solver": "sarsa",
+    "training": "teacher_guided_sarsa"
+  },
+  "checks": {
+    "all_9000_states_enumerated": true,
+    "all_local_branches_valid": true,
+    "all_local_cases_identify_sarsa": true,
+    "all_local_cases_use_canonical_checkpoint": true,
+    "analysis_stage_accepted": true,
+    "analysis_uses_canonical_checkpoint": true,
+    "checkpoint_file_hash_matches_manifest": true,
+    "comparison_stage_accepted": true,
+    "comparison_uses_canonical_checkpoint": true,
+    "greedy_original_policy_explained": true,
+    "local_stage_accepted": true,
+    "local_summary_uses_canonical_checkpoint": true,
+    "matched_rollout_action_trace_checked": true,
+    "metamorphic_pairs_manifold_valid": true,
+    "q_shape_unchanged": true,
+    "surrogate_not_used_as_policy": true,
+    "teacher_inactive_during_explanation": true,
+    "three_local_scenarios_loaded": true
+  },
+  "failed_checks": [],
+  "source_report": "runs/explanations/m13_sarsa/m13_sarsa_explanation_report.json",
+  "stage": "M13-SARSA-explanation-extension"
+}
+

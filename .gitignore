@@ -92,6 +92,7 @@ renders/
 *.swo
 *~
 .DS_Store
+*:Zone.Identifier
 ._*
 Thumbs.db
 Desktop.ini
