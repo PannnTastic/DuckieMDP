@@ -315,7 +315,9 @@ class SACAgent:
         return expanded
 
     def load(self, path: Path, allow_observation_expansion: bool = False) -> None:
-        payload = torch.load(path, map_location=self.device)
+        # Own trusted checkpoints saved under pre-2.6 torch (implicit
+        # weights_only=False); set it explicitly so torch>=2.6 still loads them.
+        payload = torch.load(path, map_location=self.device, weights_only=False)
         checkpoint_obs_dim = int(payload["obs_dim"])
         expanded_observation = checkpoint_obs_dim != self.obs_dim
         if expanded_observation and not (

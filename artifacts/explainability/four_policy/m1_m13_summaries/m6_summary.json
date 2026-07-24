@@ -1,0 +1,992 @@
+{
+  "anchors": {
+    "duck": {
+      "decision_step": 82,
+      "seed": 30101,
+      "state": {
+        "curvature": 0.0,
+        "curvature_class": "straight",
+        "d": -0.05542770730712522,
+        "duck_active": true,
+        "duck_crossing_available": false,
+        "duck_lateral": -0.12525441644573965,
+        "duck_longitudinal": 0.3577955684927309,
+        "duck_present": true,
+        "duck_threat": null,
+        "duck_v_lateral_relative": 0.019922339834038356,
+        "duck_v_longitudinal_relative": -0.011352556885601484,
+        "phi": -0.035287513862765206,
+        "source_index": null,
+        "source_representation": "sac_continuous_state",
+        "stop_distance": null,
+        "stop_hold_progress": 0.0,
+        "stop_present": false,
+        "stop_satisfied": false,
+        "v": 0.013113345213904632
+      }
+    },
+    "lane": {
+      "decision_step": 5,
+      "seed": 701,
+      "state": {
+        "curvature": 0.0,
+        "curvature_class": "straight",
+        "d": -0.045203041289607504,
+        "duck_active": null,
+        "duck_crossing_available": null,
+        "duck_lateral": null,
+        "duck_longitudinal": null,
+        "duck_present": false,
+        "duck_threat": null,
+        "duck_v_lateral_relative": null,
+        "duck_v_longitudinal_relative": null,
+        "phi": -0.2774665101153032,
+        "source_index": null,
+        "source_representation": "sac_continuous_state",
+        "stop_distance": null,
+        "stop_hold_progress": 0.0,
+        "stop_present": false,
+        "stop_satisfied": false,
+        "v": 0.05971938649088236
+      }
+    },
+    "stop": {
+      "decision_step": 21,
+      "seed": 30101,
+      "state": {
+        "curvature": 2.2024156733152997,
+        "curvature_class": "curve_left",
+        "d": -0.06481159022532426,
+        "duck_active": false,
+        "duck_crossing_available": true,
+        "duck_lateral": -0.8377382679297103,
+        "duck_longitudinal": 0.0971983849615467,
+        "duck_present": true,
+        "duck_threat": null,
+        "duck_v_lateral_relative": 6.938893903907228e-18,
+        "duck_v_longitudinal_relative": -0.10791661856800155,
+        "phi": 0.08466490426408864,
+        "source_index": null,
+        "source_representation": "sac_continuous_state",
+        "stop_distance": 0.32253565025910785,
+        "stop_hold_progress": 0.0,
+        "stop_present": true,
+        "stop_satisfied": false,
+        "v": 0.10791661856800154
+      }
+    }
+  },
+  "configs": {
+    "q_full": {
+      "path": "configs/small_loop_stop_duck_q.yaml",
+      "sha256": "5f92d9e66c1ce3e353725add2a58c95b77ca5e2832dd1771b1063afbc3604dab"
+    },
+    "sac_full": {
+      "path": "artifacts/sac/full_repeat_duck_5min/config.yaml",
+      "sha256": "3cc91129f2793fd624e7cd1600dc6636a57cb70e13f97e1ce0514f559fdb62b2"
+    },
+    "sac_lane_anchor_environment": {
+      "path": "configs/sac_lane.yaml",
+      "sha256": "832f2b026dbaa1b3fe943093e0624c6a3c2cdf6e531d7c570a5b158d106037a0"
+    }
+  },
+  "curves": [
+    {
+      "action_flip_points": 4,
+      "anchor_action": {
+        "action_id": 5,
+        "action_name": "slow_right",
+        "omega_cmd": -1.5,
+        "solver": "q_learning",
+        "v_cmd": 0.17
+      },
+      "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+      "anchor_primitive": "LaneCorrectRight",
+      "feature": "d",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": 0,
+          "action_name": "fast_left",
+          "omega_cmd": 1.5,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": 0.1547969587103925,
+        "primitive": "LaneDeparture",
+        "requested_value": -0.2
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": 0,
+          "action_name": "fast_left",
+          "omega_cmd": 1.5,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": 0.1547969587103925,
+        "primitive": "LaneDeparture",
+        "requested_value": -0.2
+      },
+      "primitive_flip_points": 4,
+      "rejected_points": 2,
+      "rejection_codes": [
+        "D_OUT_OF_BOUNDS"
+      ],
+      "solver": "q_learning",
+      "support_status": "unknown_no_visit_count_artifact",
+      "valid_points": 7
+    },
+    {
+      "action_flip_points": 4,
+      "anchor_action": {
+        "action_id": 5,
+        "action_name": "slow_right",
+        "omega_cmd": -1.5,
+        "solver": "q_learning",
+        "v_cmd": 0.17
+      },
+      "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+      "anchor_primitive": "LaneCorrectRight",
+      "feature": "phi",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": 1,
+          "action_name": "fast_straight",
+          "omega_cmd": 0.0,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": 0.2774665101153032,
+        "primitive": "CruiseStraight",
+        "requested_value": 0.0
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": 1,
+          "action_name": "fast_straight",
+          "omega_cmd": 0.0,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": 0.2774665101153032,
+        "primitive": "CruiseStraight",
+        "requested_value": 0.0
+      },
+      "primitive_flip_points": 5,
+      "rejected_points": 2,
+      "rejection_codes": [
+        "PHI_OUT_OF_BOUNDS"
+      ],
+      "solver": "q_learning",
+      "support_status": "unknown_no_visit_count_artifact",
+      "valid_points": 7
+    },
+    {
+      "action_flip_points": 0,
+      "anchor_action": {
+        "action_id": 5,
+        "action_name": "slow_right",
+        "omega_cmd": -1.5,
+        "solver": "q_learning",
+        "v_cmd": 0.17
+      },
+      "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+      "anchor_primitive": "LaneCorrectRight",
+      "feature": "curvature",
+      "minimal_action_counterfactual": null,
+      "minimal_primitive_counterfactual": null,
+      "primitive_flip_points": 0,
+      "rejected_points": 2,
+      "rejection_codes": [
+        "CURVATURE_OUT_OF_BOUNDS"
+      ],
+      "solver": "q_learning",
+      "support_status": "unknown_no_visit_count_artifact",
+      "valid_points": 7
+    },
+    {
+      "action_flip_points": 7,
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": -0.7515022158622742,
+        "solver": "sac",
+        "v_cmd": 0.04700446128845215
+      },
+      "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+      "anchor_primitive": "LaneCorrectRight",
+      "feature": "d",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": 0.17371289432048798,
+          "solver": "sac",
+          "v_cmd": 0.10276980698108673
+        },
+        "distance_from_anchor": 0.045203041289607504,
+        "primitive": "LaneCorrectLeft",
+        "requested_value": 0.0
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": 0.17371289432048798,
+          "solver": "sac",
+          "v_cmd": 0.10276980698108673
+        },
+        "distance_from_anchor": 0.045203041289607504,
+        "primitive": "LaneCorrectLeft",
+        "requested_value": 0.0
+      },
+      "primitive_flip_points": 7,
+      "rejected_points": 2,
+      "rejection_codes": [
+        "D_OUT_OF_BOUNDS"
+      ],
+      "solver": "sac",
+      "support_status": "anchor_reachable_synthetic_points_not_reachability_proven",
+      "valid_points": 7
+    },
+    {
+      "action_flip_points": 7,
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": -0.7515022158622742,
+        "solver": "sac",
+        "v_cmd": 0.04700446128845215
+      },
+      "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+      "anchor_primitive": "LaneCorrectRight",
+      "feature": "phi",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": -0.9741207361221313,
+          "solver": "sac",
+          "v_cmd": 0.04275400936603546
+        },
+        "distance_from_anchor": 0.022533489884696778,
+        "primitive": "LaneCorrectRight",
+        "requested_value": -0.3
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": 1.448240041732788,
+          "solver": "sac",
+          "v_cmd": 0.1807246059179306
+        },
+        "distance_from_anchor": 0.2774665101153032,
+        "primitive": "LaneCorrectLeft",
+        "requested_value": 0.0
+      },
+      "primitive_flip_points": 5,
+      "rejected_points": 2,
+      "rejection_codes": [
+        "PHI_OUT_OF_BOUNDS"
+      ],
+      "solver": "sac",
+      "support_status": "anchor_reachable_synthetic_points_not_reachability_proven",
+      "valid_points": 7
+    },
+    {
+      "action_flip_points": 6,
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": -0.7515022158622742,
+        "solver": "sac",
+        "v_cmd": 0.04700446128845215
+      },
+      "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+      "anchor_primitive": "LaneCorrectRight",
+      "feature": "curvature",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": -0.36831235885620117,
+          "solver": "sac",
+          "v_cmd": 0.020120948553085327
+        },
+        "distance_from_anchor": 1.0,
+        "primitive": "UnnecessaryBrake",
+        "requested_value": -1.0
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": -0.36831235885620117,
+          "solver": "sac",
+          "v_cmd": 0.020120948553085327
+        },
+        "distance_from_anchor": 1.0,
+        "primitive": "UnnecessaryBrake",
+        "requested_value": -1.0
+      },
+      "primitive_flip_points": 4,
+      "rejected_points": 2,
+      "rejection_codes": [
+        "CURVATURE_OUT_OF_BOUNDS"
+      ],
+      "solver": "sac",
+      "support_status": "anchor_reachable_synthetic_points_not_reachability_proven",
+      "valid_points": 7
+    },
+    {
+      "action_flip_points": 0,
+      "anchor_action": {
+        "action_id": 0,
+        "action_name": "fast_left",
+        "omega_cmd": 1.5,
+        "solver": "q_learning",
+        "v_cmd": 0.41
+      },
+      "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+      "anchor_primitive": "ApproachStop",
+      "feature": "stop_distance",
+      "minimal_action_counterfactual": null,
+      "minimal_primitive_counterfactual": null,
+      "primitive_flip_points": 0,
+      "rejected_points": 1,
+      "rejection_codes": [
+        "STOP_DISTANCE_OUT_OF_BOUNDS"
+      ],
+      "solver": "q_learning",
+      "support_status": "unknown_no_visit_count_artifact",
+      "valid_points": 7
+    },
+    {
+      "action_flip_points": 0,
+      "anchor_action": {
+        "action_id": 0,
+        "action_name": "fast_left",
+        "omega_cmd": 1.5,
+        "solver": "q_learning",
+        "v_cmd": 0.41
+      },
+      "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+      "anchor_primitive": "ApproachStop",
+      "feature": "stop_hold_progress",
+      "minimal_action_counterfactual": null,
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": 0,
+          "action_name": "fast_left",
+          "omega_cmd": 1.5,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": 1.0,
+        "primitive": "ResumeAfterStop",
+        "requested_value": 1.0
+      },
+      "primitive_flip_points": 1,
+      "rejected_points": 0,
+      "rejection_codes": [],
+      "solver": "q_learning",
+      "support_status": "unknown_no_visit_count_artifact",
+      "valid_points": 4
+    },
+    {
+      "action_flip_points": 7,
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": -1.1350091695785522,
+        "solver": "sac",
+        "v_cmd": 0.1103510633111
+      },
+      "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+      "anchor_primitive": "DecelerateStop",
+      "feature": "stop_distance",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": -1.1375787258148193,
+          "solver": "sac",
+          "v_cmd": 0.11000426858663559
+        },
+        "distance_from_anchor": 0.022535650259107864,
+        "primitive": "DecelerateStop",
+        "requested_value": 0.3
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": -0.16902993619441986,
+          "solver": "sac",
+          "v_cmd": 0.15396608412265778
+        },
+        "distance_from_anchor": 1.177464349740892,
+        "primitive": "ApproachStop",
+        "requested_value": 1.5
+      },
+      "primitive_flip_points": 2,
+      "rejected_points": 1,
+      "rejection_codes": [
+        "STOP_DISTANCE_OUT_OF_BOUNDS"
+      ],
+      "solver": "sac",
+      "support_status": "anchor_reachable_synthetic_points_not_reachability_proven",
+      "valid_points": 7
+    },
+    {
+      "action_flip_points": 3,
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": -1.1350091695785522,
+        "solver": "sac",
+        "v_cmd": 0.1103510633111
+      },
+      "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+      "anchor_primitive": "DecelerateStop",
+      "feature": "stop_hold_progress",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": -0.6203464269638062,
+          "solver": "sac",
+          "v_cmd": 0.08943389356136322
+        },
+        "distance_from_anchor": 0.33,
+        "primitive": "DecelerateStop",
+        "requested_value": 0.33
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": 0.4651709198951721,
+          "solver": "sac",
+          "v_cmd": 0.3325502872467041
+        },
+        "distance_from_anchor": 1.0,
+        "primitive": "ApproachCrossing",
+        "requested_value": 1.0
+      },
+      "primitive_flip_points": 1,
+      "rejected_points": 0,
+      "rejection_codes": [],
+      "solver": "sac",
+      "support_status": "anchor_reachable_synthetic_points_not_reachability_proven",
+      "valid_points": 4
+    },
+    {
+      "action_flip_points": 7,
+      "anchor_action": {
+        "action_id": 6,
+        "action_name": "brake",
+        "omega_cmd": 0.0,
+        "solver": "q_learning",
+        "v_cmd": 0.0
+      },
+      "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+      "anchor_primitive": "YieldHold",
+      "feature": "duck_longitudinal",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": 0,
+          "action_name": "fast_left",
+          "omega_cmd": 1.5,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": 0.24220443150726906,
+        "primitive": "UnsafeProceed",
+        "requested_value": 0.6
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": 0,
+          "action_name": "fast_left",
+          "omega_cmd": 1.5,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": 0.24220443150726906,
+        "primitive": "UnsafeProceed",
+        "requested_value": 0.6
+      },
+      "primitive_flip_points": 7,
+      "rejected_points": 2,
+      "rejection_codes": [
+        "DUCK_LONG_OUT_OF_BOUNDS"
+      ],
+      "solver": "q_learning",
+      "support_status": "unknown_no_visit_count_artifact",
+      "valid_points": 10
+    },
+    {
+      "action_flip_points": 6,
+      "anchor_action": {
+        "action_id": 6,
+        "action_name": "brake",
+        "omega_cmd": 0.0,
+        "solver": "q_learning",
+        "v_cmd": 0.0
+      },
+      "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+      "anchor_primitive": "YieldHold",
+      "feature": "duck_lateral",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": 0,
+          "action_name": "fast_left",
+          "omega_cmd": 1.5,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": 0.47474558355426033,
+        "primitive": "UnsafeProceed",
+        "requested_value": -0.6
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": 0,
+          "action_name": "fast_left",
+          "omega_cmd": 1.5,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": 0.47474558355426033,
+        "primitive": "UnsafeProceed",
+        "requested_value": -0.6
+      },
+      "primitive_flip_points": 6,
+      "rejected_points": 2,
+      "rejection_codes": [
+        "DUCK_LAT_OUT_OF_BOUNDS"
+      ],
+      "solver": "q_learning",
+      "support_status": "unknown_no_visit_count_artifact",
+      "valid_points": 9
+    },
+    {
+      "action_flip_points": 1,
+      "anchor_action": {
+        "action_id": 6,
+        "action_name": "brake",
+        "omega_cmd": 0.0,
+        "solver": "q_learning",
+        "v_cmd": 0.0
+      },
+      "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+      "anchor_primitive": "YieldHold",
+      "feature": "duck_present",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": 1,
+          "action_name": "fast_straight",
+          "omega_cmd": 0.0,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": null,
+        "primitive": "CruiseStraight",
+        "requested_value": false
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": 1,
+          "action_name": "fast_straight",
+          "omega_cmd": 0.0,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": null,
+        "primitive": "CruiseStraight",
+        "requested_value": false
+      },
+      "primitive_flip_points": 1,
+      "rejected_points": 0,
+      "rejection_codes": [],
+      "solver": "q_learning",
+      "support_status": "unknown_no_visit_count_artifact",
+      "valid_points": 2
+    },
+    {
+      "action_flip_points": 1,
+      "anchor_action": {
+        "action_id": 6,
+        "action_name": "brake",
+        "omega_cmd": 0.0,
+        "solver": "q_learning",
+        "v_cmd": 0.0
+      },
+      "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+      "anchor_primitive": "YieldHold",
+      "feature": "duck_active",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": 1,
+          "action_name": "fast_straight",
+          "omega_cmd": 0.0,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": null,
+        "primitive": "ApproachCrossing",
+        "requested_value": false
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": 1,
+          "action_name": "fast_straight",
+          "omega_cmd": 0.0,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": null,
+        "primitive": "ApproachCrossing",
+        "requested_value": false
+      },
+      "primitive_flip_points": 1,
+      "rejected_points": 0,
+      "rejection_codes": [],
+      "solver": "q_learning",
+      "support_status": "unknown_no_visit_count_artifact",
+      "valid_points": 2
+    },
+    {
+      "action_flip_points": 1,
+      "anchor_action": {
+        "action_id": 6,
+        "action_name": "brake",
+        "omega_cmd": 0.0,
+        "solver": "q_learning",
+        "v_cmd": 0.0
+      },
+      "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+      "anchor_primitive": "YieldHold",
+      "feature": "duck_crossing_available",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": 1,
+          "action_name": "fast_straight",
+          "omega_cmd": 0.0,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": null,
+        "primitive": "ApproachCrossing",
+        "requested_value": true
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": 1,
+          "action_name": "fast_straight",
+          "omega_cmd": 0.0,
+          "solver": "q_learning",
+          "v_cmd": 0.41
+        },
+        "distance_from_anchor": null,
+        "primitive": "ApproachCrossing",
+        "requested_value": true
+      },
+      "primitive_flip_points": 1,
+      "rejected_points": 0,
+      "rejection_codes": [],
+      "solver": "q_learning",
+      "support_status": "unknown_no_visit_count_artifact",
+      "valid_points": 2
+    },
+    {
+      "action_flip_points": 10,
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": 0.05869986489415169,
+        "solver": "sac",
+        "v_cmd": 0.011544987559318542
+      },
+      "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+      "anchor_primitive": "YieldHold",
+      "feature": "duck_longitudinal",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": 0.03939523175358772,
+          "solver": "sac",
+          "v_cmd": 0.01331019401550293
+        },
+        "distance_from_anchor": 0.0422044315072691,
+        "primitive": "YieldHold",
+        "requested_value": 0.4
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": 0.0211884044110775,
+          "solver": "sac",
+          "v_cmd": 0.0351521372795105
+        },
+        "distance_from_anchor": 0.5422044315072692,
+        "primitive": "ApproachCrossing",
+        "requested_value": 0.9
+      },
+      "primitive_flip_points": 6,
+      "rejected_points": 2,
+      "rejection_codes": [
+        "DUCK_LONG_OUT_OF_BOUNDS"
+      ],
+      "solver": "sac",
+      "support_status": "anchor_reachable_synthetic_points_not_reachability_proven",
+      "valid_points": 10
+    },
+    {
+      "action_flip_points": 9,
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": 0.05869986489415169,
+        "solver": "sac",
+        "v_cmd": 0.011544987559318542
+      },
+      "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+      "anchor_primitive": "YieldHold",
+      "feature": "duck_lateral",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": -0.00986144132912159,
+          "solver": "sac",
+          "v_cmd": 0.010563299059867859
+        },
+        "distance_from_anchor": 0.12525441644573965,
+        "primitive": "YieldHold",
+        "requested_value": 0.0
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": 0.17228808999061584,
+          "solver": "sac",
+          "v_cmd": 0.017794251441955566
+        },
+        "distance_from_anchor": 0.47474558355426033,
+        "primitive": "ApproachCrossing",
+        "requested_value": -0.6
+      },
+      "primitive_flip_points": 6,
+      "rejected_points": 2,
+      "rejection_codes": [
+        "DUCK_LAT_OUT_OF_BOUNDS"
+      ],
+      "solver": "sac",
+      "support_status": "anchor_reachable_synthetic_points_not_reachability_proven",
+      "valid_points": 9
+    },
+    {
+      "action_flip_points": 1,
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": 0.05869986489415169,
+        "solver": "sac",
+        "v_cmd": 0.011544987559318542
+      },
+      "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+      "anchor_primitive": "YieldHold",
+      "feature": "duck_present",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": 1.4219199419021606,
+          "solver": "sac",
+          "v_cmd": 0.2334795594215393
+        },
+        "distance_from_anchor": null,
+        "primitive": "LaneCorrectLeft",
+        "requested_value": false
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": 1.4219199419021606,
+          "solver": "sac",
+          "v_cmd": 0.2334795594215393
+        },
+        "distance_from_anchor": null,
+        "primitive": "LaneCorrectLeft",
+        "requested_value": false
+      },
+      "primitive_flip_points": 1,
+      "rejected_points": 0,
+      "rejection_codes": [],
+      "solver": "sac",
+      "support_status": "anchor_reachable_synthetic_points_not_reachability_proven",
+      "valid_points": 2
+    },
+    {
+      "action_flip_points": 1,
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": 0.05869986489415169,
+        "solver": "sac",
+        "v_cmd": 0.011544987559318542
+      },
+      "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+      "anchor_primitive": "YieldHold",
+      "feature": "duck_active",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": -0.7028542160987854,
+          "solver": "sac",
+          "v_cmd": 0.3808455765247345
+        },
+        "distance_from_anchor": null,
+        "primitive": "ApproachCrossing",
+        "requested_value": false
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": -0.7028542160987854,
+          "solver": "sac",
+          "v_cmd": 0.3808455765247345
+        },
+        "distance_from_anchor": null,
+        "primitive": "ApproachCrossing",
+        "requested_value": false
+      },
+      "primitive_flip_points": 1,
+      "rejected_points": 0,
+      "rejection_codes": [],
+      "solver": "sac",
+      "support_status": "anchor_reachable_synthetic_points_not_reachability_proven",
+      "valid_points": 2
+    },
+    {
+      "action_flip_points": 1,
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": 0.05869986489415169,
+        "solver": "sac",
+        "v_cmd": 0.011544987559318542
+      },
+      "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+      "anchor_primitive": "YieldHold",
+      "feature": "duck_crossing_available",
+      "minimal_action_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": -0.5547323822975159,
+          "solver": "sac",
+          "v_cmd": 0.3469926714897156
+        },
+        "distance_from_anchor": null,
+        "primitive": "ApproachCrossing",
+        "requested_value": true
+      },
+      "minimal_primitive_counterfactual": {
+        "action": {
+          "action_id": null,
+          "action_name": null,
+          "omega_cmd": -0.5547323822975159,
+          "solver": "sac",
+          "v_cmd": 0.3469926714897156
+        },
+        "distance_from_anchor": null,
+        "primitive": "ApproachCrossing",
+        "requested_value": true
+      },
+      "primitive_flip_points": 1,
+      "rejected_points": 0,
+      "rejection_codes": [],
+      "solver": "sac",
+      "support_status": "anchor_reachable_synthetic_points_not_reachability_proven",
+      "valid_points": 2
+    }
+  ],
+  "generated_files": [
+    "runs/explanations/m6_response_curves/lane_q_learning_d.json",
+    "runs/explanations/m6_response_curves/lane_q_learning_d.csv",
+    "runs/explanations/m6_response_curves/lane_q_learning_phi.json",
+    "runs/explanations/m6_response_curves/lane_q_learning_phi.csv",
+    "runs/explanations/m6_response_curves/lane_q_learning_curvature.json",
+    "runs/explanations/m6_response_curves/lane_q_learning_curvature.csv",
+    "runs/explanations/m6_response_curves/lane_sac_d.json",
+    "runs/explanations/m6_response_curves/lane_sac_d.csv",
+    "runs/explanations/m6_response_curves/lane_sac_phi.json",
+    "runs/explanations/m6_response_curves/lane_sac_phi.csv",
+    "runs/explanations/m6_response_curves/lane_sac_curvature.json",
+    "runs/explanations/m6_response_curves/lane_sac_curvature.csv",
+    "runs/explanations/m6_response_curves/stop_q_learning_stop_distance.json",
+    "runs/explanations/m6_response_curves/stop_q_learning_stop_distance.csv",
+    "runs/explanations/m6_response_curves/stop_q_learning_stop_hold_progress.json",
+    "runs/explanations/m6_response_curves/stop_q_learning_stop_hold_progress.csv",
+    "runs/explanations/m6_response_curves/stop_sac_stop_distance.json",
+    "runs/explanations/m6_response_curves/stop_sac_stop_distance.csv",
+    "runs/explanations/m6_response_curves/stop_sac_stop_hold_progress.json",
+    "runs/explanations/m6_response_curves/stop_sac_stop_hold_progress.csv",
+    "runs/explanations/m6_response_curves/duck_q_learning_duck_longitudinal.json",
+    "runs/explanations/m6_response_curves/duck_q_learning_duck_longitudinal.csv",
+    "runs/explanations/m6_response_curves/duck_q_learning_duck_lateral.json",
+    "runs/explanations/m6_response_curves/duck_q_learning_duck_lateral.csv",
+    "runs/explanations/m6_response_curves/duck_q_learning_duck_present.json",
+    "runs/explanations/m6_response_curves/duck_q_learning_duck_present.csv",
+    "runs/explanations/m6_response_curves/duck_q_learning_duck_active.json",
+    "runs/explanations/m6_response_curves/duck_q_learning_duck_active.csv",
+    "runs/explanations/m6_response_curves/duck_q_learning_duck_crossing_available.json",
+    "runs/explanations/m6_response_curves/duck_q_learning_duck_crossing_available.csv",
+    "runs/explanations/m6_response_curves/duck_sac_duck_longitudinal.json",
+    "runs/explanations/m6_response_curves/duck_sac_duck_longitudinal.csv",
+    "runs/explanations/m6_response_curves/duck_sac_duck_lateral.json",
+    "runs/explanations/m6_response_curves/duck_sac_duck_lateral.csv",
+    "runs/explanations/m6_response_curves/duck_sac_duck_present.json",
+    "runs/explanations/m6_response_curves/duck_sac_duck_present.csv",
+    "runs/explanations/m6_response_curves/duck_sac_duck_active.json",
+    "runs/explanations/m6_response_curves/duck_sac_duck_active.csv",
+    "runs/explanations/m6_response_curves/duck_sac_duck_crossing_available.json",
+    "runs/explanations/m6_response_curves/duck_sac_duck_crossing_available.csv"
+  ],
+  "method": "valid-manifold response curves",
+  "policy_checkpoints": {
+    "q_learning": {
+      "path": "artifacts/ablation/full_task/q_learning_teacher/q_table_best.npy",
+      "sha256": "59929f4e2c1968d274e9d3aa6c83ccb2cd7c915c632093cfaba6b544340906dd"
+    },
+    "sac": {
+      "adapter_observation_dim": 15,
+      "checkpoint_observation_dim": 15,
+      "observation_expanded": false,
+      "path": "artifacts/sac/full_repeat_duck_5min/sac_best.pt",
+      "sha256": "0b01447edd85e539de57f9a304fc287d26d5d7c4e73a5a51cd493fea2f4c4f2b"
+    }
+  },
+  "policy_mode": {
+    "q_learning": "greedy_teacher_free",
+    "sac": "deterministic_actor_mean"
+  },
+  "stage": "M6",
+  "totals": {
+    "action_flip_points": 76,
+    "curves": 20,
+    "primitive_flip_points": 60,
+    "rejected_points": 22,
+    "valid_points": 114
+  }
+}

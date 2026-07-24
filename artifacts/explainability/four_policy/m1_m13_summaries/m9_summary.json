@@ -1,0 +1,5174 @@
+{
+  "acceptance": {
+    "checks": {
+      "baseline_sensitivity_reported_for_every_anchor": true,
+      "checkpoint_loaded_with_actor_and_double_critic": true,
+      "critic_probe_support_caveats_present": true,
+      "critic_probes_finite": true,
+      "empirical_cruise_baseline_has_real_support": true,
+      "ig_completeness_max_abs_residual_le_0_005": true,
+      "invalid_boundary_states_not_queried": true,
+      "policy_mode_is_deterministic_actor_mean": true,
+      "real_development_states_collected": true,
+      "stability_binding_acceptance": true
+    },
+    "failed_checks": [],
+    "failed_outputs_retained_for_audit": true,
+    "passed": true
+  },
+  "anchors": {
+    "duck": {
+      "curvature": 0.0,
+      "curvature_class": "straight",
+      "d": -0.05542770730712522,
+      "duck_active": true,
+      "duck_crossing_available": false,
+      "duck_lateral": -0.12525441644573965,
+      "duck_longitudinal": 0.3577955684927309,
+      "duck_present": true,
+      "duck_threat": null,
+      "duck_v_lateral_relative": 0.019922339834038356,
+      "duck_v_longitudinal_relative": -0.011352556885601484,
+      "phi": -0.035287513862765206,
+      "source_index": null,
+      "source_representation": "sac_continuous_state",
+      "stop_distance": null,
+      "stop_hold_progress": 0.0,
+      "stop_present": false,
+      "stop_satisfied": false,
+      "v": 0.013113345213904632
+    },
+    "lane": {
+      "curvature": 0.0,
+      "curvature_class": "straight",
+      "d": -0.045203041289607504,
+      "duck_active": null,
+      "duck_crossing_available": null,
+      "duck_lateral": null,
+      "duck_longitudinal": null,
+      "duck_present": false,
+      "duck_threat": null,
+      "duck_v_lateral_relative": null,
+      "duck_v_longitudinal_relative": null,
+      "phi": -0.2774665101153032,
+      "source_index": null,
+      "source_representation": "sac_continuous_state",
+      "stop_distance": null,
+      "stop_hold_progress": 0.0,
+      "stop_present": false,
+      "stop_satisfied": false,
+      "v": 0.05971938649088236
+    },
+    "stop": {
+      "curvature": 2.2024156733152997,
+      "curvature_class": "curve_left",
+      "d": -0.06481159022532426,
+      "duck_active": false,
+      "duck_crossing_available": true,
+      "duck_lateral": -0.8377382679297103,
+      "duck_longitudinal": 0.0971983849615467,
+      "duck_present": true,
+      "duck_threat": null,
+      "duck_v_lateral_relative": 6.938893903907228e-18,
+      "duck_v_longitudinal_relative": -0.10791661856800155,
+      "phi": 0.08466490426408864,
+      "source_index": null,
+      "source_representation": "sac_continuous_state",
+      "stop_distance": 0.32253565025910785,
+      "stop_hold_progress": 0.0,
+      "stop_present": true,
+      "stop_satisfied": false,
+      "v": 0.10791661856800154
+    }
+  },
+  "attribution_stability": {
+    "acceptance_threshold": 0.1,
+    "accepted": true,
+    "anchors": 12,
+    "disposition": "PASS",
+    "median_non_boundary": 0.0007563080387182897,
+    "near_boundary_anchors": 9,
+    "non_boundary_comparisons": 64,
+    "p95_non_boundary": 0.004655256170246536,
+    "rows": [
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": -0.005,
+        "explanation_distance": 0.0007733578111749351,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": -0.005,
+        "explanation_distance": 0.002968682110640719,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": 0.005,
+        "explanation_distance": 0.0002059123616274805,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": 0.005,
+        "explanation_distance": 0.009001329924028467,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": -0.01,
+        "explanation_distance": 0.0007693011218622425,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": -0.01,
+        "explanation_distance": 0.007954097658677495,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": 0.01,
+        "explanation_distance": 0.00018795507267732603,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": 0.01,
+        "explanation_distance": 0.0023704497424209547,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": 0.01,
+        "explanation_distance": 0.0016729554884933329,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": 0.01,
+        "explanation_distance": 0.0014452600815094696,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": -0.02,
+        "explanation_distance": 0.0001249357897926684,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": -0.02,
+        "explanation_distance": 0.0013259804924679042,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": 0.02,
+        "explanation_distance": 0.0001600184600708543,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": 0.02,
+        "explanation_distance": 0.005381735263665255,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": -0.02,
+        "explanation_distance": 0.00026109054077905203,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": -0.02,
+        "explanation_distance": 0.0007020071679615381,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": 0.02,
+        "explanation_distance": 0.0001769312587500682,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "805ad85449bd9f05a7daf1dee1112965c0a0129a9ebd74ba057114fec7aa0657",
+        "delta": 0.02,
+        "explanation_distance": 0.0013550995830849955,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": -0.005,
+        "explanation_distance": 0.0017070860815503464,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": -0.005,
+        "explanation_distance": 0.004731927293071814,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": 0.005,
+        "explanation_distance": 0.0032999879958808265,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": 0.005,
+        "explanation_distance": 0.004124214507458035,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": -0.01,
+        "explanation_distance": 0.0011976076900255261,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": -0.01,
+        "explanation_distance": 0.016401165884587066,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": 0.01,
+        "explanation_distance": 0.0010413562371356377,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": 0.01,
+        "explanation_distance": 0.002541923562226489,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": -0.01,
+        "explanation_distance": 0.000651442929372692,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": -0.01,
+        "explanation_distance": 0.0034351230977612834,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": 0.01,
+        "explanation_distance": 0.004140860779690114,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": 0.01,
+        "explanation_distance": 0.0027855449408502597,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": -0.02,
+        "explanation_distance": 0.0016717309530123181,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": -0.02,
+        "explanation_distance": 0.0018618071660562174,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": 0.02,
+        "explanation_distance": 0.00018761121218990873,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": 0.02,
+        "explanation_distance": 0.0003972963959153475,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": -0.02,
+        "explanation_distance": 0.000487601529078896,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": -0.02,
+        "explanation_distance": 0.000667460533882891,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": 0.02,
+        "explanation_distance": 0.0003714104532658302,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "24f41318635c698f409d5d185b5cf286ef528fba493b5918a3cf94ee20695c45",
+        "delta": 0.02,
+        "explanation_distance": 0.001073255530881445,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": -0.005,
+        "explanation_distance": 0.0017188169604495096,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": -0.005,
+        "explanation_distance": 0.008343639973261485,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": 0.005,
+        "explanation_distance": 0.013430273770726253,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": 0.005,
+        "explanation_distance": 0.002004318470046007,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": -0.01,
+        "explanation_distance": 0.0007013481438283842,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": -0.01,
+        "explanation_distance": 0.006743599371777487,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": 0.01,
+        "explanation_distance": 0.0011759163615677748,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": 0.01,
+        "explanation_distance": 0.0012014571660619033,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": -0.01,
+        "explanation_distance": 0.0035725643666543183,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": -0.01,
+        "explanation_distance": 0.0024680167252115748,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": 0.01,
+        "explanation_distance": 0.0011918565069980458,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": 0.01,
+        "explanation_distance": 0.000821761563993606,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": -0.02,
+        "explanation_distance": 0.013900506946610713,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": -0.02,
+        "explanation_distance": 0.0009141688515599267,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": 0.02,
+        "explanation_distance": 0.00019477389121813626,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": 0.02,
+        "explanation_distance": 0.007003868494102283,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": -0.02,
+        "explanation_distance": 0.011805498562585615,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": -0.02,
+        "explanation_distance": 0.0018441787297676093,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": 0.02,
+        "explanation_distance": 0.00021665833251105493,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0ed3cae08908651fca23849b70d2aa7b0721bbd2d51273b66ff5b8ba5c312367",
+        "delta": 0.02,
+        "explanation_distance": 0.002297489405119202,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": -0.005,
+        "explanation_distance": 0.01032442273970724,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": -0.005,
+        "explanation_distance": 0.0006926443194436027,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": 0.005,
+        "explanation_distance": 0.003157272821030621,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": 0.005,
+        "explanation_distance": 0.0038937256398794418,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": -0.01,
+        "explanation_distance": 0.000964656053316526,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": -0.01,
+        "explanation_distance": 0.001613532663343853,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": 0.01,
+        "explanation_distance": 0.000885759470174996,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": 0.01,
+        "explanation_distance": 0.02110229829804222,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": -0.01,
+        "explanation_distance": 0.002133408887848298,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": -0.01,
+        "explanation_distance": 0.0014058499339421049,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": 0.01,
+        "explanation_distance": 0.0014143010736700212,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": 0.01,
+        "explanation_distance": 0.008700595797149213,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": -0.02,
+        "explanation_distance": 0.0025630506541336473,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": -0.02,
+        "explanation_distance": 0.0037061079389446583,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": 0.02,
+        "explanation_distance": 0.001383113258140889,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": 0.02,
+        "explanation_distance": 0.0010912745401149282,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": -0.02,
+        "explanation_distance": 0.0019166492488409403,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": -0.02,
+        "explanation_distance": 0.0008358196263227313,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": 0.02,
+        "explanation_distance": 0.000594118406392341,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "6aabdc2414cbef91db5f82df50229a58b9d9dd3e342fdc0782d6d2b1a3e42415",
+        "delta": 0.02,
+        "explanation_distance": 0.0034671279611366845,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": -0.005,
+        "explanation_distance": 0.008817952210506408,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": -0.005,
+        "explanation_distance": 0.015039407903325253,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": 0.005,
+        "explanation_distance": 0.0013436088450480277,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": 0.005,
+        "explanation_distance": 0.01864889826040783,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": -0.01,
+        "explanation_distance": 0.0029321098403071177,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": -0.01,
+        "explanation_distance": 0.002422726408608633,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": 0.01,
+        "explanation_distance": 0.004948275748650199,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": 0.01,
+        "explanation_distance": 0.001429129899555237,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": -0.01,
+        "explanation_distance": 0.006203174669443534,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": -0.01,
+        "explanation_distance": 0.003038863681552928,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": 0.01,
+        "explanation_distance": 0.009574145998326178,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": 0.01,
+        "explanation_distance": 0.0007038947871882417,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": -0.02,
+        "explanation_distance": 0.00311571990571613,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": -0.02,
+        "explanation_distance": 0.0015133110201187572,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": 0.02,
+        "explanation_distance": 0.0019528147709343413,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": 0.02,
+        "explanation_distance": 0.0008464720590627417,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": -0.02,
+        "explanation_distance": 0.0016591225696610534,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": -0.02,
+        "explanation_distance": 0.0008545788718496983,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": 0.02,
+        "explanation_distance": 0.0015946535293571706,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "0cb03177695382a4c1ea1d183fd081bffa1d4c86d09db119605ab897288889c5",
+        "delta": 0.02,
+        "explanation_distance": 0.0007901450344282024,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": -0.005,
+        "explanation_distance": 0.018141936180768425,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": -0.005,
+        "explanation_distance": 0.09735426020641824,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": 0.005,
+        "explanation_distance": 0.015912696642154334,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": 0.005,
+        "explanation_distance": 0.004318959794049837,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": -0.01,
+        "explanation_distance": 0.00033554295311721827,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": -0.01,
+        "explanation_distance": 0.004081046812442146,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": 0.01,
+        "explanation_distance": 0.0036776073487896355,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": 0.01,
+        "explanation_distance": 0.018827960303470337,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": -0.01,
+        "explanation_distance": 0.0037879824190811817,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": -0.01,
+        "explanation_distance": 0.019379988261734593,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": 0.01,
+        "explanation_distance": 0.0004227697888309345,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": 0.01,
+        "explanation_distance": 0.0021561897660196117,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": -0.02,
+        "explanation_distance": 0.004971758231363199,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": -0.02,
+        "explanation_distance": 0.002215034607501054,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": 0.02,
+        "explanation_distance": 0.00200599845724303,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": 0.02,
+        "explanation_distance": 0.008133330132560235,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": -0.02,
+        "explanation_distance": 0.00044427003915559204,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": -0.02,
+        "explanation_distance": 0.003015732239783575,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": 0.02,
+        "explanation_distance": 0.0007864777953917601,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "8b8b0e048de120e8b027a46de3c7b0c3266336682e9e496b9352cc9367c3e418",
+        "delta": 0.02,
+        "explanation_distance": 0.0025991758670418363,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": -0.005,
+        "explanation_distance": 0.0007185689717457144,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": -0.005,
+        "explanation_distance": 0.0023731727044535855,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": 0.005,
+        "explanation_distance": 0.0009664914448355155,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": 0.005,
+        "explanation_distance": 0.003375643648691362,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": -0.01,
+        "explanation_distance": 0.0001691196654157734,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": -0.01,
+        "explanation_distance": 0.0013730958200707244,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": 0.01,
+        "explanation_distance": 0.00016594814396375668,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": 0.01,
+        "explanation_distance": 0.002072248460077364,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": -0.01,
+        "explanation_distance": 0.00030630642433282507,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": -0.01,
+        "explanation_distance": 0.0007789165319792568,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": 0.01,
+        "explanation_distance": 0.00021918854112434882,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": 0.01,
+        "explanation_distance": 0.0007123986471473387,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": 0.02,
+        "explanation_distance": 1.551829745594091e-06,
+        "feature": "stop_distance",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": 0.02,
+        "explanation_distance": 4.990554306383288e-05,
+        "feature": "stop_distance",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": -0.02,
+        "explanation_distance": 3.908767732385687e-05,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": -0.02,
+        "explanation_distance": 0.00013744341216692657,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": 0.02,
+        "explanation_distance": 0.0002403406317206258,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": 0.02,
+        "explanation_distance": 0.0006054253063160209,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": -0.02,
+        "explanation_distance": 5.76696571314983e-05,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": -0.02,
+        "explanation_distance": 0.0007180509233638555,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": 0.02,
+        "explanation_distance": 5.09665440968643e-05,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d2f0a8e7c24cd4133c78c341e64f510915c8399c47d5199495074245450d6116",
+        "delta": 0.02,
+        "explanation_distance": 0.0005347511201353461,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": -0.005,
+        "explanation_distance": 0.005865860366919717,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": -0.005,
+        "explanation_distance": 0.0003375780047170096,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": 0.005,
+        "explanation_distance": 0.003103004458178571,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": 0.005,
+        "explanation_distance": 0.002069296853767666,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": -0.01,
+        "explanation_distance": 0.003743393574737963,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": -0.01,
+        "explanation_distance": 0.003278255615852932,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": 0.01,
+        "explanation_distance": 0.0011570954385784482,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": 0.01,
+        "explanation_distance": 0.0002864952245985597,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": -0.01,
+        "explanation_distance": 0.005786702383636322,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": -0.01,
+        "explanation_distance": 0.0005731506012236487,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": 0.01,
+        "explanation_distance": 0.019659122501822224,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": 0.01,
+        "explanation_distance": 0.0006391351934302847,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": -0.02,
+        "explanation_distance": 0.008210042708029275,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": -0.02,
+        "explanation_distance": 0.00023941961496176667,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": 0.02,
+        "explanation_distance": 0.0003422621612573229,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": 0.02,
+        "explanation_distance": 0.0016323761927082847,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": -0.02,
+        "explanation_distance": 0.0011328592545062355,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": -0.02,
+        "explanation_distance": 0.00023419582644468306,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": 0.02,
+        "explanation_distance": 0.0012914242762249728,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "819dc13e6b7af3eb8301602599beec7f91dbdbd54c3b85efe589d01635427e50",
+        "delta": 0.02,
+        "explanation_distance": 2.5429351154682145e-05,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": -0.005,
+        "explanation_distance": 0.0033404302659546525,
+        "feature": "d",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": -0.005,
+        "explanation_distance": 0.0004084781454295472,
+        "feature": "d",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": 0.005,
+        "explanation_distance": 0.007214261105984221,
+        "feature": "d",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": 0.005,
+        "explanation_distance": 0.001078277720998444,
+        "feature": "d",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": -0.01,
+        "explanation_distance": 0.000978878075055034,
+        "feature": "phi",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": -0.01,
+        "explanation_distance": 0.0007672975453796305,
+        "feature": "phi",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": 0.01,
+        "explanation_distance": 0.0023547907622190056,
+        "feature": "phi",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": 0.01,
+        "explanation_distance": 0.0003373708881315718,
+        "feature": "phi",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": -0.01,
+        "explanation_distance": 0.001212044269138124,
+        "feature": "v",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": -0.01,
+        "explanation_distance": 0.0005189892279396924,
+        "feature": "v",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": 0.01,
+        "explanation_distance": 0.00976115912409814,
+        "feature": "v",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": 0.01,
+        "explanation_distance": 0.0009131352368737522,
+        "feature": "v",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": -0.02,
+        "explanation_distance": 0.0005488270154013764,
+        "feature": "duck_longitudinal",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": -0.02,
+        "explanation_distance": 0.0003260363036461378,
+        "feature": "duck_longitudinal",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": 0.02,
+        "explanation_distance": 0.0007453185320569489,
+        "feature": "duck_longitudinal",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": 0.02,
+        "explanation_distance": 0.0007447316753450561,
+        "feature": "duck_longitudinal",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": -0.02,
+        "explanation_distance": 0.00014759134866115797,
+        "feature": "duck_lateral",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": -0.02,
+        "explanation_distance": 0.0004811883854196619,
+        "feature": "duck_lateral",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": 0.02,
+        "explanation_distance": 0.00016003307706768943,
+        "feature": "duck_lateral",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "d9c9e7ef94d53790748297fb67ce49191540dd49742c8b06d48da497ff8bbe07",
+        "delta": 0.02,
+        "explanation_distance": 0.0004011981249018026,
+        "feature": "duck_lateral",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": -0.005,
+        "explanation_distance": 0.004604257429664083,
+        "feature": "d",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": -0.005,
+        "explanation_distance": 0.002685325348323775,
+        "feature": "d",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": 0.005,
+        "explanation_distance": 0.0018743606957938308,
+        "feature": "d",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": 0.005,
+        "explanation_distance": 0.004659726804450037,
+        "feature": "d",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": -0.01,
+        "explanation_distance": 0.0031288480871514146,
+        "feature": "phi",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": -0.01,
+        "explanation_distance": 0.0013477845674541022,
+        "feature": "phi",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": 0.01,
+        "explanation_distance": 0.0005268392828714497,
+        "feature": "phi",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": 0.01,
+        "explanation_distance": 0.003089638453143584,
+        "feature": "phi",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": -0.01,
+        "explanation_distance": 0.002033597613801952,
+        "feature": "v",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": -0.01,
+        "explanation_distance": 0.0030926089682856706,
+        "feature": "v",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": 0.01,
+        "explanation_distance": 0.00037840556926982405,
+        "feature": "v",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": 0.01,
+        "explanation_distance": 0.000822449387577362,
+        "feature": "v",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": -0.02,
+        "explanation_distance": 1.5311509459103867e-05,
+        "feature": "stop_distance",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": -0.02,
+        "explanation_distance": 6.638140603409948e-05,
+        "feature": "stop_distance",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": 0.02,
+        "explanation_distance": 5.910563743960484e-05,
+        "feature": "stop_distance",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": 0.02,
+        "explanation_distance": 0.0003151258884990238,
+        "feature": "stop_distance",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": -0.02,
+        "explanation_distance": 0.0004448624648432098,
+        "feature": "duck_longitudinal",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": -0.02,
+        "explanation_distance": 0.0006911203991863957,
+        "feature": "duck_longitudinal",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": 0.02,
+        "explanation_distance": 4.927355385320187e-05,
+        "feature": "duck_longitudinal",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": 0.02,
+        "explanation_distance": 0.0004503604526338023,
+        "feature": "duck_longitudinal",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": -0.02,
+        "explanation_distance": 0.00024424596639394114,
+        "feature": "duck_lateral",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": -0.02,
+        "explanation_distance": 0.0008289331993224236,
+        "feature": "duck_lateral",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": 0.02,
+        "explanation_distance": 0.0007155359739565714,
+        "feature": "duck_lateral",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "5902e5a57db64810074149cef78b71b94f0cf22f47aa7e11b37faca79f283300",
+        "delta": 0.02,
+        "explanation_distance": 0.000522489088602196,
+        "feature": "duck_lateral",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": -0.005,
+        "explanation_distance": 0.0030245876725280008,
+        "feature": "d",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": -0.005,
+        "explanation_distance": 0.00024977390206237793,
+        "feature": "d",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": 0.005,
+        "explanation_distance": 0.0011867444853558284,
+        "feature": "d",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": 0.005,
+        "explanation_distance": 0.001765545998641871,
+        "feature": "d",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": -0.01,
+        "explanation_distance": 0.0019989988099553546,
+        "feature": "phi",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": -0.01,
+        "explanation_distance": 0.00015313073922984533,
+        "feature": "phi",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": 0.01,
+        "explanation_distance": 0.0009460898117106264,
+        "feature": "phi",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": 0.01,
+        "explanation_distance": 0.00035134424032368106,
+        "feature": "phi",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": -0.01,
+        "explanation_distance": 0.006111559402213085,
+        "feature": "v",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": -0.01,
+        "explanation_distance": 0.0001832447788413516,
+        "feature": "v",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": 0.01,
+        "explanation_distance": 0.0020399817482403826,
+        "feature": "v",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": 0.01,
+        "explanation_distance": 0.0002664423026166318,
+        "feature": "v",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": -0.02,
+        "explanation_distance": 0.0011986479541201689,
+        "feature": "duck_longitudinal",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": -0.02,
+        "explanation_distance": 1.798903895966486e-05,
+        "feature": "duck_longitudinal",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": 0.02,
+        "explanation_distance": 0.004629922576426693,
+        "feature": "duck_longitudinal",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": 0.02,
+        "explanation_distance": 0.00014674865635222467,
+        "feature": "duck_longitudinal",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": -0.02,
+        "explanation_distance": 0.0012069709881000756,
+        "feature": "duck_lateral",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": -0.02,
+        "explanation_distance": 1.4527720284873702e-05,
+        "feature": "duck_lateral",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": 0.02,
+        "explanation_distance": 0.0014338795050626851,
+        "feature": "duck_lateral",
+        "near_boundary": false,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "bdd16ec1a1712d80f174b0f70622e5006013602008bd2292f0690be96b0aadf1",
+        "delta": 0.02,
+        "explanation_distance": 0.0008894610641519973,
+        "feature": "duck_lateral",
+        "near_boundary": false,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": -0.005,
+        "explanation_distance": 0.005797175450705905,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": -0.005,
+        "explanation_distance": 0.01427782105809472,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": 0.005,
+        "explanation_distance": 0.0015016832195522412,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": 0.005,
+        "explanation_distance": 0.013303105499168466,
+        "feature": "d",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": -0.01,
+        "explanation_distance": 0.003924050035001958,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": -0.01,
+        "explanation_distance": 0.0034675420193505113,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": 0.01,
+        "explanation_distance": 0.0011121712775206127,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": 0.01,
+        "explanation_distance": 0.0021929803656174363,
+        "feature": "phi",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": -0.01,
+        "explanation_distance": 0.005796319905423286,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": -0.01,
+        "explanation_distance": 0.0037793307755159544,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": 0.01,
+        "explanation_distance": 0.0027986627195188962,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": 0.01,
+        "explanation_distance": 0.001482923858076468,
+        "feature": "v",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": -0.02,
+        "explanation_distance": 0.00042536981380369987,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": -0.02,
+        "explanation_distance": 0.00043913490536784394,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": 0.02,
+        "explanation_distance": 0.0005472242967063945,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": 0.02,
+        "explanation_distance": 0.0001864783661452707,
+        "feature": "duck_longitudinal",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": -0.02,
+        "explanation_distance": 0.00033300223581522737,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": -0.02,
+        "explanation_distance": 0.000977428383356238,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": 0.02,
+        "explanation_distance": 6.714966444032466e-05,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "v_cmd"
+      },
+      {
+        "anchor_id": "f530930a8cc4d491aa1ebfa9a4e0738359094db6bb8d3b738442435ba344d4ae",
+        "delta": 0.02,
+        "explanation_distance": 0.001610273011489638,
+        "feature": "duck_lateral",
+        "near_boundary": true,
+        "output": "omega_cmd"
+      }
+    ]
+  },
+  "baseline_comparisons": {
+    "duck": {
+      "omega_cmd": {
+        "cosine_similarity": 0.4135967732559155,
+        "dominant_alternative": "pedestrian",
+        "dominant_concept_stable": true,
+        "dominant_primary": "pedestrian",
+        "feature_rank_correlation": 0.6104283962173952
+      },
+      "v_cmd": {
+        "cosine_similarity": 0.9192425859288923,
+        "dominant_alternative": "pedestrian",
+        "dominant_concept_stable": true,
+        "dominant_primary": "pedestrian",
+        "feature_rank_correlation": 0.7970561861437325
+      }
+    },
+    "lane": {
+      "omega_cmd": {
+        "cosine_similarity": 0.6935544237861754,
+        "dominant_alternative": "pedestrian",
+        "dominant_concept_stable": false,
+        "dominant_primary": "heading",
+        "feature_rank_correlation": 0.5112849996121628
+      },
+      "v_cmd": {
+        "cosine_similarity": 0.37282877859804675,
+        "dominant_alternative": "pedestrian",
+        "dominant_concept_stable": false,
+        "dominant_primary": "speed",
+        "feature_rank_correlation": 0.41440994705406875
+      }
+    },
+    "stop": {
+      "omega_cmd": {
+        "cosine_similarity": 0.3135291637811476,
+        "dominant_alternative": "stop",
+        "dominant_concept_stable": false,
+        "dominant_primary": "pedestrian",
+        "feature_rank_correlation": 0.593137118713552
+      },
+      "v_cmd": {
+        "cosine_similarity": 0.4754429146365684,
+        "dominant_alternative": "pedestrian",
+        "dominant_concept_stable": true,
+        "dominant_primary": "pedestrian",
+        "feature_rank_correlation": 0.7179129150282931
+      }
+    }
+  },
+  "baselines": {
+    "centroid_source": "real deterministic development rollouts only",
+    "empirical_cruise_straight_centroid": [
+      -0.22598384320735931,
+      -0.026041775941848755,
+      0.24052877724170685,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      -0.2684079110622406,
+      -0.4262092709541321,
+      -0.19723360240459442,
+      -1.4265818569205206e-20,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "neutral_canonical": [
+      0.0,
+      0.0,
+      0.4146341383457184,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "checkpoint": {
+    "observation_dim": 15,
+    "path": "artifacts/sac/full_repeat_duck_5min/sac_best.pt",
+    "replay_snapshot_available": false,
+    "sha256": "0b01447edd85e539de57f9a304fc287d26d5d7c4e73a5a51cd493fea2f4c4f2b"
+  },
+  "config": "artifacts/sac/full_repeat_duck_5min/config.yaml",
+  "critic_probe_comparisons": {
+    "duck": [
+      {
+        "action": [
+          0.011544987559318542,
+          0.05869986489415169
+        ],
+        "actor_log_probability": 4.10118293762207,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 0.8944282531738281,
+        "delta_min_q_vs_actor_probe": 0.0,
+        "min_q": -57.62531661987305,
+        "normalized_distance_to_actor": 0.0,
+        "probe_name": "actor",
+        "q1": -57.62531661987305,
+        "q2": -56.73088836669922,
+        "schema_version": "1.0.0",
+        "support_label": "ACTOR_ACTION"
+      },
+      {
+        "action": [
+          0.0,
+          0.0
+        ],
+        "actor_log_probability": -31.307172775268555,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 1.0694160461425781,
+        "delta_min_q_vs_actor_probe": -0.01122283935546875,
+        "min_q": -57.636539459228516,
+        "normalized_distance_to_actor": 0.034289274364709854,
+        "probe_name": "brake",
+        "q1": -57.636539459228516,
+        "q2": -56.56712341308594,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      },
+      {
+        "action": [
+          0.17000000178813934,
+          0.0
+        ],
+        "actor_log_probability": -1.9593933820724487,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 0.9431610107421875,
+        "delta_min_q_vs_actor_probe": -0.6935005187988281,
+        "min_q": -58.318817138671875,
+        "normalized_distance_to_actor": 0.3869706392288208,
+        "probe_name": "slow_straight",
+        "q1": -58.318817138671875,
+        "q2": -57.37565612792969,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      },
+      {
+        "action": [
+          0.4099999964237213,
+          0.0
+        ],
+        "actor_log_probability": -108.37432098388672,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 0.867950439453125,
+        "delta_min_q_vs_actor_probe": -2.5731735229492188,
+        "min_q": -60.198490142822266,
+        "normalized_distance_to_actor": 0.9720384478569031,
+        "probe_name": "cruise_straight",
+        "q1": -59.33053970336914,
+        "q2": -60.198490142822266,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      },
+      {
+        "action": [
+          0.17000000178813934,
+          1.5
+        ],
+        "actor_log_probability": -1397.41064453125,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 2.2408180236816406,
+        "delta_min_q_vs_actor_probe": -0.10943603515625,
+        "min_q": -57.7347526550293,
+        "normalized_distance_to_actor": 0.6165871024131775,
+        "probe_name": "corrective_left",
+        "q1": -55.493934631347656,
+        "q2": -57.7347526550293,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      },
+      {
+        "action": [
+          0.17000000178813934,
+          -1.5
+        ],
+        "actor_log_probability": -1428.1737060546875,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 5.626594543457031,
+        "delta_min_q_vs_actor_probe": -5.5084381103515625,
+        "min_q": -63.13375473022461,
+        "normalized_distance_to_actor": 0.647543728351593,
+        "probe_name": "corrective_right",
+        "q1": -63.13375473022461,
+        "q2": -57.50716018676758,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      }
+    ],
+    "lane": [
+      {
+        "action": [
+          0.04700446128845215,
+          -0.7515022158622742
+        ],
+        "actor_log_probability": 2.2256345748901367,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 32.598976135253906,
+        "delta_min_q_vs_actor_probe": 0.0,
+        "min_q": -91.7425537109375,
+        "normalized_distance_to_actor": 0.0,
+        "probe_name": "actor",
+        "q1": -91.7425537109375,
+        "q2": -59.143577575683594,
+        "schema_version": "1.0.0",
+        "support_label": "ACTOR_ACTION"
+      },
+      {
+        "action": [
+          0.0,
+          0.0
+        ],
+        "actor_log_probability": -143.04014587402344,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 34.085838317871094,
+        "delta_min_q_vs_actor_probe": 1.18243408203125,
+        "min_q": -90.56011962890625,
+        "normalized_distance_to_actor": 0.27548885345458984,
+        "probe_name": "brake",
+        "q1": -90.56011962890625,
+        "q2": -56.474281311035156,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      },
+      {
+        "action": [
+          0.17000000178813934,
+          0.0
+        ],
+        "actor_log_probability": -2.3891687393188477,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 27.957416534423828,
+        "delta_min_q_vs_actor_probe": 2.318084716796875,
+        "min_q": -89.42446899414062,
+        "normalized_distance_to_actor": 0.3908248841762543,
+        "probe_name": "slow_straight",
+        "q1": -89.42446899414062,
+        "q2": -61.4670524597168,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      },
+      {
+        "action": [
+          0.4099999964237213,
+          0.0
+        ],
+        "actor_log_probability": -261.841796875,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 17.281570434570312,
+        "delta_min_q_vs_actor_probe": 5.5560150146484375,
+        "min_q": -86.18653869628906,
+        "normalized_distance_to_actor": 0.9201109409332275,
+        "probe_name": "cruise_straight",
+        "q1": -86.18653869628906,
+        "q2": -68.90496826171875,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      },
+      {
+        "action": [
+          0.17000000178813934,
+          1.5
+        ],
+        "actor_log_probability": -101.23738861083984,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 27.463104248046875,
+        "delta_min_q_vs_actor_probe": 7.625434875488281,
+        "min_q": -84.11711883544922,
+        "normalized_distance_to_actor": 0.8082356452941895,
+        "probe_name": "corrective_left",
+        "q1": -84.11711883544922,
+        "q2": -56.654014587402344,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      },
+      {
+        "action": [
+          0.17000000178813934,
+          -1.5
+        ],
+        "actor_log_probability": -71.77672576904297,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 24.449989318847656,
+        "delta_min_q_vs_actor_probe": -3.4280471801757812,
+        "min_q": -95.17060089111328,
+        "normalized_distance_to_actor": 0.3901837468147278,
+        "probe_name": "corrective_right",
+        "q1": -95.17060089111328,
+        "q2": -70.72061157226562,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      }
+    ],
+    "stop": [
+      {
+        "action": [
+          0.1103510633111,
+          -1.1350091695785522
+        ],
+        "actor_log_probability": 3.020721435546875,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 0.394561767578125,
+        "delta_min_q_vs_actor_probe": 0.0,
+        "min_q": -76.42134094238281,
+        "normalized_distance_to_actor": 0.0,
+        "probe_name": "actor",
+        "q1": -76.02677917480469,
+        "q2": -76.42134094238281,
+        "schema_version": "1.0.0",
+        "support_label": "ACTOR_ACTION"
+      },
+      {
+        "action": [
+          0.0,
+          0.0
+        ],
+        "actor_log_probability": -224.31565856933594,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 0.98455810546875,
+        "delta_min_q_vs_actor_probe": 0.3729400634765625,
+        "min_q": -76.04840087890625,
+        "normalized_distance_to_actor": 0.46430549025535583,
+        "probe_name": "brake",
+        "q1": -75.0638427734375,
+        "q2": -76.04840087890625,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      },
+      {
+        "action": [
+          0.17000000178813934,
+          0.0
+        ],
+        "actor_log_probability": -7.182306289672852,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 0.5956649780273438,
+        "delta_min_q_vs_actor_probe": -0.35599517822265625,
+        "min_q": -76.77733612060547,
+        "normalized_distance_to_actor": 0.40534478425979614,
+        "probe_name": "slow_straight",
+        "q1": -76.77733612060547,
+        "q2": -76.18167114257812,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      },
+      {
+        "action": [
+          0.4099999964237213,
+          0.0
+        ],
+        "actor_log_probability": -297.2986755371094,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 1.9551925659179688,
+        "delta_min_q_vs_actor_probe": -5.28466796875,
+        "min_q": -81.70600891113281,
+        "normalized_distance_to_actor": 0.8229712843894958,
+        "probe_name": "cruise_straight",
+        "q1": -81.70600891113281,
+        "q2": -79.75081634521484,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      },
+      {
+        "action": [
+          0.17000000178813934,
+          1.5
+        ],
+        "actor_log_probability": -583.18017578125,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 7.659355163574219,
+        "delta_min_q_vs_actor_probe": -6.812652587890625,
+        "min_q": -83.23399353027344,
+        "normalized_distance_to_actor": 0.8903037905693054,
+        "probe_name": "corrective_left",
+        "q1": -83.23399353027344,
+        "q2": -75.57463836669922,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      },
+      {
+        "action": [
+          0.17000000178813934,
+          -1.5
+        ],
+        "actor_log_probability": -330.8161315917969,
+        "caveat": "Critic comparison is heuristic; no replay snapshot is available to establish state-action support.",
+        "critic_disagreement": 0.595245361328125,
+        "delta_min_q_vs_actor_probe": -1.1348724365234375,
+        "min_q": -77.55621337890625,
+        "normalized_distance_to_actor": 0.18965226411819458,
+        "probe_name": "corrective_right",
+        "q1": -76.96096801757812,
+        "q2": -77.55621337890625,
+        "schema_version": "1.0.0",
+        "support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+      }
+    ]
+  },
+  "critic_probe_contract": {
+    "name": "critic probe comparison",
+    "not_advantage_or_confidence": true,
+    "reference_support_label": "LOW_ACTOR_SUPPORT_NO_REPLAY_SNAPSHOT"
+  },
+  "development_rollout": {
+    "cruise_straight_states": 57,
+    "decisions_per_seed_limit": 400,
+    "seeds": [
+      2101,
+      2202,
+      2303,
+      2404,
+      2505
+    ],
+    "states": 2000,
+    "termination_counts": {}
+  },
+  "files": {
+    "attribution_stability": "runs/explanations/m9_sac_internal/attribution_stability.csv",
+    "critic_probe_comparisons": "runs/explanations/m9_sac_internal/critic_probe_comparisons.csv",
+    "ig_feature_attributions": "runs/explanations/m9_sac_internal/ig_feature_attributions.csv",
+    "local_boundary_points": "runs/explanations/m9_sac_internal/local_boundary_points.csv"
+  },
+  "integrated_gradients": {
+    "duck": {
+      "empirical_cruise_centroid": {
+        "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+        "attributions": {
+          "omega_cmd": [
+            0.013934748247265816,
+            0.029125487431883812,
+            -0.03555862233042717,
+            0.0,
+            -0.0,
+            0.0,
+            0.0,
+            -0.0,
+            -0.21797879040241241,
+            0.027989981696009636,
+            0.08038045465946198,
+            0.02161432057619095,
+            0.6167190074920654,
+            0.0,
+            0.0
+          ],
+          "v_cmd": [
+            0.0005661407485604286,
+            -0.0014978914987295866,
+            0.09305554628372192,
+            -0.0,
+            -0.0,
+            -0.0,
+            0.0,
+            0.0,
+            0.04427718743681908,
+            -0.05048823356628418,
+            0.03676951676607132,
+            -0.010502253659069538,
+            -0.33501699566841125,
+            0.0,
+            0.0
+          ]
+        },
+        "baseline_name": "empirical_cruise_straight_centroid",
+        "baseline_observation": [
+          -0.22598384320735931,
+          -0.026041775941848755,
+          0.24052877724170685,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          -0.2684079110622406,
+          -0.4262092709541321,
+          -0.19723360240459442,
+          -1.4265818569205206e-20,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "completeness_residual": {
+          "omega_cmd": -0.0010582972317934036,
+          "v_cmd": -0.00011711125262081623
+        },
+        "concept_absolute": {
+          "omega_cmd": {
+            "heading": 0.029125487431883812,
+            "lane": 0.013934748247265816,
+            "pedestrian": 0.9646825548261404,
+            "road": 0.0,
+            "speed": 0.03555862233042717,
+            "stop": 0.0
+          },
+          "v_cmd": {
+            "heading": 0.0014978914987295866,
+            "lane": 0.0005661407485604286,
+            "pedestrian": 0.47705418709665537,
+            "road": 0.0,
+            "speed": 0.09305554628372192,
+            "stop": 0.0
+          }
+        },
+        "concept_signed": {
+          "omega_cmd": {
+            "heading": 0.029125487431883812,
+            "lane": 0.013934748247265816,
+            "pedestrian": 0.5287249740213156,
+            "road": 0.0,
+            "speed": -0.03555862233042717,
+            "stop": 0.0
+          },
+          "v_cmd": {
+            "heading": -0.0014978914987295866,
+            "lane": 0.0005661407485604286,
+            "pedestrian": -0.3149607786908746,
+            "road": 0.0,
+            "speed": 0.09305554628372192,
+            "stop": 0.0
+          }
+        },
+        "feature_names": [
+          "d",
+          "phi",
+          "v",
+          "kappa",
+          "stop_present",
+          "d_stop",
+          "sigma_stop",
+          "duck_present",
+          "duck_longitudinal",
+          "duck_lateral",
+          "duck_v_longitudinal_relative",
+          "duck_v_lateral_relative",
+          "duck_active",
+          "duck_crossing_available",
+          "stop_hold_progress"
+        ],
+        "input_observation": [
+          -0.22171083092689514,
+          -0.022464729845523834,
+          0.03198377043008804,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.17889778316020966,
+          -0.06262721121311188,
+          -0.022705113515257835,
+          0.039844680577516556,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "output_at_baseline": {
+          "omega_cmd": -0.47646841406822205,
+          "v_cmd": 0.23449908196926117
+        },
+        "output_at_input": {
+          "omega_cmd": 0.05869986489415169,
+          "v_cmd": 0.011544987559318542
+        },
+        "schema_version": "1.0.0",
+        "steps": 1024
+      },
+      "neutral": {
+        "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+        "attributions": {
+          "omega_cmd": [
+            -0.6430965662002563,
+            -0.11380304396152496,
+            0.1943894773721695,
+            0.0,
+            -0.0,
+            0.0,
+            0.0,
+            -0.9741002321243286,
+            -0.4783872067928314,
+            0.07734086364507675,
+            0.02429068833589554,
+            0.023408107459545135,
+            0.45986607670783997,
+            -0.0,
+            0.0
+          ],
+          "v_cmd": [
+            0.013498194515705109,
+            -0.003543716622516513,
+            0.04128353297710419,
+            -0.0,
+            -0.0,
+            0.0,
+            0.0,
+            -0.010028289631009102,
+            0.03829096257686615,
+            0.003089571138843894,
+            -0.0005126034957356751,
+            -0.0024199513718485832,
+            -0.08503344655036926,
+            0.0,
+            0.0
+          ]
+        },
+        "baseline_name": "neutral_canonical",
+        "baseline_observation": [
+          0.0,
+          0.0,
+          0.4146341383457184,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "completeness_residual": {
+          "omega_cmd": 0.0018899217247962952,
+          "v_cmd": 2.3189757484942675e-05
+        },
+        "concept_absolute": {
+          "omega_cmd": {
+            "heading": 0.11380304396152496,
+            "lane": 0.6430965662002563,
+            "pedestrian": 2.0373931750655174,
+            "road": 0.0,
+            "speed": 0.1943894773721695,
+            "stop": 0.0
+          },
+          "v_cmd": {
+            "heading": 0.003543716622516513,
+            "lane": 0.013498194515705109,
+            "pedestrian": 0.13937482476467267,
+            "road": 0.0,
+            "speed": 0.04128353297710419,
+            "stop": 0.0
+          }
+        },
+        "concept_signed": {
+          "omega_cmd": {
+            "heading": -0.11380304396152496,
+            "lane": -0.6430965662002563,
+            "pedestrian": -0.8675817027688026,
+            "road": 0.0,
+            "speed": 0.1943894773721695,
+            "stop": 0.0
+          },
+          "v_cmd": {
+            "heading": -0.003543716622516513,
+            "lane": 0.013498194515705109,
+            "pedestrian": -0.05661375733325258,
+            "road": 0.0,
+            "speed": 0.04128353297710419,
+            "stop": 0.0
+          }
+        },
+        "feature_names": [
+          "d",
+          "phi",
+          "v",
+          "kappa",
+          "stop_present",
+          "d_stop",
+          "sigma_stop",
+          "duck_present",
+          "duck_longitudinal",
+          "duck_lateral",
+          "duck_v_longitudinal_relative",
+          "duck_v_lateral_relative",
+          "duck_active",
+          "duck_crossing_available",
+          "stop_hold_progress"
+        ],
+        "input_observation": [
+          -0.22171083092689514,
+          -0.022464729845523834,
+          0.03198377043008804,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          0.17889778316020966,
+          -0.06262721121311188,
+          -0.022705113515257835,
+          0.039844680577516556,
+          1.0,
+          0.0,
+          0.0
+        ],
+        "output_at_baseline": {
+          "omega_cmd": 1.4869017601013184,
+          "v_cmd": 0.016897544264793396
+        },
+        "output_at_input": {
+          "omega_cmd": 0.05869986489415169,
+          "v_cmd": 0.011544987559318542
+        },
+        "schema_version": "1.0.0",
+        "steps": 1024
+      }
+    },
+    "lane": {
+      "empirical_cruise_centroid": {
+        "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+        "attributions": {
+          "omega_cmd": [
+            0.08913519233465195,
+            -1.9826698303222656,
+            0.23089836537837982,
+            0.0,
+            -0.0,
+            0.0,
+            -0.0,
+            0.3553897738456726,
+            1.741806149482727,
+            -0.7198958396911621,
+            0.008691808208823204,
+            7.149065963735096e-21,
+            0.0,
+            -0.0,
+            -0.0
+          ],
+          "v_cmd": [
+            0.005813061259686947,
+            -0.06746580451726913,
+            0.04452764615416527,
+            -0.0,
+            -0.0,
+            0.0,
+            0.0,
+            -0.16646647453308105,
+            0.006264286581426859,
+            -0.06502468883991241,
+            0.055589210242033005,
+            -3.889811175975644e-21,
+            -0.0,
+            -0.0,
+            0.0
+          ]
+        },
+        "baseline_name": "empirical_cruise_straight_centroid",
+        "baseline_observation": [
+          -0.22598384320735931,
+          -0.026041775941848755,
+          0.24052877724170685,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          -0.2684079110622406,
+          -0.4262092709541321,
+          -0.19723360240459442,
+          -1.4265818569205206e-20,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "completeness_residual": {
+          "omega_cmd": 0.0016105789691209793,
+          "v_cmd": -0.0007318570278584957
+        },
+        "concept_absolute": {
+          "omega_cmd": {
+            "heading": 1.9826698303222656,
+            "lane": 0.08913519233465195,
+            "pedestrian": 2.825783571228385,
+            "road": 0.0,
+            "speed": 0.23089836537837982,
+            "stop": 0.0
+          },
+          "v_cmd": {
+            "heading": 0.06746580451726913,
+            "lane": 0.005813061259686947,
+            "pedestrian": 0.29334466019645333,
+            "road": 0.0,
+            "speed": 0.04452764615416527,
+            "stop": 0.0
+          }
+        },
+        "concept_signed": {
+          "omega_cmd": {
+            "heading": -1.9826698303222656,
+            "lane": 0.08913519233465195,
+            "pedestrian": 1.3859918918460608,
+            "road": 0.0,
+            "speed": 0.23089836537837982,
+            "stop": 0.0
+          },
+          "v_cmd": {
+            "heading": -0.06746580451726913,
+            "lane": 0.005813061259686947,
+            "pedestrian": -0.1696376665495336,
+            "road": 0.0,
+            "speed": 0.04452764615416527,
+            "stop": 0.0
+          }
+        },
+        "feature_names": [
+          "d",
+          "phi",
+          "v",
+          "kappa",
+          "stop_present",
+          "d_stop",
+          "sigma_stop",
+          "duck_present",
+          "duck_longitudinal",
+          "duck_lateral",
+          "duck_v_longitudinal_relative",
+          "duck_v_lateral_relative",
+          "duck_active",
+          "duck_crossing_available",
+          "stop_hold_progress"
+        ],
+        "input_observation": [
+          -0.18081216514110565,
+          -0.17664065957069397,
+          0.14565704762935638,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "output_at_baseline": {
+          "omega_cmd": -0.47646841406822205,
+          "v_cmd": 0.23449908196926117
+        },
+        "output_at_input": {
+          "omega_cmd": -0.7515022158622742,
+          "v_cmd": 0.04700446128845215
+        },
+        "schema_version": "1.0.0",
+        "steps": 1024
+      },
+      "neutral": {
+        "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+        "attributions": {
+          "omega_cmd": [
+            -0.4707406163215637,
+            -2.489988088607788,
+            0.7225837707519531,
+            -0.0,
+            -0.0,
+            0.0,
+            -0.0,
+            0.0,
+            0.0,
+            -0.0,
+            0.0,
+            0.0,
+            0.0,
+            -0.0,
+            -0.0
+          ],
+          "v_cmd": [
+            0.005618545692414045,
+            -0.06884931772947311,
+            0.09332741051912308,
+            0.0,
+            -0.0,
+            0.0,
+            0.0,
+            -0.0,
+            0.0,
+            -0.0,
+            0.0,
+            -0.0,
+            -0.0,
+            0.0,
+            0.0
+          ]
+        },
+        "baseline_name": "neutral_canonical",
+        "baseline_observation": [
+          0.0,
+          0.0,
+          0.4146341383457184,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "completeness_residual": {
+          "omega_cmd": -0.00025910139083862305,
+          "v_cmd": 1.0278541594743729e-05
+        },
+        "concept_absolute": {
+          "omega_cmd": {
+            "heading": 2.489988088607788,
+            "lane": 0.4707406163215637,
+            "pedestrian": 0.0,
+            "road": 0.0,
+            "speed": 0.7225837707519531,
+            "stop": 0.0
+          },
+          "v_cmd": {
+            "heading": 0.06884931772947311,
+            "lane": 0.005618545692414045,
+            "pedestrian": 0.0,
+            "road": 0.0,
+            "speed": 0.09332741051912308,
+            "stop": 0.0
+          }
+        },
+        "concept_signed": {
+          "omega_cmd": {
+            "heading": -2.489988088607788,
+            "lane": -0.4707406163215637,
+            "pedestrian": 0.0,
+            "road": 0.0,
+            "speed": 0.7225837707519531,
+            "stop": 0.0
+          },
+          "v_cmd": {
+            "heading": -0.06884931772947311,
+            "lane": 0.005618545692414045,
+            "pedestrian": 0.0,
+            "road": 0.0,
+            "speed": 0.09332741051912308,
+            "stop": 0.0
+          }
+        },
+        "feature_names": [
+          "d",
+          "phi",
+          "v",
+          "kappa",
+          "stop_present",
+          "d_stop",
+          "sigma_stop",
+          "duck_present",
+          "duck_longitudinal",
+          "duck_lateral",
+          "duck_v_longitudinal_relative",
+          "duck_v_lateral_relative",
+          "duck_active",
+          "duck_crossing_available",
+          "stop_hold_progress"
+        ],
+        "input_observation": [
+          -0.18081216514110565,
+          -0.17664065957069397,
+          0.14565704762935638,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "output_at_baseline": {
+          "omega_cmd": 1.4869017601013184,
+          "v_cmd": 0.016897544264793396
+        },
+        "output_at_input": {
+          "omega_cmd": -0.7515022158622742,
+          "v_cmd": 0.04700446128845215
+        },
+        "schema_version": "1.0.0",
+        "steps": 1024
+      }
+    },
+    "stop": {
+      "empirical_cruise_centroid": {
+        "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+        "attributions": {
+          "omega_cmd": [
+            -0.2054094672203064,
+            0.9220153093338013,
+            0.011144181713461876,
+            1.2701276540756226,
+            -1.9162731170654297,
+            -2.0955114364624023,
+            0.0,
+            0.0,
+            -1.2457047700881958,
+            0.002678422722965479,
+            -0.01915099285542965,
+            1.644756500141457e-17,
+            0.0,
+            2.6179986000061035,
+            0.0
+          ],
+          "v_cmd": [
+            0.009443631395697594,
+            -0.08032488822937012,
+            -0.006223693955689669,
+            -0.06642672419548035,
+            -0.06520820409059525,
+            -0.026076652109622955,
+            0.0,
+            0.0,
+            0.08429687470197678,
+            -0.0004113795002922416,
+            -0.010208599269390106,
+            -4.377077496522324e-18,
+            -0.0,
+            0.03707902505993843,
+            0.0
+          ]
+        },
+        "baseline_name": "empirical_cruise_straight_centroid",
+        "baseline_observation": [
+          -0.22598384320735931,
+          -0.026041775941848755,
+          0.24052877724170685,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          1.0,
+          -0.2684079110622406,
+          -0.4262092709541321,
+          -0.19723360240459442,
+          -1.4265818569205206e-20,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "completeness_residual": {
+          "omega_cmd": -0.0004551098681986332,
+          "v_cmd": -8.740846533328295e-05
+        },
+        "concept_absolute": {
+          "omega_cmd": {
+            "heading": 0.9220153093338013,
+            "lane": 0.2054094672203064,
+            "pedestrian": 3.8855327856726944,
+            "road": 1.2701276540756226,
+            "speed": 0.011144181713461876,
+            "stop": 4.011784553527832
+          },
+          "v_cmd": {
+            "heading": 0.08032488822937012,
+            "lane": 0.009443631395697594,
+            "pedestrian": 0.13199587853159755,
+            "road": 0.06642672419548035,
+            "speed": 0.006223693955689669,
+            "stop": 0.0912848562002182
+          }
+        },
+        "concept_signed": {
+          "omega_cmd": {
+            "heading": 0.9220153093338013,
+            "lane": -0.2054094672203064,
+            "pedestrian": 1.3558212597854435,
+            "road": 1.2701276540756226,
+            "speed": 0.011144181713461876,
+            "stop": -4.011784553527832
+          },
+          "v_cmd": {
+            "heading": -0.08032488822937012,
+            "lane": 0.009443631395697594,
+            "pedestrian": 0.11075592099223286,
+            "road": -0.06642672419548035,
+            "speed": -0.006223693955689669,
+            "stop": -0.0912848562002182
+          }
+        },
+        "feature_names": [
+          "d",
+          "phi",
+          "v",
+          "kappa",
+          "stop_present",
+          "d_stop",
+          "sigma_stop",
+          "duck_present",
+          "duck_longitudinal",
+          "duck_lateral",
+          "duck_v_longitudinal_relative",
+          "duck_v_lateral_relative",
+          "duck_active",
+          "duck_crossing_available",
+          "stop_hold_progress"
+        ],
+        "input_observation": [
+          -0.2592463493347168,
+          0.05389935150742531,
+          0.2632112503051758,
+          0.2753019630908966,
+          1.0,
+          0.10751188546419144,
+          0.0,
+          1.0,
+          0.04859919100999832,
+          -0.41886913776397705,
+          -0.21583323180675507,
+          1.3877787807814457e-17,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "output_at_baseline": {
+          "omega_cmd": -0.47646841406822205,
+          "v_cmd": 0.23449908196926117
+        },
+        "output_at_input": {
+          "omega_cmd": -1.1350091695785522,
+          "v_cmd": 0.1103510633111
+        },
+        "schema_version": "1.0.0",
+        "steps": 1024
+      },
+      "neutral": {
+        "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+        "attributions": {
+          "omega_cmd": [
+            -0.6516558527946472,
+            0.22550484538078308,
+            -0.04655677080154419,
+            0.20176535844802856,
+            -0.47675463557243347,
+            -0.0936022698879242,
+            0.0,
+            -0.34608134627342224,
+            -1.5442601442337036,
+            0.41729021072387695,
+            0.09149199724197388,
+            -2.004858330160087e-19,
+            0.0,
+            -0.39699870347976685,
+            0.0
+          ],
+          "v_cmd": [
+            0.09459685534238815,
+            -0.024270420894026756,
+            0.0223065298050642,
+            0.02338441088795662,
+            -0.0508684478700161,
+            -0.051387935876846313,
+            0.0,
+            -0.008396663703024387,
+            0.03757977485656738,
+            -0.018527282401919365,
+            -0.0554703064262867,
+            -1.5863620156705212e-18,
+            -0.0,
+            0.12460706382989883,
+            -0.0
+          ]
+        },
+        "baseline_name": "neutral_canonical",
+        "baseline_observation": [
+          0.0,
+          0.0,
+          0.4146341383457184,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "completeness_residual": {
+          "omega_cmd": -0.0020537376403808594,
+          "v_cmd": -0.00010005850344896317
+        },
+        "concept_absolute": {
+          "omega_cmd": {
+            "heading": 0.22550484538078308,
+            "lane": 0.6516558527946472,
+            "pedestrian": 2.7961224019527435,
+            "road": 0.20176535844802856,
+            "speed": 0.04655677080154419,
+            "stop": 0.5703569054603577
+          },
+          "v_cmd": {
+            "heading": 0.024270420894026756,
+            "lane": 0.09459685534238815,
+            "pedestrian": 0.24458109121769667,
+            "road": 0.02338441088795662,
+            "speed": 0.0223065298050642,
+            "stop": 0.10225638374686241
+          }
+        },
+        "concept_signed": {
+          "omega_cmd": {
+            "heading": 0.22550484538078308,
+            "lane": -0.6516558527946472,
+            "pedestrian": -1.7785579860210419,
+            "road": 0.20176535844802856,
+            "speed": -0.04655677080154419,
+            "stop": -0.5703569054603577
+          },
+          "v_cmd": {
+            "heading": -0.024270420894026756,
+            "lane": 0.09459685534238815,
+            "pedestrian": 0.07979258615523577,
+            "road": 0.02338441088795662,
+            "speed": 0.0223065298050642,
+            "stop": -0.10225638374686241
+          }
+        },
+        "feature_names": [
+          "d",
+          "phi",
+          "v",
+          "kappa",
+          "stop_present",
+          "d_stop",
+          "sigma_stop",
+          "duck_present",
+          "duck_longitudinal",
+          "duck_lateral",
+          "duck_v_longitudinal_relative",
+          "duck_v_lateral_relative",
+          "duck_active",
+          "duck_crossing_available",
+          "stop_hold_progress"
+        ],
+        "input_observation": [
+          -0.2592463493347168,
+          0.05389935150742531,
+          0.2632112503051758,
+          0.2753019630908966,
+          1.0,
+          0.10751188546419144,
+          0.0,
+          1.0,
+          0.04859919100999832,
+          -0.41886913776397705,
+          -0.21583323180675507,
+          1.3877787807814457e-17,
+          0.0,
+          1.0,
+          0.0
+        ],
+        "output_at_baseline": {
+          "omega_cmd": 1.4869017601013184,
+          "v_cmd": 0.016897544264793396
+        },
+        "output_at_input": {
+          "omega_cmd": -1.1350091695785522,
+          "v_cmd": 0.1103510633111
+        },
+        "schema_version": "1.0.0",
+        "steps": 1024
+      }
+    }
+  },
+  "local_boundary_search": {
+    "duck": {
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": 0.05869986489415169,
+        "solver": "sac",
+        "v_cmd": 0.011544987559318542
+      },
+      "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+      "anchor_primitive": {
+        "primitive": "YieldHold",
+        "rule_id": "pedestrian.hold",
+        "schema_version": "1.0.1",
+        "trigger": "pedestrian occupied or approached the ego corridor",
+        "undesirable": false
+      },
+      "boundary_points": 0,
+      "nearest_boundary_delta": null,
+      "nearest_boundary_feature": null,
+      "points": [
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -0.029723651707172394,
+            "solver": "sac",
+            "v_cmd": 0.011152416467666626
+          },
+          "delta": -0.005,
+          "feature": "d",
+          "normalized_action_distance": 0.02949005365325323,
+          "primitive": {
+            "primitive": "YieldHold",
+            "rule_id": "pedestrian.hold",
+            "schema_version": "1.0.1",
+            "trigger": "pedestrian occupied or approached the ego corridor",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+            "applied_changes": {
+              "d": -0.06042770730712522
+            },
+            "intervention_name": "m9_local_boundary_d",
+            "repair_notes": [],
+            "requested_changes": {
+              "d": -0.06042770730712522
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.06042770730712522,
+              "duck_active": true,
+              "duck_crossing_available": false,
+              "duck_lateral": -0.12525441644573965,
+              "duck_longitudinal": 0.3577955684927309,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 0.019922339834038356,
+              "duck_v_longitudinal_relative": -0.011352556885601484,
+              "phi": -0.035287513862765206,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.013113345213904632
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": 0.1410970389842987,
+            "solver": "sac",
+            "v_cmd": 0.012073144316673279
+          },
+          "delta": 0.005,
+          "feature": "d",
+          "normalized_action_distance": 0.027495917141288784,
+          "primitive": {
+            "primitive": "YieldHold",
+            "rule_id": "pedestrian.hold",
+            "schema_version": "1.0.1",
+            "trigger": "pedestrian occupied or approached the ego corridor",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+            "applied_changes": {
+              "d": -0.05042770730712522
+            },
+            "intervention_name": "m9_local_boundary_d",
+            "repair_notes": [],
+            "requested_changes": {
+              "d": -0.05042770730712522
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.05042770730712522,
+              "duck_active": true,
+              "duck_crossing_available": false,
+              "duck_lateral": -0.12525441644573965,
+              "duck_longitudinal": 0.3577955684927309,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 0.019922339834038356,
+              "duck_v_longitudinal_relative": -0.011352556885601484,
+              "phi": -0.035287513862765206,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.013113345213904632
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": 0.004663379862904549,
+            "solver": "sac",
+            "v_cmd": 0.012156754732131958
+          },
+          "delta": -0.01,
+          "feature": "phi",
+          "normalized_action_distance": 0.018073858903385028,
+          "primitive": {
+            "primitive": "YieldHold",
+            "rule_id": "pedestrian.hold",
+            "schema_version": "1.0.1",
+            "trigger": "pedestrian occupied or approached the ego corridor",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+            "applied_changes": {
+              "phi": -0.04528751386276521
+            },
+            "intervention_name": "m9_local_boundary_phi",
+            "repair_notes": [],
+            "requested_changes": {
+              "phi": -0.04528751386276521
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.05542770730712522,
+              "duck_active": true,
+              "duck_crossing_available": false,
+              "duck_lateral": -0.12525441644573965,
+              "duck_longitudinal": 0.3577955684927309,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 0.019922339834038356,
+              "duck_v_longitudinal_relative": -0.011352556885601484,
+              "phi": -0.04528751386276521,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.013113345213904632
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": 0.09189790487289429,
+            "solver": "sac",
+            "v_cmd": 0.011307328939437866
+          },
+          "delta": 0.01,
+          "feature": "phi",
+          "normalized_action_distance": 0.011081184551263832,
+          "primitive": {
+            "primitive": "YieldHold",
+            "rule_id": "pedestrian.hold",
+            "schema_version": "1.0.1",
+            "trigger": "pedestrian occupied or approached the ego corridor",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+            "applied_changes": {
+              "phi": -0.025287513862765204
+            },
+            "intervention_name": "m9_local_boundary_phi",
+            "repair_notes": [],
+            "requested_changes": {
+              "phi": -0.025287513862765204
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.05542770730712522,
+              "duck_active": true,
+              "duck_crossing_available": false,
+              "duck_lateral": -0.12525441644573965,
+              "duck_longitudinal": 0.3577955684927309,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 0.019922339834038356,
+              "duck_v_longitudinal_relative": -0.011352556885601484,
+              "phi": -0.025287513862765204,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.013113345213904632
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": 0.05791875720024109,
+            "solver": "sac",
+            "v_cmd": 0.012665167450904846
+          },
+          "delta": -0.01,
+          "feature": "v",
+          "normalized_action_distance": 0.0027445244493565116,
+          "primitive": {
+            "primitive": "YieldHold",
+            "rule_id": "pedestrian.hold",
+            "schema_version": "1.0.1",
+            "trigger": "pedestrian occupied or approached the ego corridor",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+            "applied_changes": {
+              "v": 0.003113345213904632
+            },
+            "intervention_name": "m9_local_boundary_v",
+            "repair_notes": [],
+            "requested_changes": {
+              "v": 0.003113345213904632
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.05542770730712522,
+              "duck_active": true,
+              "duck_crossing_available": false,
+              "duck_lateral": -0.12525441644573965,
+              "duck_longitudinal": 0.3577955684927309,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 0.019922339834038356,
+              "duck_v_longitudinal_relative": -0.011352556885601484,
+              "phi": -0.035287513862765206,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.003113345213904632
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": 0.04759544879198074,
+            "solver": "sac",
+            "v_cmd": 0.01086057722568512
+          },
+          "delta": 0.01,
+          "feature": "v",
+          "normalized_action_distance": 0.0040604723919184845,
+          "primitive": {
+            "primitive": "YieldHold",
+            "rule_id": "pedestrian.hold",
+            "schema_version": "1.0.1",
+            "trigger": "pedestrian occupied or approached the ego corridor",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+            "applied_changes": {
+              "v": 0.02311334521390463
+            },
+            "intervention_name": "m9_local_boundary_v",
+            "repair_notes": [],
+            "requested_changes": {
+              "v": 0.02311334521390463
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.05542770730712522,
+              "duck_active": true,
+              "duck_crossing_available": false,
+              "duck_lateral": -0.12525441644573965,
+              "duck_longitudinal": 0.3577955684927309,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 0.019922339834038356,
+              "duck_v_longitudinal_relative": -0.011352556885601484,
+              "phi": -0.035287513862765206,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.02311334521390463
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": 0.0601695254445076,
+            "solver": "sac",
+            "v_cmd": 0.010981962084770203
+          },
+          "delta": -0.02,
+          "feature": "duck_longitudinal",
+          "normalized_action_distance": 0.00145799782566779,
+          "primitive": {
+            "primitive": "YieldHold",
+            "rule_id": "pedestrian.hold",
+            "schema_version": "1.0.1",
+            "trigger": "pedestrian occupied or approached the ego corridor",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+            "applied_changes": {
+              "duck_longitudinal": 0.3377955684927309
+            },
+            "intervention_name": "m9_local_boundary_duck_longitudinal",
+            "repair_notes": [
+              "duck_present enabled for metric intervention"
+            ],
+            "requested_changes": {
+              "duck_longitudinal": 0.3377955684927309
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.05542770730712522,
+              "duck_active": true,
+              "duck_crossing_available": false,
+              "duck_lateral": -0.12525441644573965,
+              "duck_longitudinal": 0.3377955684927309,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 0.019922339834038356,
+              "duck_v_longitudinal_relative": -0.011352556885601484,
+              "phi": -0.035287513862765206,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.013113345213904632
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": 0.053266607224941254,
+            "solver": "sac",
+            "v_cmd": 0.012276947498321533
+          },
+          "delta": 0.02,
+          "feature": "duck_longitudinal",
+          "normalized_action_distance": 0.002543071863173338,
+          "primitive": {
+            "primitive": "YieldHold",
+            "rule_id": "pedestrian.hold",
+            "schema_version": "1.0.1",
+            "trigger": "pedestrian occupied or approached the ego corridor",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+            "applied_changes": {
+              "duck_longitudinal": 0.37779556849273094
+            },
+            "intervention_name": "m9_local_boundary_duck_longitudinal",
+            "repair_notes": [
+              "duck_present enabled for metric intervention"
+            ],
+            "requested_changes": {
+              "duck_longitudinal": 0.37779556849273094
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.05542770730712522,
+              "duck_active": true,
+              "duck_crossing_available": false,
+              "duck_lateral": -0.12525441644573965,
+              "duck_longitudinal": 0.37779556849273094,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 0.019922339834038356,
+              "duck_v_longitudinal_relative": -0.011352556885601484,
+              "phi": -0.035287513862765206,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.013113345213904632
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": 0.06516926735639572,
+            "solver": "sac",
+            "v_cmd": 0.011825606226921082
+          },
+          "delta": -0.02,
+          "feature": "duck_lateral",
+          "normalized_action_distance": 0.002262477483215329,
+          "primitive": {
+            "primitive": "YieldHold",
+            "rule_id": "pedestrian.hold",
+            "schema_version": "1.0.1",
+            "trigger": "pedestrian occupied or approached the ego corridor",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+            "applied_changes": {
+              "duck_lateral": -0.14525441644573964
+            },
+            "intervention_name": "m9_local_boundary_duck_lateral",
+            "repair_notes": [
+              "duck_present enabled for metric intervention"
+            ],
+            "requested_changes": {
+              "duck_lateral": -0.14525441644573964
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.05542770730712522,
+              "duck_active": true,
+              "duck_crossing_available": false,
+              "duck_lateral": -0.14525441644573964,
+              "duck_longitudinal": 0.3577955684927309,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 0.019922339834038356,
+              "duck_v_longitudinal_relative": -0.011352556885601484,
+              "phi": -0.035287513862765206,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.013113345213904632
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": 0.05166168510913849,
+            "solver": "sac",
+            "v_cmd": 0.01129564642906189
+          },
+          "delta": 0.02,
+          "feature": "duck_lateral",
+          "normalized_action_distance": 0.002423601146936044,
+          "primitive": {
+            "primitive": "YieldHold",
+            "rule_id": "pedestrian.hold",
+            "schema_version": "1.0.1",
+            "trigger": "pedestrian occupied or approached the ego corridor",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "030fae49e50dfd3f427b60bac27314210838d8689f00ecffef71decffd9df537",
+            "applied_changes": {
+              "duck_lateral": -0.10525441644573964
+            },
+            "intervention_name": "m9_local_boundary_duck_lateral",
+            "repair_notes": [
+              "duck_present enabled for metric intervention"
+            ],
+            "requested_changes": {
+              "duck_lateral": -0.10525441644573964
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.05542770730712522,
+              "duck_active": true,
+              "duck_crossing_available": false,
+              "duck_lateral": -0.10525441644573964,
+              "duck_longitudinal": 0.3577955684927309,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 0.019922339834038356,
+              "duck_v_longitudinal_relative": -0.011352556885601484,
+              "phi": -0.035287513862765206,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.013113345213904632
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        }
+      ],
+      "rejected_points": 0,
+      "schema_version": "1.0.0",
+      "threshold": 0.05,
+      "valid_points": 10
+    },
+    "lane": {
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": -0.7515022158622742,
+        "solver": "sac",
+        "v_cmd": 0.04700446128845215
+      },
+      "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+      "anchor_primitive": {
+        "primitive": "LaneCorrectRight",
+        "rule_id": "lane.correct",
+        "schema_version": "1.0.1",
+        "trigger": "steering command corrected lane-relative tracking error",
+        "undesirable": false
+      },
+      "boundary_points": 0,
+      "nearest_boundary_delta": null,
+      "nearest_boundary_feature": null,
+      "points": [
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -0.8130921125411987,
+            "solver": "sac",
+            "v_cmd": 0.04184778034687042
+          },
+          "delta": -0.005,
+          "feature": "d",
+          "normalized_action_distance": 0.024076279283025557,
+          "primitive": {
+            "primitive": "LaneCorrectRight",
+            "rule_id": "lane.correct",
+            "schema_version": "1.0.1",
+            "trigger": "steering command corrected lane-relative tracking error",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+            "applied_changes": {
+              "d": -0.0502030412896075
+            },
+            "intervention_name": "m9_local_boundary_d",
+            "repair_notes": [],
+            "requested_changes": {
+              "d": -0.0502030412896075
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.0502030412896075,
+              "duck_active": null,
+              "duck_crossing_available": null,
+              "duck_lateral": null,
+              "duck_longitudinal": null,
+              "duck_present": false,
+              "duck_threat": null,
+              "duck_v_lateral_relative": null,
+              "duck_v_longitudinal_relative": null,
+              "phi": -0.2774665101153032,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.05971938649088236
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -0.6845427751541138,
+            "solver": "sac",
+            "v_cmd": 0.05254697799682617
+          },
+          "delta": 0.005,
+          "feature": "d",
+          "normalized_action_distance": 0.026094432736153635,
+          "primitive": {
+            "primitive": "LaneCorrectRight",
+            "rule_id": "lane.correct",
+            "schema_version": "1.0.1",
+            "trigger": "steering command corrected lane-relative tracking error",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+            "applied_changes": {
+              "d": -0.040203041289607507
+            },
+            "intervention_name": "m9_local_boundary_d",
+            "repair_notes": [],
+            "requested_changes": {
+              "d": -0.040203041289607507
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.040203041289607507,
+              "duck_active": null,
+              "duck_crossing_available": null,
+              "duck_lateral": null,
+              "duck_longitudinal": null,
+              "duck_present": false,
+              "duck_threat": null,
+              "duck_v_lateral_relative": null,
+              "duck_v_longitudinal_relative": null,
+              "phi": -0.2774665101153032,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.05971938649088236
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -0.8577568531036377,
+            "solver": "sac",
+            "v_cmd": 0.045246049761772156
+          },
+          "delta": -0.01,
+          "feature": "phi",
+          "normalized_action_distance": 0.0356769344273123,
+          "primitive": {
+            "primitive": "LaneCorrectRight",
+            "rule_id": "lane.correct",
+            "schema_version": "1.0.1",
+            "trigger": "steering command corrected lane-relative tracking error",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+            "applied_changes": {
+              "phi": -0.2874665101153032
+            },
+            "intervention_name": "m9_local_boundary_phi",
+            "repair_notes": [],
+            "requested_changes": {
+              "phi": -0.2874665101153032
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.045203041289607504,
+              "duck_active": null,
+              "duck_crossing_available": null,
+              "duck_lateral": null,
+              "duck_longitudinal": null,
+              "duck_present": false,
+              "duck_threat": null,
+              "duck_v_lateral_relative": null,
+              "duck_v_longitudinal_relative": null,
+              "phi": -0.2874665101153032,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.05971938649088236
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -0.6313761472702026,
+            "solver": "sac",
+            "v_cmd": 0.0487527996301651
+          },
+          "delta": 0.01,
+          "feature": "phi",
+          "normalized_action_distance": 0.040268440954740095,
+          "primitive": {
+            "primitive": "LaneCorrectRight",
+            "rule_id": "lane.correct",
+            "schema_version": "1.0.1",
+            "trigger": "steering command corrected lane-relative tracking error",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+            "applied_changes": {
+              "phi": -0.2674665101153032
+            },
+            "intervention_name": "m9_local_boundary_phi",
+            "repair_notes": [],
+            "requested_changes": {
+              "phi": -0.2674665101153032
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.045203041289607504,
+              "duck_active": null,
+              "duck_crossing_available": null,
+              "duck_lateral": null,
+              "duck_longitudinal": null,
+              "duck_present": false,
+              "duck_threat": null,
+              "duck_v_lateral_relative": null,
+              "duck_v_longitudinal_relative": null,
+              "phi": -0.2674665101153032,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.05971938649088236
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -0.6227595210075378,
+            "solver": "sac",
+            "v_cmd": 0.056211501359939575
+          },
+          "delta": -0.01,
+          "feature": "v",
+          "normalized_action_distance": 0.04843461563146524,
+          "primitive": {
+            "primitive": "LaneCorrectRight",
+            "rule_id": "lane.correct",
+            "schema_version": "1.0.1",
+            "trigger": "steering command corrected lane-relative tracking error",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+            "applied_changes": {
+              "v": 0.04971938649088236
+            },
+            "intervention_name": "m9_local_boundary_v",
+            "repair_notes": [],
+            "requested_changes": {
+              "v": 0.04971938649088236
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.045203041289607504,
+              "duck_active": null,
+              "duck_crossing_available": null,
+              "duck_lateral": null,
+              "duck_longitudinal": null,
+              "duck_present": false,
+              "duck_threat": null,
+              "duck_v_lateral_relative": null,
+              "duck_v_longitudinal_relative": null,
+              "phi": -0.2774665101153032,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.04971938649088236
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -0.8627679347991943,
+            "solver": "sac",
+            "v_cmd": 0.03953373432159424
+          },
+          "delta": 0.01,
+          "feature": "v",
+          "normalized_action_distance": 0.041322844636433105,
+          "primitive": {
+            "primitive": "LaneCorrectRight",
+            "rule_id": "lane.correct",
+            "schema_version": "1.0.1",
+            "trigger": "steering command corrected lane-relative tracking error",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "6f1e65e686260d7d0c5494cf1c4660bb08977e6c8bed21f385166f7bbca41b62",
+            "applied_changes": {
+              "v": 0.06971938649088236
+            },
+            "intervention_name": "m9_local_boundary_v",
+            "repair_notes": [],
+            "requested_changes": {
+              "v": 0.06971938649088236
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 0.0,
+              "curvature_class": "straight",
+              "d": -0.045203041289607504,
+              "duck_active": null,
+              "duck_crossing_available": null,
+              "duck_lateral": null,
+              "duck_longitudinal": null,
+              "duck_present": false,
+              "duck_threat": null,
+              "duck_v_lateral_relative": null,
+              "duck_v_longitudinal_relative": null,
+              "phi": -0.2774665101153032,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": null,
+              "stop_hold_progress": 0.0,
+              "stop_present": false,
+              "stop_satisfied": false,
+              "v": 0.06971938649088236
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        }
+      ],
+      "rejected_points": 0,
+      "schema_version": "1.0.0",
+      "threshold": 0.05,
+      "valid_points": 6
+    },
+    "stop": {
+      "anchor_action": {
+        "action_id": null,
+        "action_name": null,
+        "omega_cmd": -1.1350091695785522,
+        "solver": "sac",
+        "v_cmd": 0.1103510633111
+      },
+      "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+      "anchor_primitive": {
+        "primitive": "DecelerateStop",
+        "rule_id": "stop.decelerate",
+        "schema_version": "1.0.1",
+        "trigger": "ego reduced speed while approaching an unsatisfied stop",
+        "undesirable": false
+      },
+      "boundary_points": 0,
+      "nearest_boundary_delta": null,
+      "nearest_boundary_feature": null,
+      "points": [
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -1.1690212488174438,
+            "solver": "sac",
+            "v_cmd": 0.11824994534254074
+          },
+          "delta": -0.005,
+          "feature": "d",
+          "normalized_action_distance": 0.02235392053104739,
+          "primitive": {
+            "primitive": "DecelerateStop",
+            "rule_id": "stop.decelerate",
+            "schema_version": "1.0.1",
+            "trigger": "ego reduced speed while approaching an unsatisfied stop",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+            "applied_changes": {
+              "d": -0.06981159022532427
+            },
+            "intervention_name": "m9_local_boundary_d",
+            "repair_notes": [],
+            "requested_changes": {
+              "d": -0.06981159022532427
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 2.2024156733152997,
+              "curvature_class": "curve_left",
+              "d": -0.06981159022532427,
+              "duck_active": false,
+              "duck_crossing_available": true,
+              "duck_lateral": -0.8377382679297103,
+              "duck_longitudinal": 0.0971983849615467,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 6.938893903907228e-18,
+              "duck_v_longitudinal_relative": -0.10791661856800155,
+              "phi": 0.08466490426408864,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": 0.32253565025910785,
+              "stop_hold_progress": 0.0,
+              "stop_present": true,
+              "stop_satisfied": false,
+              "v": 0.10791661856800154
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -1.0998841524124146,
+            "solver": "sac",
+            "v_cmd": 0.10182967782020569
+          },
+          "delta": 0.005,
+          "feature": "d",
+          "normalized_action_distance": 0.023854859894025512,
+          "primitive": {
+            "primitive": "DecelerateStop",
+            "rule_id": "stop.decelerate",
+            "schema_version": "1.0.1",
+            "trigger": "ego reduced speed while approaching an unsatisfied stop",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+            "applied_changes": {
+              "d": -0.059811590225324264
+            },
+            "intervention_name": "m9_local_boundary_d",
+            "repair_notes": [],
+            "requested_changes": {
+              "d": -0.059811590225324264
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 2.2024156733152997,
+              "curvature_class": "curve_left",
+              "d": -0.059811590225324264,
+              "duck_active": false,
+              "duck_crossing_available": true,
+              "duck_lateral": -0.8377382679297103,
+              "duck_longitudinal": 0.0971983849615467,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 6.938893903907228e-18,
+              "duck_v_longitudinal_relative": -0.10791661856800155,
+              "phi": 0.08466490426408864,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": 0.32253565025910785,
+              "stop_hold_progress": 0.0,
+              "stop_present": true,
+              "stop_satisfied": false,
+              "v": 0.10791661856800154
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -1.1347723007202148,
+            "solver": "sac",
+            "v_cmd": 0.11672258377075195
+          },
+          "delta": -0.01,
+          "feature": "phi",
+          "normalized_action_distance": 0.015540494516703989,
+          "primitive": {
+            "primitive": "DecelerateStop",
+            "rule_id": "stop.decelerate",
+            "schema_version": "1.0.1",
+            "trigger": "ego reduced speed while approaching an unsatisfied stop",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+            "applied_changes": {
+              "phi": 0.07466490426408864
+            },
+            "intervention_name": "m9_local_boundary_phi",
+            "repair_notes": [],
+            "requested_changes": {
+              "phi": 0.07466490426408864
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 2.2024156733152997,
+              "curvature_class": "curve_left",
+              "d": -0.06481159022532426,
+              "duck_active": false,
+              "duck_crossing_available": true,
+              "duck_lateral": -0.8377382679297103,
+              "duck_longitudinal": 0.0971983849615467,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 6.938893903907228e-18,
+              "duck_v_longitudinal_relative": -0.10791661856800155,
+              "phi": 0.07466490426408864,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": 0.32253565025910785,
+              "stop_hold_progress": 0.0,
+              "stop_present": true,
+              "stop_satisfied": false,
+              "v": 0.10791661856800154
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -1.1304993629455566,
+            "solver": "sac",
+            "v_cmd": 0.1032823696732521
+          },
+          "delta": 0.01,
+          "feature": "phi",
+          "normalized_action_distance": 0.017306129470328512,
+          "primitive": {
+            "primitive": "DecelerateStop",
+            "rule_id": "stop.decelerate",
+            "schema_version": "1.0.1",
+            "trigger": "ego reduced speed while approaching an unsatisfied stop",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+            "applied_changes": {
+              "phi": 0.09466490426408863
+            },
+            "intervention_name": "m9_local_boundary_phi",
+            "repair_notes": [],
+            "requested_changes": {
+              "phi": 0.09466490426408863
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 2.2024156733152997,
+              "curvature_class": "curve_left",
+              "d": -0.06481159022532426,
+              "duck_active": false,
+              "duck_crossing_available": true,
+              "duck_lateral": -0.8377382679297103,
+              "duck_longitudinal": 0.0971983849615467,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 6.938893903907228e-18,
+              "duck_v_longitudinal_relative": -0.10791661856800155,
+              "phi": 0.09466490426408863,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": 0.32253565025910785,
+              "stop_hold_progress": 0.0,
+              "stop_present": true,
+              "stop_satisfied": false,
+              "v": 0.10791661856800154
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -1.1397966146469116,
+            "solver": "sac",
+            "v_cmd": 0.10750237107276917
+          },
+          "delta": -0.01,
+          "feature": "v",
+          "normalized_action_distance": 0.007128937173231421,
+          "primitive": {
+            "primitive": "DecelerateStop",
+            "rule_id": "stop.decelerate",
+            "schema_version": "1.0.1",
+            "trigger": "ego reduced speed while approaching an unsatisfied stop",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+            "applied_changes": {
+              "v": 0.09791661856800155
+            },
+            "intervention_name": "m9_local_boundary_v",
+            "repair_notes": [],
+            "requested_changes": {
+              "v": 0.09791661856800155
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 2.2024156733152997,
+              "curvature_class": "curve_left",
+              "d": -0.06481159022532426,
+              "duck_active": false,
+              "duck_crossing_available": true,
+              "duck_lateral": -0.8377382679297103,
+              "duck_longitudinal": 0.0971983849615467,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 6.938893903907228e-18,
+              "duck_v_longitudinal_relative": -0.10791661856800155,
+              "phi": 0.08466490426408864,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": 0.32253565025910785,
+              "stop_hold_progress": 0.0,
+              "stop_present": true,
+              "stop_satisfied": false,
+              "v": 0.09791661856800155
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -1.1303632259368896,
+            "solver": "sac",
+            "v_cmd": 0.11337912082672119
+          },
+          "delta": 0.01,
+          "feature": "v",
+          "normalized_action_distance": 0.007546125634350495,
+          "primitive": {
+            "primitive": "DecelerateStop",
+            "rule_id": "stop.decelerate",
+            "schema_version": "1.0.1",
+            "trigger": "ego reduced speed while approaching an unsatisfied stop",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+            "applied_changes": {
+              "v": 0.11791661856800154
+            },
+            "intervention_name": "m9_local_boundary_v",
+            "repair_notes": [],
+            "requested_changes": {
+              "v": 0.11791661856800154
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 2.2024156733152997,
+              "curvature_class": "curve_left",
+              "d": -0.06481159022532426,
+              "duck_active": false,
+              "duck_crossing_available": true,
+              "duck_lateral": -0.8377382679297103,
+              "duck_longitudinal": 0.0971983849615467,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 6.938893903907228e-18,
+              "duck_v_longitudinal_relative": -0.10791661856800155,
+              "phi": 0.08466490426408864,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": 0.32253565025910785,
+              "stop_hold_progress": 0.0,
+              "stop_present": true,
+              "stop_satisfied": false,
+              "v": 0.11791661856800154
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -1.1374011039733887,
+            "solver": "sac",
+            "v_cmd": 0.11006297171115875
+          },
+          "delta": -0.02,
+          "feature": "stop_distance",
+          "normalized_action_distance": 0.0010627511861960788,
+          "primitive": {
+            "primitive": "DecelerateStop",
+            "rule_id": "stop.decelerate",
+            "schema_version": "1.0.1",
+            "trigger": "ego reduced speed while approaching an unsatisfied stop",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+            "applied_changes": {
+              "stop_distance": 0.30253565025910784
+            },
+            "intervention_name": "m9_local_boundary_stop_distance",
+            "repair_notes": [
+              "stop_present enabled for distance intervention"
+            ],
+            "requested_changes": {
+              "stop_distance": 0.30253565025910784
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 2.2024156733152997,
+              "curvature_class": "curve_left",
+              "d": -0.06481159022532426,
+              "duck_active": false,
+              "duck_crossing_available": true,
+              "duck_lateral": -0.8377382679297103,
+              "duck_longitudinal": 0.0971983849615467,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 6.938893903907228e-18,
+              "duck_v_longitudinal_relative": -0.10791661856800155,
+              "phi": 0.08466490426408864,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": 0.30253565025910784,
+              "stop_hold_progress": 0.0,
+              "stop_present": true,
+              "stop_satisfied": false,
+              "v": 0.10791661856800154
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -1.1320327520370483,
+            "solver": "sac",
+            "v_cmd": 0.11053872108459473
+          },
+          "delta": 0.02,
+          "feature": "stop_distance",
+          "normalized_action_distance": 0.001092625816147704,
+          "primitive": {
+            "primitive": "DecelerateStop",
+            "rule_id": "stop.decelerate",
+            "schema_version": "1.0.1",
+            "trigger": "ego reduced speed while approaching an unsatisfied stop",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+            "applied_changes": {
+              "stop_distance": 0.34253565025910787
+            },
+            "intervention_name": "m9_local_boundary_stop_distance",
+            "repair_notes": [
+              "stop_present enabled for distance intervention"
+            ],
+            "requested_changes": {
+              "stop_distance": 0.34253565025910787
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 2.2024156733152997,
+              "curvature_class": "curve_left",
+              "d": -0.06481159022532426,
+              "duck_active": false,
+              "duck_crossing_available": true,
+              "duck_lateral": -0.8377382679297103,
+              "duck_longitudinal": 0.0971983849615467,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 6.938893903907228e-18,
+              "duck_v_longitudinal_relative": -0.10791661856800155,
+              "phi": 0.08466490426408864,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": 0.34253565025910787,
+              "stop_hold_progress": 0.0,
+              "stop_present": true,
+              "stop_satisfied": false,
+              "v": 0.10791661856800154
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -1.115706443786621,
+            "solver": "sac",
+            "v_cmd": 0.10959877818822861
+          },
+          "delta": -0.02,
+          "feature": "duck_longitudinal",
+          "normalized_action_distance": 0.00669074835697811,
+          "primitive": {
+            "primitive": "DecelerateStop",
+            "rule_id": "stop.decelerate",
+            "schema_version": "1.0.1",
+            "trigger": "ego reduced speed while approaching an unsatisfied stop",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+            "applied_changes": {
+              "duck_longitudinal": 0.0771983849615467
+            },
+            "intervention_name": "m9_local_boundary_duck_longitudinal",
+            "repair_notes": [
+              "duck_present enabled for metric intervention"
+            ],
+            "requested_changes": {
+              "duck_longitudinal": 0.0771983849615467
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 2.2024156733152997,
+              "curvature_class": "curve_left",
+              "d": -0.06481159022532426,
+              "duck_active": false,
+              "duck_crossing_available": true,
+              "duck_lateral": -0.8377382679297103,
+              "duck_longitudinal": 0.0771983849615467,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 6.938893903907228e-18,
+              "duck_v_longitudinal_relative": -0.10791661856800155,
+              "phi": 0.08466490426408864,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": 0.32253565025910785,
+              "stop_hold_progress": 0.0,
+              "stop_present": true,
+              "stop_satisfied": false,
+              "v": 0.10791661856800154
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -1.1474981307983398,
+            "solver": "sac",
+            "v_cmd": 0.11020862311124802
+          },
+          "delta": 0.02,
+          "feature": "duck_longitudinal",
+          "normalized_action_distance": 0.00417745839488152,
+          "primitive": {
+            "primitive": "DecelerateStop",
+            "rule_id": "stop.decelerate",
+            "schema_version": "1.0.1",
+            "trigger": "ego reduced speed while approaching an unsatisfied stop",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+            "applied_changes": {
+              "duck_longitudinal": 0.1171983849615467
+            },
+            "intervention_name": "m9_local_boundary_duck_longitudinal",
+            "repair_notes": [
+              "duck_present enabled for metric intervention"
+            ],
+            "requested_changes": {
+              "duck_longitudinal": 0.1171983849615467
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 2.2024156733152997,
+              "curvature_class": "curve_left",
+              "d": -0.06481159022532426,
+              "duck_active": false,
+              "duck_crossing_available": true,
+              "duck_lateral": -0.8377382679297103,
+              "duck_longitudinal": 0.1171983849615467,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 6.938893903907228e-18,
+              "duck_v_longitudinal_relative": -0.10791661856800155,
+              "phi": 0.08466490426408864,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": 0.32253565025910785,
+              "stop_hold_progress": 0.0,
+              "stop_present": true,
+              "stop_satisfied": false,
+              "v": 0.10791661856800154
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -1.1219990253448486,
+            "solver": "sac",
+            "v_cmd": 0.11005156487226486
+          },
+          "delta": -0.02,
+          "feature": "duck_lateral",
+          "normalized_action_distance": 0.004397806459493927,
+          "primitive": {
+            "primitive": "DecelerateStop",
+            "rule_id": "stop.decelerate",
+            "schema_version": "1.0.1",
+            "trigger": "ego reduced speed while approaching an unsatisfied stop",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+            "applied_changes": {
+              "duck_lateral": -0.8577382679297103
+            },
+            "intervention_name": "m9_local_boundary_duck_lateral",
+            "repair_notes": [
+              "duck_present enabled for metric intervention"
+            ],
+            "requested_changes": {
+              "duck_lateral": -0.8577382679297103
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 2.2024156733152997,
+              "curvature_class": "curve_left",
+              "d": -0.06481159022532426,
+              "duck_active": false,
+              "duck_crossing_available": true,
+              "duck_lateral": -0.8577382679297103,
+              "duck_longitudinal": 0.0971983849615467,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 6.938893903907228e-18,
+              "duck_v_longitudinal_relative": -0.10791661856800155,
+              "phi": 0.08466490426408864,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": 0.32253565025910785,
+              "stop_hold_progress": 0.0,
+              "stop_present": true,
+              "stop_satisfied": false,
+              "v": 0.10791661856800154
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        },
+        {
+          "boundary": false,
+          "decision_action": {
+            "action_id": null,
+            "action_name": null,
+            "omega_cmd": -1.1476318836212158,
+            "solver": "sac",
+            "v_cmd": 0.11065110564231873
+          },
+          "delta": 0.02,
+          "feature": "duck_lateral",
+          "normalized_action_distance": 0.00427073803406514,
+          "primitive": {
+            "primitive": "DecelerateStop",
+            "rule_id": "stop.decelerate",
+            "schema_version": "1.0.1",
+            "trigger": "ego reduced speed while approaching an unsatisfied stop",
+            "undesirable": false
+          },
+          "primitive_changed": false,
+          "schema_version": "1.0.0",
+          "synthetic": {
+            "anchor_id": "8e3e853e1aea64b3750d7b9720ab1515a3e18829cea26728e51ebd60086aab08",
+            "applied_changes": {
+              "duck_lateral": -0.8177382679297103
+            },
+            "intervention_name": "m9_local_boundary_duck_lateral",
+            "repair_notes": [
+              "duck_present enabled for metric intervention"
+            ],
+            "requested_changes": {
+              "duck_lateral": -0.8177382679297103
+            },
+            "schema_version": "1.0.0",
+            "state": {
+              "curvature": 2.2024156733152997,
+              "curvature_class": "curve_left",
+              "d": -0.06481159022532426,
+              "duck_active": false,
+              "duck_crossing_available": true,
+              "duck_lateral": -0.8177382679297103,
+              "duck_longitudinal": 0.0971983849615467,
+              "duck_present": true,
+              "duck_threat": null,
+              "duck_v_lateral_relative": 6.938893903907228e-18,
+              "duck_v_longitudinal_relative": -0.10791661856800155,
+              "phi": 0.08466490426408864,
+              "source_index": null,
+              "source_representation": "sac_counterfactual_projection",
+              "stop_distance": 0.32253565025910785,
+              "stop_hold_progress": 0.0,
+              "stop_present": true,
+              "stop_satisfied": false,
+              "v": 0.10791661856800154
+            },
+            "validation": {
+              "encoded_observation_valid": true,
+              "issues": [],
+              "schema_version": "1.0.0",
+              "solver": "sac",
+              "valid": true
+            }
+          }
+        }
+      ],
+      "rejected_points": 0,
+      "schema_version": "1.0.0",
+      "threshold": 0.05,
+      "valid_points": 12
+    }
+  },
+  "method": "SAC actor attribution and double-critic internal diagnostics",
+  "policy_mode": "deterministic_actor_mean",
+  "stage": "M9",
+  "teacher_active": false
+}

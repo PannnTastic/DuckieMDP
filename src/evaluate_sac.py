@@ -24,15 +24,8 @@ def _quiet_third_party_logs() -> None:
         logging.getLogger(name).setLevel(logging.WARNING)
 
 
-def evaluate_policy(
-    config_path: Path,
-    checkpoint_path: Path,
-    episodes: Optional[int] = None,
-    seeds: Optional[Sequence[int]] = None,
-) -> Dict[str, float]:
-    with config_path.open("r", encoding="utf-8") as handle:
-        config = yaml.safe_load(handle)
-    _quiet_third_party_logs()
+def resolve_eval_params(config, episodes, seeds):
+    """Shared episode/seed defaulting so SAC and TD3 evaluate identically."""
     evaluation = config["evaluation"]
     if episodes is None:
         episodes = int(evaluation["final_episodes"])
@@ -42,7 +35,19 @@ def evaluate_policy(
         seeds = [int(value) for value in evaluation["final_seeds"]]
     if not seeds:
         raise ValueError("seed list tidak boleh kosong")
+    return episodes, seeds
 
+
+def evaluate_policy(
+    config_path: Path,
+    checkpoint_path: Path,
+    episodes: Optional[int] = None,
+    seeds: Optional[Sequence[int]] = None,
+) -> Dict[str, float]:
+    with config_path.open("r", encoding="utf-8") as handle:
+        config = yaml.safe_load(handle)
+    _quiet_third_party_logs()
+    episodes, seeds = resolve_eval_params(config, episodes, seeds)
     device = str(config["training"].get("device", "cpu"))
     if device.startswith("cuda") and not torch.cuda.is_available():
         raise RuntimeError("Evaluasi meminta CUDA tetapi CUDA tidak tersedia")
@@ -61,7 +66,12 @@ def evaluate_policy(
             config["training"].get("allow_observation_expansion", False)
         ),
     )
+    return run_evaluation(env, agent, config, episodes, seeds)
 
+
+def run_evaluation(env, agent, config, episodes, seeds):
+    """Deterministic, teacher-free metric loop shared by SAC and TD3."""
+    evaluation = config["evaluation"]
     decision_dt = env.unwrapped.delta_time * int(config["environment"]["frame_skip"])
     brake_threshold = float(evaluation["brake_command_threshold"])
     move_threshold = float(evaluation["move_command_threshold"])

@@ -10,6 +10,7 @@ from ..actions import build_action_table
 from .primitives import DrivingPrimitive, PrimitiveLabeler, PrimitiveThresholds
 from .q_policy_adapter import QPolicyAdapter
 from .sac_policy_adapter import SACPolicyAdapter
+from .td3_policy_adapter import TD3PolicyAdapter
 from .scenario_manifest import (
     ScenarioManifest,
     WorldMode,
@@ -79,9 +80,9 @@ def _policy_decision(policy: Any, env: Any) -> PolicyDecision:
         if raw is None:
             raise RuntimeError("Q environment has no current RawState")
         return policy.decide_raw(raw)
-    if isinstance(policy, SACPolicyAdapter):
+    if isinstance(policy, (SACPolicyAdapter, TD3PolicyAdapter)):
         if not hasattr(env, "current_state"):
-            raise TypeError("SAC policy requires ContinuousDuckieMDPEnv")
+            raise TypeError("continuous policy requires ContinuousDuckieMDPEnv")
         return policy.decide(canonical_from_continuous_state(env.current_state))
     raise TypeError("unsupported policy adapter: %s" % type(policy).__name__)
 
@@ -113,8 +114,13 @@ def _canonical_prefix_action(
         )
     values = np.asarray(raw_action, dtype=float).reshape(-1)
     if values.size != 2:
-        raise ValueError("SAC prefix action must contain v_cmd and omega_cmd")
-    return sac_action(values[0], values[1])
+        raise ValueError("continuous prefix action must contain v_cmd and omega_cmd")
+    # Carry the generating solver so the replayed decision and action agree.
+    return CanonicalAction(
+        solver=solver,
+        v_cmd=float(values[0]),
+        omega_cmd=float(values[1]),
+    )
 
 
 def _execute_prefix(

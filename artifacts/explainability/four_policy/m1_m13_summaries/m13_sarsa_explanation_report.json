@@ -1,0 +1,3807 @@
+{
+  "acceptance": {
+    "binding_validation": true,
+    "checks": {
+      "all_9000_states_enumerated": true,
+      "all_local_branches_valid": true,
+      "all_local_cases_identify_sarsa": true,
+      "all_local_cases_use_canonical_checkpoint": true,
+      "analysis_stage_accepted": true,
+      "analysis_uses_canonical_checkpoint": true,
+      "checkpoint_file_hash_matches_manifest": true,
+      "comparison_stage_accepted": true,
+      "comparison_uses_canonical_checkpoint": true,
+      "greedy_original_policy_explained": true,
+      "local_stage_accepted": true,
+      "local_summary_uses_canonical_checkpoint": true,
+      "matched_rollout_action_trace_checked": true,
+      "metamorphic_pairs_manifold_valid": true,
+      "q_shape_unchanged": true,
+      "surrogate_not_used_as_policy": true,
+      "teacher_inactive_during_explanation": true,
+      "three_local_scenarios_loaded": true
+    },
+    "failed_checks": [],
+    "passed": true
+  },
+  "artefact_manifest": {
+    "artifacts/ablation/full_task/q_learning_teacher/q_table_best.npy": {
+      "bytes": 252128,
+      "sha256": "59929f4e2c1968d274e9d3aa6c83ccb2cd7c915c632093cfaba6b544340906dd"
+    },
+    "artifacts/ablation/full_task/sarsa_teacher/q_table_best.npy": {
+      "bytes": 252128,
+      "sha256": "0266ad6f6fdae71bf2dfb7c7121f66e038d16f75e214a931f8c9d50bc6ad3313"
+    },
+    "runs/explanations/m13_sarsa/local/sarsa_lane_correction.json": {
+      "bytes": 276897,
+      "sha256": "a7667bfc4ea0f5b94788f1c9cd7aa00ab06348c6a1e4baa8ead2221396cedf98"
+    },
+    "runs/explanations/m13_sarsa/local/sarsa_pedestrian_yield.json": {
+      "bytes": 275167,
+      "sha256": "4e233e07d31cfa63a9cebdf43e09dbb0e725f00ec327ff37be261d1a7ec6ade9"
+    },
+    "runs/explanations/m13_sarsa/local/sarsa_stop_hold.json": {
+      "bytes": 274451,
+      "sha256": "6ae474c0b942ffd2245a7fb660e8e1127824b908bb6269cc6f9acc5f6d15a9a3"
+    },
+    "runs/explanations/m13_sarsa/m13_analysis_summary.json": {
+      "bytes": 64919,
+      "sha256": "9d13623496421d7f428a86b6b1f8bedf1f1566304098b09270a3fcfb7e9ac33d"
+    },
+    "runs/explanations/m13_sarsa/m13_comparison_summary.json": {
+      "bytes": 27909,
+      "sha256": "2b6028e281fdd3542a96ad03ca910aea4a4b7ad77e003f9c532057f0fb4933e8"
+    },
+    "runs/explanations/m13_sarsa/m13_local_summary.json": {
+      "bytes": 3350,
+      "sha256": "cd23af5e2c1e2b58a4b8dc94c5df17912dec57cdbcde57deae6f007ccc7433b7"
+    }
+  },
+  "epistemic_limits": [
+    "SARSA used teacher guidance during training, but the explained policy is teacher-free greedy lookup.",
+    "Q-margin is action-value separation, not a probability or calibrated confidence.",
+    "Violations in unsupported table cells are not described as learned behavior.",
+    "Metamorphic failures are policy findings, not explanation-pipeline failures.",
+    "The rule tree is a post-hoc surrogate and never replaces the original SARSA table.",
+    "The five-seed comparison validates integration and is not population-level inference."
+  ],
+  "framework": "primitive-grounded decision explanation + paired action-outcome counterfactual + metamorphic/safety verification",
+  "global_analysis": {
+    "acceptance": {
+      "checks": {
+        "all_9000_states_enumerated": true,
+        "checkpoint_shape_unchanged": true,
+        "metamorphic_pairs_manifold_valid": true,
+        "response_curves_generated": true,
+        "response_queries_manifold_valid_or_explicitly_rejected": true,
+        "rule_surrogate_not_original_policy": true,
+        "teacher_inactive": true
+      },
+      "passed": true,
+      "policy_violations_are_findings_not_pipeline_failures": true
+    },
+    "checkpoint": {
+      "path": "artifacts/ablation/full_task/sarsa_teacher/q_table_best.npy",
+      "sha256": "0266ad6f6fdae71bf2dfb7c7121f66e038d16f75e214a931f8c9d50bc6ad3313",
+      "shape": [
+        5,
+        5,
+        3,
+        3,
+        4,
+        2,
+        5,
+        7
+      ]
+    },
+    "config": "configs/small_loop_stop_duck_sarsa.yaml",
+    "exact_verification": {
+      "acceptance": {
+        "all_states_enumerated_once": true,
+        "enumerated_states": 9000,
+        "expected_states": 9000,
+        "shape": [
+          5,
+          5,
+          3,
+          3,
+          4,
+          2,
+          5,
+          7
+        ],
+        "shape_unchanged": true
+      },
+      "files": {
+        "one_bin_flips": "runs/explanations/m13_sarsa/analysis/exact/one_bin_action_flips.csv",
+        "policy_map": "runs/explanations/m13_sarsa/analysis/exact/exact_policy_map.csv",
+        "reach_counts": "runs/explanations/m13_sarsa/analysis/exact/evaluation_reach_counts.npy",
+        "safety_violations": "runs/explanations/m13_sarsa/analysis/exact/safety_property_violations.csv"
+      },
+      "one_bin_flips": 3324,
+      "primitive_distribution": {
+        "reachable": {
+          "ApproachCrossing": 75,
+          "CruiseCurveLeft": 8,
+          "CruiseCurveRight": 3,
+          "CruiseStraight": 8,
+          "DecelerateLane": 3,
+          "DecelerateStop": 6,
+          "EmergencyLaneRecovery": 4,
+          "LaneCorrectLeft": 21,
+          "LaneCorrectRight": 19,
+          "ResumeAfterStop": 19,
+          "StopHold": 8,
+          "UnnecessaryBrake": 1,
+          "UnsafeProceed": 4,
+          "YieldDecelerate": 2,
+          "YieldHold": 19
+        },
+        "representable": {
+          "ApproachCrossing": 2250,
+          "ApproachStop": 1997,
+          "CruiseCurveLeft": 18,
+          "CruiseCurveRight": 15,
+          "CruiseStraight": 10,
+          "DecelerateLane": 3,
+          "DecelerateStop": 13,
+          "EmergencyLaneRecovery": 114,
+          "LaneCorrectLeft": 126,
+          "LaneCorrectRight": 25,
+          "LaneDeparture": 138,
+          "ResumeAfterStop": 675,
+          "StopHold": 15,
+          "UnnecessaryBrake": 1,
+          "UnsafeProceed": 3565,
+          "YieldDecelerate": 3,
+          "YieldHold": 32
+        },
+        "supported": {
+          "ApproachCrossing": 53,
+          "CruiseCurveLeft": 7,
+          "CruiseCurveRight": 3,
+          "CruiseStraight": 7,
+          "DecelerateLane": 2,
+          "DecelerateStop": 5,
+          "EmergencyLaneRecovery": 1,
+          "LaneCorrectLeft": 17,
+          "LaneCorrectRight": 14,
+          "ResumeAfterStop": 14,
+          "StopHold": 4,
+          "YieldHold": 14
+        },
+        "valid_manifold": {
+          "ApproachCrossing": 1800,
+          "ApproachStop": 1997,
+          "CruiseCurveLeft": 9,
+          "CruiseCurveRight": 6,
+          "CruiseStraight": 10,
+          "DecelerateLane": 3,
+          "DecelerateStop": 13,
+          "EmergencyLaneRecovery": 60,
+          "LaneCorrectLeft": 45,
+          "LaneCorrectRight": 25,
+          "LaneDeparture": 66,
+          "ResumeAfterStop": 675,
+          "StopHold": 15,
+          "UnnecessaryBrake": 1,
+          "UnsafeProceed": 3115,
+          "YieldDecelerate": 3,
+          "YieldHold": 32
+        }
+      },
+      "provenance_counts": {
+        "reached_only": 200,
+        "unknown": 8800
+      },
+      "reach_manifest": {
+        "base_seeds": [
+          101,
+          202,
+          303,
+          404,
+          505
+        ],
+        "decision_states_counted": 7253,
+        "episodes": 30,
+        "episodes_manifest": [
+          {
+            "episode": 0,
+            "length": 250,
+            "seed": 101,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 1,
+            "length": 250,
+            "seed": 203,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 2,
+            "length": 250,
+            "seed": 305,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 3,
+            "length": 250,
+            "seed": 407,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 4,
+            "length": 250,
+            "seed": 509,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 5,
+            "length": 250,
+            "seed": 106,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 6,
+            "length": 250,
+            "seed": 208,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 7,
+            "length": 250,
+            "seed": 310,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 8,
+            "length": 250,
+            "seed": 412,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 9,
+            "length": 250,
+            "seed": 514,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 10,
+            "length": 250,
+            "seed": 111,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 11,
+            "length": 250,
+            "seed": 213,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 12,
+            "length": 250,
+            "seed": 315,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 13,
+            "length": 250,
+            "seed": 417,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 14,
+            "length": 215,
+            "seed": 519,
+            "termination_reason": "offroad"
+          },
+          {
+            "episode": 15,
+            "length": 38,
+            "seed": 116,
+            "termination_reason": "offroad"
+          },
+          {
+            "episode": 16,
+            "length": 250,
+            "seed": 218,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 17,
+            "length": 250,
+            "seed": 320,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 18,
+            "length": 250,
+            "seed": 422,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 19,
+            "length": 250,
+            "seed": 524,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 20,
+            "length": 250,
+            "seed": 121,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 21,
+            "length": 250,
+            "seed": 223,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 22,
+            "length": 250,
+            "seed": 325,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 23,
+            "length": 250,
+            "seed": 427,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 24,
+            "length": 250,
+            "seed": 529,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 25,
+            "length": 250,
+            "seed": 126,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 26,
+            "length": 250,
+            "seed": 228,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 27,
+            "length": 250,
+            "seed": 330,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 28,
+            "length": 250,
+            "seed": 432,
+            "termination_reason": "timeout"
+          },
+          {
+            "episode": 29,
+            "length": 250,
+            "seed": 534,
+            "termination_reason": "timeout"
+          }
+        ],
+        "mean_episode_length": 241.76666666666668,
+        "policy_mode": "greedy_teacher_free_lowest_id_tie_break",
+        "termination_counts": {
+          "offroad": 2,
+          "timeout": 28
+        },
+        "unique_states_reached": 200
+      },
+      "safety_properties": {
+        "P-DUCK-CROSSING-NEAR-NO-FAST": {
+          "reachable": {
+            "applicable": 19,
+            "violation_rate": 0.21052631578947367,
+            "violations": 4
+          },
+          "reached_only": {
+            "applicable": 19,
+            "violation_rate": 0.21052631578947367,
+            "violations": 4
+          },
+          "representable": {
+            "applicable": 1800,
+            "violation_rate": 0.9883333333333333,
+            "violations": 1779
+          },
+          "supported": {
+            "applicable": 10,
+            "violation_rate": 0.0,
+            "violations": 0
+          },
+          "unknown": {
+            "applicable": 1781,
+            "violation_rate": 0.9966311061201573,
+            "violations": 1775
+          },
+          "valid_manifold": {
+            "applicable": 1575,
+            "violation_rate": 0.9866666666666667,
+            "violations": 1554
+          }
+        },
+        "P-STOP-NEAR-UNSATISFIED-NO-FAST": {
+          "reachable": {
+            "applicable": 8,
+            "violation_rate": 0.0,
+            "violations": 0
+          },
+          "reached_only": {
+            "applicable": 8,
+            "violation_rate": 0.0,
+            "violations": 0
+          },
+          "representable": {
+            "applicable": 1125,
+            "violation_rate": 0.984,
+            "violations": 1107
+          },
+          "supported": {
+            "applicable": 4,
+            "violation_rate": 0.0,
+            "violations": 0
+          },
+          "unknown": {
+            "applicable": 1117,
+            "violation_rate": 0.991047448522829,
+            "violations": 1107
+          },
+          "valid_manifold": {
+            "applicable": 1125,
+            "violation_rate": 0.984,
+            "violations": 1107
+          }
+        }
+      },
+      "state_counts": {
+        "reachable": 200,
+        "representable": 9000,
+        "supported": 141,
+        "valid_manifold": 7875
+      }
+    },
+    "metamorphic": {
+      "all_pairs_manifold_valid": true,
+      "counts": {
+        "FAIL": 3,
+        "PASS": 21
+      },
+      "files": [
+        "runs/explanations/m13_sarsa/analysis/metamorphic/m13_sarsa_metamorphic_results.json",
+        "runs/explanations/m13_sarsa/analysis/metamorphic/m13_sarsa_metamorphic_results.csv"
+      ],
+      "method": "LEGIBLE-inspired metamorphic policy testing"
+    },
+    "policy_contract": {
+      "explanation_mode": "greedy_teacher_free_lowest_id_tie_break",
+      "trained_with_teacher_guidance": true,
+      "training_algorithm": "sarsa"
+    },
+    "response_curves": {
+      "action_flip_points": 16,
+      "anchors": {
+        "duck": {
+          "curvature": null,
+          "curvature_class": "straight",
+          "d": 0.03150430135482386,
+          "duck_active": true,
+          "duck_crossing_available": null,
+          "duck_lateral": null,
+          "duck_longitudinal": null,
+          "duck_present": true,
+          "duck_threat": "crossing_far",
+          "duck_v_lateral_relative": null,
+          "duck_v_longitudinal_relative": null,
+          "phi": 0.1152056123282551,
+          "source_index": null,
+          "source_representation": "q_raw_state",
+          "stop_distance": null,
+          "stop_hold_progress": 0.0,
+          "stop_present": false,
+          "stop_satisfied": false,
+          "v": 0.19829079566980018
+        },
+        "lane": {
+          "curvature": null,
+          "curvature_class": "curve_left",
+          "d": 0.02738600697734303,
+          "duck_active": null,
+          "duck_crossing_available": null,
+          "duck_lateral": null,
+          "duck_longitudinal": null,
+          "duck_present": false,
+          "duck_threat": "none",
+          "duck_v_lateral_relative": null,
+          "duck_v_longitudinal_relative": null,
+          "phi": 0.1221477231904018,
+          "source_index": null,
+          "source_representation": "q_raw_state",
+          "stop_distance": null,
+          "stop_hold_progress": 0.0,
+          "stop_present": false,
+          "stop_satisfied": false,
+          "v": 0.24575526791005411
+        },
+        "stop": {
+          "curvature": null,
+          "curvature_class": "curve_left",
+          "d": 0.03399132808819769,
+          "duck_active": null,
+          "duck_crossing_available": null,
+          "duck_lateral": null,
+          "duck_longitudinal": null,
+          "duck_present": false,
+          "duck_threat": "none",
+          "duck_v_lateral_relative": null,
+          "duck_v_longitudinal_relative": null,
+          "phi": 0.16337687922939467,
+          "source_index": null,
+          "source_representation": "q_raw_state",
+          "stop_distance": 0.3146753517198784,
+          "stop_hold_progress": 0.0,
+          "stop_present": true,
+          "stop_satisfied": false,
+          "v": 0.1852498035394878
+        }
+      },
+      "curves": 6,
+      "files": [
+        "runs/explanations/m13_sarsa/analysis/response_curves/lane_sarsa_d.json",
+        "runs/explanations/m13_sarsa/analysis/response_curves/lane_sarsa_d.csv",
+        "runs/explanations/m13_sarsa/analysis/response_curves/lane_sarsa_phi.json",
+        "runs/explanations/m13_sarsa/analysis/response_curves/lane_sarsa_phi.csv",
+        "runs/explanations/m13_sarsa/analysis/response_curves/lane_sarsa_curvature.json",
+        "runs/explanations/m13_sarsa/analysis/response_curves/lane_sarsa_curvature.csv",
+        "runs/explanations/m13_sarsa/analysis/response_curves/stop_sarsa_stop_distance.json",
+        "runs/explanations/m13_sarsa/analysis/response_curves/stop_sarsa_stop_distance.csv",
+        "runs/explanations/m13_sarsa/analysis/response_curves/stop_sarsa_stop_satisfied.json",
+        "runs/explanations/m13_sarsa/analysis/response_curves/stop_sarsa_stop_satisfied.csv",
+        "runs/explanations/m13_sarsa/analysis/response_curves/duck_sarsa_duck_threat.json",
+        "runs/explanations/m13_sarsa/analysis/response_curves/duck_sarsa_duck_threat.csv"
+      ],
+      "primitive_flip_points": 15,
+      "rejected_points": 0,
+      "valid_points": 32
+    },
+    "rule_extraction": {
+      "action_metrics": {
+        "all": {
+          "balanced_fidelity": 1.0,
+          "fidelity": 1.0,
+          "macro_f1": 1.0,
+          "per_class_recall": {
+            "0": 1.0,
+            "1": 1.0,
+            "2": 1.0,
+            "3": 1.0,
+            "4": 1.0,
+            "5": 1.0,
+            "6": 1.0
+          },
+          "samples": 9000,
+          "schema_version": "1.0.0"
+        },
+        "reachable": {
+          "balanced_fidelity": 1.0,
+          "fidelity": 1.0,
+          "macro_f1": 1.0,
+          "per_class_recall": {
+            "0": 1.0,
+            "1": 1.0,
+            "2": 1.0,
+            "3": 1.0,
+            "4": 1.0,
+            "5": 1.0,
+            "6": 1.0
+          },
+          "samples": 200,
+          "schema_version": "1.0.0"
+        },
+        "representable": {
+          "balanced_fidelity": 1.0,
+          "fidelity": 1.0,
+          "macro_f1": 1.0,
+          "per_class_recall": {
+            "0": 1.0,
+            "1": 1.0,
+            "2": 1.0,
+            "3": 1.0,
+            "4": 1.0,
+            "5": 1.0,
+            "6": 1.0
+          },
+          "samples": 9000,
+          "schema_version": "1.0.0"
+        },
+        "supported": {
+          "balanced_fidelity": 1.0,
+          "fidelity": 1.0,
+          "macro_f1": 1.0,
+          "per_class_recall": {
+            "0": 1.0,
+            "1": 1.0,
+            "3": 1.0,
+            "4": 1.0,
+            "5": 1.0,
+            "6": 1.0
+          },
+          "samples": 141,
+          "schema_version": "1.0.0"
+        },
+        "valid_manifold": {
+          "balanced_fidelity": 1.0,
+          "fidelity": 1.0,
+          "macro_f1": 1.0,
+          "per_class_recall": {
+            "0": 1.0,
+            "1": 1.0,
+            "2": 1.0,
+            "3": 1.0,
+            "4": 1.0,
+            "5": 1.0,
+            "6": 1.0
+          },
+          "samples": 7875,
+          "schema_version": "1.0.0"
+        }
+      },
+      "action_tree_complexity": {
+        "depth": 15,
+        "features_used": [
+          "curvature_bin",
+          "d_bin",
+          "duck_threat_bin",
+          "speed_bin",
+          "stop_distance_bin",
+          "stop_satisfied_bin",
+          "tracking_error_bin"
+        ],
+        "leaves": 258,
+        "nodes": 515,
+        "schema_version": "1.0.0"
+      },
+      "library_manifest": {
+        "joblib": "1.4.2",
+        "numpy": "1.20.0",
+        "random_state": 0,
+        "role": "post_hoc_surrogate_only",
+        "scikit_learn": "1.6.1"
+      },
+      "models": {
+        "action": "runs/explanations/m13_sarsa/analysis/rules/sarsa_action_tree.joblib",
+        "primitive": "runs/explanations/m13_sarsa/analysis/rules/sarsa_primitive_tree.joblib"
+      },
+      "primitive_metrics": {
+        "all": {
+          "balanced_fidelity": 1.0,
+          "fidelity": 1.0,
+          "macro_f1": 1.0,
+          "per_class_recall": {
+            "ApproachCrossing": 1.0,
+            "ApproachStop": 1.0,
+            "CruiseCurveLeft": 1.0,
+            "CruiseCurveRight": 1.0,
+            "CruiseStraight": 1.0,
+            "DecelerateLane": 1.0,
+            "DecelerateStop": 1.0,
+            "EmergencyLaneRecovery": 1.0,
+            "LaneCorrectLeft": 1.0,
+            "LaneCorrectRight": 1.0,
+            "LaneDeparture": 1.0,
+            "ResumeAfterStop": 1.0,
+            "StopHold": 1.0,
+            "UnnecessaryBrake": 1.0,
+            "UnsafeProceed": 1.0,
+            "YieldDecelerate": 1.0,
+            "YieldHold": 1.0
+          },
+          "samples": 9000,
+          "schema_version": "1.0.0"
+        },
+        "reachable": {
+          "balanced_fidelity": 1.0,
+          "fidelity": 1.0,
+          "macro_f1": 1.0,
+          "per_class_recall": {
+            "ApproachCrossing": 1.0,
+            "CruiseCurveLeft": 1.0,
+            "CruiseCurveRight": 1.0,
+            "CruiseStraight": 1.0,
+            "DecelerateLane": 1.0,
+            "DecelerateStop": 1.0,
+            "EmergencyLaneRecovery": 1.0,
+            "LaneCorrectLeft": 1.0,
+            "LaneCorrectRight": 1.0,
+            "ResumeAfterStop": 1.0,
+            "StopHold": 1.0,
+            "UnnecessaryBrake": 1.0,
+            "UnsafeProceed": 1.0,
+            "YieldDecelerate": 1.0,
+            "YieldHold": 1.0
+          },
+          "samples": 200,
+          "schema_version": "1.0.0"
+        },
+        "representable": {
+          "balanced_fidelity": 1.0,
+          "fidelity": 1.0,
+          "macro_f1": 1.0,
+          "per_class_recall": {
+            "ApproachCrossing": 1.0,
+            "ApproachStop": 1.0,
+            "CruiseCurveLeft": 1.0,
+            "CruiseCurveRight": 1.0,
+            "CruiseStraight": 1.0,
+            "DecelerateLane": 1.0,
+            "DecelerateStop": 1.0,
+            "EmergencyLaneRecovery": 1.0,
+            "LaneCorrectLeft": 1.0,
+            "LaneCorrectRight": 1.0,
+            "LaneDeparture": 1.0,
+            "ResumeAfterStop": 1.0,
+            "StopHold": 1.0,
+            "UnnecessaryBrake": 1.0,
+            "UnsafeProceed": 1.0,
+            "YieldDecelerate": 1.0,
+            "YieldHold": 1.0
+          },
+          "samples": 9000,
+          "schema_version": "1.0.0"
+        },
+        "supported": {
+          "balanced_fidelity": 1.0,
+          "fidelity": 1.0,
+          "macro_f1": 1.0,
+          "per_class_recall": {
+            "ApproachCrossing": 1.0,
+            "CruiseCurveLeft": 1.0,
+            "CruiseCurveRight": 1.0,
+            "CruiseStraight": 1.0,
+            "DecelerateLane": 1.0,
+            "DecelerateStop": 1.0,
+            "EmergencyLaneRecovery": 1.0,
+            "LaneCorrectLeft": 1.0,
+            "LaneCorrectRight": 1.0,
+            "ResumeAfterStop": 1.0,
+            "StopHold": 1.0,
+            "YieldHold": 1.0
+          },
+          "samples": 141,
+          "schema_version": "1.0.0"
+        },
+        "valid_manifold": {
+          "balanced_fidelity": 1.0,
+          "fidelity": 1.0,
+          "macro_f1": 1.0,
+          "per_class_recall": {
+            "ApproachCrossing": 1.0,
+            "ApproachStop": 1.0,
+            "CruiseCurveLeft": 1.0,
+            "CruiseCurveRight": 1.0,
+            "CruiseStraight": 1.0,
+            "DecelerateLane": 1.0,
+            "DecelerateStop": 1.0,
+            "EmergencyLaneRecovery": 1.0,
+            "LaneCorrectLeft": 1.0,
+            "LaneCorrectRight": 1.0,
+            "LaneDeparture": 1.0,
+            "ResumeAfterStop": 1.0,
+            "StopHold": 1.0,
+            "UnnecessaryBrake": 1.0,
+            "UnsafeProceed": 1.0,
+            "YieldDecelerate": 1.0,
+            "YieldHold": 1.0
+          },
+          "samples": 7875,
+          "schema_version": "1.0.0"
+        }
+      },
+      "primitive_tree_complexity": {
+        "depth": 16,
+        "features_used": [
+          "curvature_bin",
+          "d_bin",
+          "duck_threat_bin",
+          "speed_bin",
+          "stop_distance_bin",
+          "stop_satisfied_bin",
+          "tracking_error_bin"
+        ],
+        "leaves": 137,
+        "nodes": 273,
+        "schema_version": "1.0.0"
+      },
+      "role": "post_hoc_surrogate_only",
+      "surrogate_rollout": {
+        "action_mismatches_vs_frozen_q_policy": 0,
+        "behavioral_equivalence_observed": true,
+        "decisions_compared": 1250,
+        "duck_collision_rate": 0.0,
+        "duck_yield_step_rate": 0.6571428571428571,
+        "episodes": 5,
+        "mean_abs_d": 0.027871977518308496,
+        "mean_forward_progress_m": 7.458706534465729,
+        "mean_return": 49.353821556488555,
+        "offroad_rate": 0.0,
+        "other_collision_rate": 0.0,
+        "p95_abs_d": 0.06252543982830625,
+        "per_seed": [
+          {
+            "abs_d_values": [
+              0.016497903986237634,
+              0.018006633421334593,
+              0.019240267688912373,
+              0.019868411984093007,
+              0.020662329724871392,
+              0.022805143173240262,
+              0.02738600697734303,
+              0.03399132808819769,
+              0.0382616479118414,
+              0.039653810338766506,
+              0.040076366433700474,
+              0.0404033349044044,
+              0.04177609781656141,
+              0.043086143894597376,
+              0.043661981233949716,
+              0.04477536601662537,
+              0.04878311296925737,
+              0.05585111050590319,
+              0.06124945670954968,
+              0.06429792009317246,
+              0.06542314781019311,
+              0.06458260681551373,
+              0.06118434053410926,
+              0.05581249947271427,
+              0.04945151607697462,
+              0.042678500956904175,
+              0.03573792255741437,
+              0.029095248990789413,
+              0.025600014597706222,
+              0.024763179443134886,
+              0.024751861036405032,
+              0.022489344395966615,
+              0.015974897354355422,
+              0.005135653725173661,
+              0.00354710772800626,
+              0.009188893185104074,
+              0.012445180106660292,
+              0.013459388840148316,
+              0.011784369420506145,
+              0.006510716719630003,
+              0.0025302454695346303,
+              0.00038969914679853174,
+              0.00017783221662285635,
+              0.0012895547309664914,
+              0.002844763407297702,
+              0.003989092370228221,
+              0.002466121824304178,
+              0.002806193101909787,
+              0.011021495638691526,
+              0.01708095030623043,
+              0.02084766771565979,
+              0.023010898731881654,
+              0.023297677077668638,
+              0.024460946581744008,
+              0.02691120470550343,
+              0.03150430135482386,
+              0.03466360564215696,
+              0.035564183487904355,
+              0.03580214483103183,
+              0.035873176388367664,
+              0.035895248230767604,
+              0.035902381666505764,
+              0.03590473396954624,
+              0.03609793927818039,
+              0.037610181327972336,
+              0.03974935891638731,
+              0.04209794480801299,
+              0.044516516446312826,
+              0.046958477476201965,
+              0.04940825273354732,
+              0.05186063722868273,
+              0.05415827322238709,
+              0.05469752567021713,
+              0.05201600997238809,
+              0.044451118177788906,
+              0.03229856805485576,
+              0.022643818441484553,
+              0.016200979223609968,
+              0.012372127037769944,
+              0.011223185668408756,
+              0.013156940209091665,
+              0.018130886732389367,
+              0.02165066356842816,
+              0.0235067242239424,
+              0.023433141289864894,
+              0.023172032433259274,
+              0.02220246895306363,
+              0.022654485601801482,
+              0.025736486702211316,
+              0.031041396097923807,
+              0.03486119232364205,
+              0.03709137575321088,
+              0.03803067856305434,
+              0.037716769121468374,
+              0.03752080501707263,
+              0.03982822803594189,
+              0.044524808243495785,
+              0.047722401256674866,
+              0.048956654335296376,
+              0.048255777987014754,
+              0.04539367298207639,
+              0.04085519350397851,
+              0.035534129627252026,
+              0.029886217599053327,
+              0.02410455593270422,
+              0.018268254091745373,
+              0.013028362291404694,
+              0.010323420414536821,
+              0.0068150281307053084,
+              7.651077217540895e-05,
+              0.010267748113601594,
+              0.01774711017918046,
+              0.0224329539491826,
+              0.02480974488352855,
+              0.025018023744459772,
+              0.02392589075599946,
+              0.022949908521825685,
+              0.02296845515135225,
+              0.023681840719039164,
+              0.02366135362252727,
+              0.021311874190782693,
+              0.014960909301614464,
+              0.005514108924689436,
+              0.0014303303866693758,
+              0.006267973039837609,
+              0.009644203345662962,
+              0.011705137830385941,
+              0.012130856016571129,
+              0.014062970865627727,
+              0.01772339267326805,
+              0.023229253508444393,
+              0.02674677092053855,
+              0.02810704360142338,
+              0.02703884241380719,
+              0.022789933945478513,
+              0.017309463146619464,
+              0.01436615560852847,
+              0.013731021451340308,
+              0.015029269762145109,
+              0.01762573045743976,
+              0.020828303974286227,
+              0.024151289999472275,
+              0.02551916384123007,
+              0.022830998577079903,
+              0.01519971732977235,
+              0.003796056831539635,
+              0.004623165282351183,
+              0.010043779006601106,
+              0.012722118864337646,
+              0.012665238142091181,
+              0.01008830472425248,
+              0.006532065539923214,
+              0.002692814487518895,
+              0.0020418635386543226,
+              0.008040197982452323,
+              0.01250358587776454,
+              0.01562553811131985,
+              0.017797442532690447,
+              0.018970601944892036,
+              0.019210635735830643,
+              0.01925199012568483,
+              0.019298400303027027,
+              0.020271173836123577,
+              0.023222389622648075,
+              0.028337354907070924,
+              0.032804424245953694,
+              0.03513833418865074,
+              0.035779000905646216,
+              0.034606276192846216,
+              0.031208367431944113,
+              0.02770395236099442,
+              0.02456117249518952,
+              0.021067512235986907,
+              0.01742250657854183,
+              0.01371473205807594,
+              0.009980910917659624,
+              0.006236250689221068,
+              0.00243634288067196,
+              0.002983480361318902,
+              0.011640122380329299,
+              0.01853420498720748,
+              0.02266808131116127,
+              0.024504710407032837,
+              0.024055473267023952,
+              0.021771769999202606,
+              0.020669122851822153,
+              0.021255293257697424,
+              0.02352774555877254,
+              0.02683844172331175,
+              0.029471203293812993,
+              0.02973583963474804,
+              0.025632708777569624,
+              0.01730792396812316,
+              0.01054715306771159,
+              0.0059587978054974665,
+              0.002893531196977231,
+              0.0013113562634346368,
+              0.000852075494979012,
+              0.000989843331737038,
+              0.000401131808000403,
+              0.004070479548922204,
+              0.009375214554876221,
+              0.01210743990393226,
+              0.012240844945354823,
+              0.009836619793297308,
+              0.005702798845889312,
+              0.0007698019497590636,
+              0.004209330484370666,
+              0.006655498478455035,
+              0.006637709878736464,
+              0.0053867487671355185,
+              0.0061835119890159,
+              0.011175294513421807,
+              0.020566335771213806,
+              0.028284575335013162,
+              0.03317824149401649,
+              0.03575203988651898,
+              0.036096670561350234,
+              0.03361526549152882,
+              0.027042027339233193,
+              0.02200944878048272,
+              0.018956106806108073,
+              0.01739151030098647,
+              0.016791278886833433,
+              0.01614418126490785,
+              0.014093325887096,
+              0.008722371483076398,
+              9.425886372849929e-05,
+              0.007062960456646299,
+              0.011856955772086552,
+              0.015178922876792388,
+              0.017208809658514724,
+              0.01793649322883723,
+              0.018859784732261985,
+              0.02180469415363936,
+              0.02709474790125311,
+              0.030944962449874595,
+              0.03262790971038115,
+              0.03221490970929192,
+              0.028730516951676527,
+              0.023125783420062246,
+              0.016914611445582317,
+              0.013474176105470193,
+              0.012618117689304792,
+              0.013875736719442006,
+              0.016644746809839628,
+              0.020085949344819998,
+              0.02222207323404035,
+              0.020624600023747303,
+              0.014204452613577112
+            ],
+            "duck_crossing_steps": 7,
+            "duck_yield_steps": 5,
+            "forward_progress_m": 8.746291896452732,
+            "full_stops": 2,
+            "return": 69.22321734215852,
+            "seed": 101,
+            "stop_violations": 0,
+            "termination_reason": "timeout"
+          },
+          {
+            "abs_d_values": [
+              0.004312585964012267,
+              0.0033383583711827647,
+              0.0033415933152358686,
+              0.005410202842928591,
+              0.008986289054787377,
+              0.014002952299866367,
+              0.017390111378068812,
+              0.018566680621667803,
+              0.01748298154721198,
+              0.015062166813870459,
+              0.014858990867300526,
+              0.018945131338642292,
+              0.026254098071623745,
+              0.031187913785132453,
+              0.03299289398545466,
+              0.03177751666956608,
+              0.026476869753167397,
+              0.017753223993477944,
+              0.011235728599454748,
+              0.006494102815611948,
+              0.002815430855801721,
+              5.847554222092587e-05,
+              0.0022161541619009264,
+              0.0038414332138782033,
+              0.006657560554387823,
+              0.011466112946099855,
+              0.017205416027210374,
+              0.02043570603102653,
+              0.021545412929344743,
+              0.022193936093941987,
+              0.024179414541727482,
+              0.028075366429188637,
+              0.03282344066451054,
+              0.03496578618591942,
+              0.034601349132730164,
+              0.031454877197352266,
+              0.02645729073913433,
+              0.020620445158555767,
+              0.014766696286156844,
+              0.01172979456175574,
+              0.011132215625850456,
+              0.010770469555183154,
+              0.007639648027957635,
+              0.000555687610168859,
+              0.005483485095844787,
+              0.009041718573900903,
+              0.010388768365442558,
+              0.009428557026163603,
+              0.0060838203382705125,
+              0.0023260231816801054,
+              0.0004411009657356683,
+              0.0021429647279852275,
+              0.003571580002512547,
+              0.006012365133195746,
+              0.01083882128535528,
+              0.018390505819812213,
+              0.0240701968924059,
+              0.02614042111902333,
+              0.02678640979006304,
+              0.027240198411684128,
+              0.029083937082141277,
+              0.031074952981333608,
+              0.032379360586770864,
+              0.032664062901852205,
+              0.03281511033160738,
+              0.035940590090275976,
+              0.04164779359448961,
+              0.046001352418802724,
+              0.04818055376180918,
+              0.048478911583460155,
+              0.04671215273739682,
+              0.04117407552257801,
+              0.033515343584733515,
+              0.02865522860732761,
+              0.026556860712695807,
+              0.026818481064722732,
+              0.030022629954903124,
+              0.03495205875044105,
+              0.037868319608962864,
+              0.03842275317015731,
+              0.03637882820296601,
+              0.029007547865031125,
+              0.017191655604283262,
+              0.008247185121331713,
+              0.0021782539821419977,
+              0.0015615880469912469,
+              0.0030617555955789744,
+              0.0021621299685294915,
+              0.0002458367403430639,
+              0.000732125343609526,
+              0.0011089811943436687,
+              0.0050267914226204665,
+              0.009768297608303887,
+              0.011583417848211684,
+              0.009922388330581778,
+              0.0041726603286081744,
+              0.001150532853312666,
+              0.005487810575884211,
+              0.009028420362839133,
+              0.011828991504765676,
+              0.013878711016267375,
+              0.015444567098135725,
+              0.017995684584168316,
+              0.021877587447638153,
+              0.02728792865602901,
+              0.030970028643375506,
+              0.032702477601250925,
+              0.03275858074354517,
+              0.03197039425194006,
+              0.03186943301946045,
+              0.032029725828322815,
+              0.032091008540575006,
+              0.032107274203290403,
+              0.03211214486164682,
+              0.03211369419587928,
+              0.03211420145059485,
+              0.032173346406436876,
+              0.03244177872994647,
+              0.03279391316605307,
+              0.033173957213357363,
+              0.03356331453921535,
+              0.03395577919375237,
+              0.03434927992377057,
+              0.03460497679399466,
+              0.032793834826974066,
+              0.026895154455250703,
+              0.01736740418908389,
+              0.010270749547375724,
+              0.005890774106998231,
+              0.003795893886920254,
+              0.00391577838038204,
+              0.0054027079771085135,
+              0.006683111725210774,
+              0.006748884285086715,
+              0.005325596857984539,
+              0.00462643021732533,
+              0.004713684583920095,
+              0.007461264782026111,
+              0.013656778864594064,
+              0.021964838966640126,
+              0.027624681965735885,
+              0.031182926740216034,
+              0.03321696559778337,
+              0.03383536944113192,
+              0.03529227270133205,
+              0.03876716421471087,
+              0.044211880480773263,
+              0.04771450223779343,
+              0.04910556087977094,
+              0.04835046074905178,
+              0.04462056523007557,
+              0.039036574334061075,
+              0.032626680226408605,
+              0.026578961099704035,
+              0.023270546564373884,
+              0.02077586892127828,
+              0.018860850677219654,
+              0.01711417457743747,
+              0.01345079742173369,
+              0.005776131718677052,
+              0.00601363756745249,
+              0.015280850647845956,
+              0.021351262186163622,
+              0.02498832298173031,
+              0.02613191151273956,
+              0.02433869040565354,
+              0.018731856328852572,
+              0.014343958223275045,
+              0.0117434897527633,
+              0.010563293223066452,
+              0.010239522813972522,
+              0.009846113758063692,
+              0.007510760598505651,
+              0.0016893484131135334,
+              0.0073239150375808085,
+              0.01418458641223492,
+              0.018749255807014545,
+              0.021766740081155384,
+              0.02341819246479381,
+              0.023285781075215763,
+              0.02356051915732981,
+              0.02508072744635831,
+              0.02906030847512931,
+              0.034991732834834574,
+              0.03864391881618082,
+              0.03951933576090563,
+              0.03792949847757365,
+              0.03254153661055614,
+              0.025142524959824636,
+              0.02049068936741169,
+              0.01856676564577861,
+              0.019007855004006896,
+              0.022503539906195302,
+              0.027761141028565195,
+              0.030907354764283607,
+              0.03164271644341307,
+              0.029978387321598826,
+              0.02321263091982606,
+              0.01113371761395937,
+              0.0012882888087986932,
+              0.005462403131555216,
+              0.009818611056088972,
+              0.011930530071041473,
+              0.01171557011616406,
+              0.008836121016128157,
+              0.0051977757770057045,
+              0.0021695129940823826,
+              0.0002947135851385492,
+              0.003195716081598039,
+              0.0077973067889066695,
+              0.014814373843327852,
+              0.020487195310405493,
+              0.024195964898592166,
+              0.025455842230262142,
+              0.025823765936216457,
+              0.02610962491966521,
+              0.027330433273584146,
+              0.02848922882652006,
+              0.028978023567183674,
+              0.030169627110532202,
+              0.034573681682895284,
+              0.04226570601419668,
+              0.048173383942657466,
+              0.051653780332862144,
+              0.053194631473139804,
+              0.05281673915498751,
+              0.05029040528586659,
+              0.0460811399188632,
+              0.04094298892800907,
+              0.03541266455820846,
+              0.029721317378275325,
+              0.023964124421303357,
+              0.018179921904618146,
+              0.012334076930934579,
+              0.005353427484838136,
+              0.0002257499006388386,
+              0.0023253485832606113,
+              0.0026587592643385616,
+              0.0018256037999404562,
+              0.002979006434142839,
+              0.008063558784823897,
+              0.01561687119147223,
+              0.02060122205997295,
+              0.022359853665422265,
+              0.021030435540982138,
+              0.015111473849233024,
+              0.006067621482196907,
+              0.00095748110092918,
+              0.0061073546591897294,
+              0.010130515374580727
+            ],
+            "duck_crossing_steps": 7,
+            "duck_yield_steps": 4,
+            "forward_progress_m": 8.337367922658022,
+            "full_stops": 2,
+            "return": 67.00429335752408,
+            "seed": 202,
+            "stop_violations": 0,
+            "termination_reason": "timeout"
+          },
+          {
+            "abs_d_values": [
+              0.031900277562111334,
+              0.028044291563048107,
+              0.02258350744727977,
+              0.0169150124209545,
+              0.013982349419314533,
+              0.01346680427007052,
+              0.013354347110981823,
+              0.012029698831175217,
+              0.00886589401649851,
+              0.0037331058151788277,
+              0.001914109716422141,
+              0.006493836866926728,
+              0.00928865069535556,
+              0.010017077956852916,
+              0.009848063653616235,
+              0.010583825608210917,
+              0.012448430578656753,
+              0.014872946982093495,
+              0.016349990635821456,
+              0.014660850011007455,
+              0.00986422230664405,
+              0.003199177645647164,
+              0.004679091876951121,
+              0.013301727201414197,
+              0.022263114639075113,
+              0.03121452265202929,
+              0.0397987811390944,
+              0.047964853314758985,
+              0.05530974164970016,
+              0.06171259303681207,
+              0.067011398355348,
+              0.0710145911067861,
+              0.07294288198701299,
+              0.07253451137031985,
+              0.06942720520966555,
+              0.06178762326836934,
+              0.05577042411406968,
+              0.05223970142525691,
+              0.05084523726740592,
+              0.05127662069695155,
+              0.05321114743196681,
+              0.05572206041715849,
+              0.056635341240961534,
+              0.05550294664857264,
+              0.05235562428969598,
+              0.047163357295209096,
+              0.041128977056862526,
+              0.035980155554269866,
+              0.03252752098269823,
+              0.031099162039122552,
+              0.030551509942077615,
+              0.029093537146231474,
+              0.025912970244263478,
+              0.02073541185815936,
+              0.014706325961090616,
+              0.01003332927731393,
+              0.00837475582452,
+              0.010347389826468713,
+              0.014995310858177567,
+              0.020834453831076055,
+              0.027160833024318775,
+              0.03378219648528168,
+              0.04058726995582201,
+              0.047466667644970754,
+              0.054286715040167036,
+              0.060892584694214984,
+              0.06712190694237907,
+              0.07277993697008457,
+              0.07779119750224424,
+              0.08191165709484735,
+              0.08502366066547282,
+              0.08698719647388037,
+              0.0876759269668459,
+              0.08635028148471097,
+              0.08111674214984554,
+              0.07329875045938605,
+              0.06481131225309161,
+              0.05980089283300405,
+              0.05760236222042936,
+              0.056841301354846996,
+              0.057253602974818296,
+              0.058068632098491335,
+              0.057581092789449784,
+              0.05528351630382461,
+              0.051042607774030024,
+              0.0448572117353665,
+              0.0381852715480413,
+              0.03257434441389706,
+              0.028730089665556013,
+              0.02698142332976322,
+              0.02736070400616719,
+              0.028325188339850815,
+              0.028211067654495103,
+              0.02632095011944847,
+              0.023255840662915656,
+              0.0209857941051034,
+              0.021279963113588207,
+              0.02351839346553293,
+              0.026562828745761786,
+              0.03002885179900268,
+              0.03381314115239737,
+              0.03787243720029169,
+              0.04212838482309761,
+              0.04644546823824987,
+              0.050040882100737295,
+              0.0513085527024192,
+              0.05170523632239781,
+              0.05183371931622542,
+              0.05187528596867213,
+              0.051888998909477735,
+              0.05189356186801221,
+              0.05240433994683837,
+              0.0547017452060278,
+              0.05749036113904151,
+              0.05997822951843716,
+              0.061736093113128915,
+              0.06250004989512294,
+              0.06203816132278672,
+              0.05936474586380536,
+              0.05488520280905096,
+              0.04957754344099463,
+              0.04392283863066426,
+              0.03812587178499882,
+              0.03227072210351656,
+              0.026391690564844028,
+              0.020908774965737953,
+              0.016244831410974436,
+              0.012522445270813254,
+              0.01051766898573847,
+              0.010408447117262076,
+              0.010750463243700104,
+              0.009950898389961882,
+              0.007327575583108814,
+              0.002727401688246145,
+              0.002392503038974203,
+              0.006334646443555682,
+              0.0073844011511575176,
+              0.004861355247822547,
+              2.2349410015469966e-05,
+              0.0059249387318936675,
+              0.012399215399937182,
+              0.019318667283830804,
+              0.026606564139273654,
+              0.034138271127147846,
+              0.04174407646239113,
+              0.049227311362237715,
+              0.056385995799326606,
+              0.0630262758162134,
+              0.06896652319248843,
+              0.07403764677211638,
+              0.07808005099036175,
+              0.08095136959165722,
+              0.08245401443463463,
+              0.08181156296239078,
+              0.07815618670080027,
+              0.07061286250774179,
+              0.06524498954858537,
+              0.062262165167646044,
+              0.061367902062283264,
+              0.06241171940526313,
+              0.06469410046406932,
+              0.06568140515287046,
+              0.06455463275905848,
+              0.06060579880812522,
+              0.05593142133058571,
+              0.05009799384205538,
+              0.04389413910346618,
+              0.038789848617027056,
+              0.035457695646145204,
+              0.03417461756269047,
+              0.033779107905228534,
+              0.03247492943807018,
+              0.02944755965165058,
+              0.024420481404837213,
+              0.01854030254228034,
+              0.013561800628589983,
+              0.011101517250633944,
+              0.01207409468529017,
+              0.015559890171203551,
+              0.020003675508684548,
+              0.02482818859918635,
+              0.0298842885349603,
+              0.03515126243657264,
+              0.04059982133903482,
+              0.04614891497190729,
+              0.051668380443817094,
+              0.05699586783873353,
+              0.06195355480691591,
+              0.0663576484298043,
+              0.07003343651846623,
+              0.07281099979590751,
+              0.07453452683819971,
+              0.07505869132475806,
+              0.07385876861659335,
+              0.06891375023694679,
+              0.061438288322831325,
+              0.05329404838349,
+              0.04851796907673417,
+              0.04651917728328736,
+              0.04605836016852677,
+              0.04682117173474193,
+              0.048097164863111996,
+              0.04815157489194383,
+              0.04635117230067026,
+              0.04260670420929802,
+              0.036851787169829564,
+              0.030269134198207204,
+              0.024567316656597393,
+              0.02055168877169783,
+              0.018595086658509008,
+              0.01882331809967236,
+              0.019996629947693967,
+              0.020285641662126652,
+              0.01887333324630563,
+              0.016194717364934424,
+              0.012698568440193042,
+              0.009872196354334598,
+              0.009841666857127214,
+              0.012483189861568005,
+              0.016551751270326372,
+              0.02149655366143658,
+              0.0270349866824444,
+              0.032929730254480136,
+              0.03893646366080204,
+              0.04480814116921924,
+              0.05030847957194293,
+              0.0552167149342607,
+              0.05932441631106395,
+              0.06246891131476394,
+              0.06446800830275859,
+              0.06501339846112536,
+              0.06305368254992544,
+              0.05676290128275863,
+              0.048198450089104894,
+              0.042686090903888196,
+              0.040065466988255194,
+              0.03979812175543285,
+              0.042146475730233224,
+              0.04611395599116541,
+              0.04835692139125647,
+              0.04838237374677523,
+              0.04631206390914744,
+              0.04214895186510814,
+              0.03712122702886861,
+              0.03298622033910248,
+              0.030562465254637683,
+              0.03017254603137265,
+              0.030664752914823623,
+              0.03024534923497968,
+              0.028095362071536067
+            ],
+            "duck_crossing_steps": 7,
+            "duck_yield_steps": 5,
+            "forward_progress_m": 5.841496830248511,
+            "full_stops": 0,
+            "return": 20.853405109616403,
+            "seed": 303,
+            "stop_violations": 0,
+            "termination_reason": "timeout"
+          },
+          {
+            "abs_d_values": [
+              0.008117158944750052,
+              0.006562925748027536,
+              0.0033497589585562513,
+              0.0011551630085444226,
+              0.0044731807479647,
+              0.006230909852586638,
+              0.00805292310121438,
+              0.010428315919320003,
+              0.012459844427993472,
+              0.014283588619478288,
+              0.0160153618217396,
+              0.0177072432832088,
+              0.019381968867685728,
+              0.02104934829389482,
+              0.022662735574966203,
+              0.02264896460289076,
+              0.018774026571767827,
+              0.010621721923820077,
+              0.003790317483637007,
+              0.00038728092159895366,
+              0.0022538590689158188,
+              0.0014225249749691112,
+              0.002759378038939602,
+              0.00788230003924098,
+              0.01068278565730723,
+              0.011065556000910564,
+              0.011586471841552839,
+              0.01151883684190623,
+              0.013106719997086694,
+              0.017611099062864205,
+              0.02454584964030404,
+              0.02800180959686633,
+              0.029171943834891516,
+              0.029819770130791803,
+              0.03203650291608541,
+              0.03441472425377615,
+              0.036065053654650715,
+              0.03665440422573718,
+              0.03734764767046823,
+              0.04029556353787765,
+              0.04543575261309424,
+              0.048877096383317366,
+              0.05029278099507541,
+              0.04978387490683381,
+              0.046758183364310035,
+              0.04170970286580511,
+              0.03571555524585812,
+              0.02932664634937443,
+              0.023122855254321673,
+              0.019899064882766826,
+              0.019313051996201258,
+              0.021016756533720482,
+              0.024273010504889614,
+              0.026690598413667388,
+              0.02557177399333499,
+              0.0196966478820515,
+              0.00930230332059212,
+              0.0008769387213121149,
+              0.004368432587950088,
+              0.006779350092838454,
+              0.006387688283381156,
+              0.0026937866379558423,
+              0.002322467264280239,
+              0.005169161184287492,
+              0.006774733195299284,
+              0.006864281039491283,
+              0.006169699031673027,
+              0.00666800899146884,
+              0.010113214498455765,
+              0.016442211062637997,
+              0.021320727908844768,
+              0.024283542214756867,
+              0.025801512690930346,
+              0.025938690501429086,
+              0.02579702462998875,
+              0.02749242947211863,
+              0.031859692875419766,
+              0.03810031175825086,
+              0.0412411694485193,
+              0.04232910536724099,
+              0.04269234982042702,
+              0.04281384309882097,
+              0.04285450873408214,
+              0.04286812441998866,
+              0.04337407376214175,
+              0.0451042738776366,
+              0.04589635201761055,
+              0.04447606061212306,
+              0.03963786288176352,
+              0.03351129957085086,
+              0.030115935946263717,
+              0.0290394631493458,
+              0.02967887507153444,
+              0.03152828463215007,
+              0.033818299357363246,
+              0.03429989042869863,
+              0.030786889549247576,
+              0.02236167051204463,
+              0.010255844357392796,
+              0.0013790845848671296,
+              0.004462476851295527,
+              0.00776847644261112,
+              0.00839437302755555,
+              0.005817019608690017,
+              0.00011833378481695392,
+              0.004380540055143992,
+              0.006906235361421488,
+              0.007753284685783505,
+              0.008762129974028967,
+              0.009694979684329415,
+              0.012547077289574946,
+              0.017705570387834706,
+              0.02174636093328545,
+              0.02442210924436057,
+              0.025992871759558805,
+              0.026609203719564475,
+              0.02690776719545259,
+              0.028725950124258697,
+              0.0334945277415254,
+              0.040343790942307174,
+              0.04486791145992405,
+              0.0471034012423843,
+              0.047402795782455265,
+              0.04518465108502562,
+              0.03898555177068902,
+              0.031412157318675665,
+              0.02701303746021802,
+              0.024963192596505285,
+              0.024146388384301387,
+              0.024340770747446783,
+              0.02504550096420813,
+              0.025838375395838442,
+              0.024663457511081316,
+              0.019437566919299407,
+              0.01052866852814932,
+              0.0038416437693708505,
+              0.0002089527727447413,
+              0.00199925378647553,
+              0.001521112387842717,
+              0.0009438799549886546,
+              0.0035298669931777956,
+              0.0051579045061732635,
+              0.005957387757196909,
+              0.0070771181038765466,
+              0.009667923337327909,
+              0.015019431566814751,
+              0.022639211760202935,
+              0.028150613700690205,
+              0.03182805585912875,
+              0.034176090629065826,
+              0.03529240567772759,
+              0.035177618621033226,
+              0.03521489150850463,
+              0.0376850375888238,
+              0.04244240523746644,
+              0.04563827423247521,
+              0.0468522363002694,
+              0.04611047725971833,
+              0.04295089500275895,
+              0.0380230980009135,
+              0.032296547441593965,
+              0.02623781304268752,
+              0.020043569910289133,
+              0.014124956432708863,
+              0.01112041755435142,
+              0.010698030562565103,
+              0.011306113076204993,
+              0.009765550287822972,
+              0.004001989950671331,
+              0.006123064646541249,
+              0.01433016998534098,
+              0.019602812259656627,
+              0.02252203935124918,
+              0.022982223116480703,
+              0.020448342391921306,
+              0.013707331581640357,
+              0.008461449595454246,
+              0.005173156742725362,
+              0.003453969387491392,
+              0.003415644247168954,
+              0.004223511085311089,
+              0.0051525255841537885,
+              0.003839758367926304,
+              0.0011028309883155789,
+              0.008822048852757586,
+              0.012622634524394721,
+              0.01389974784763237,
+              0.014636911721230477,
+              0.017047316599989978,
+              0.019689013482981636,
+              0.021571572074364036,
+              0.022056674089881233,
+              0.02316611890908337,
+              0.025880368765540316,
+              0.030922479472633334,
+              0.034527665143417305,
+              0.035994437450135086,
+              0.03521325687522148,
+              0.031111178555865093,
+              0.024777742511084,
+              0.01783748200765345,
+              0.013899961132677108,
+              0.01262165480721511,
+              0.013246275701777277,
+              0.01527716715614047,
+              0.017945325181865535,
+              0.019295574592256948,
+              0.01690855865815699,
+              0.00970461684599977,
+              0.001956009350283283,
+              0.011226303001938165,
+              0.017320029291413876,
+              0.02068761756767714,
+              0.02134795237860199,
+              0.018964653978628614,
+              0.012289202400983745,
+              0.006928100442714453,
+              0.00341582302727003,
+              0.0015423648605783799,
+              0.0005894344161223472,
+              0.0004425386889561169,
+              0.0006399132368777188,
+              0.004501733129000569,
+              0.011433171483967048,
+              0.01696157365204068,
+              0.020584201641516787,
+              0.022818090098290843,
+              0.023883454986132778,
+              0.025424667542984482,
+              0.029512091159903407,
+              0.03624441886599205,
+              0.04120617362080138,
+              0.0438237463684848,
+              0.04448873301692293,
+              0.0430034770206682,
+              0.037668128779854815,
+              0.030237443125275654,
+              0.025537206231735166,
+              0.023420234273460405,
+              0.022688557592043912,
+              0.02310405952372485,
+              0.024116490038812,
+              0.025394150238755575,
+              0.026734017650117847,
+              0.02649669445216718,
+              0.02241972930293734,
+              0.01408468239449312,
+              0.007133770899724112,
+              0.002864425729385056,
+              0.0010017090262319564
+            ],
+            "duck_crossing_steps": 7,
+            "duck_yield_steps": 4,
+            "forward_progress_m": 8.48533406029251,
+            "full_stops": 2,
+            "return": 67.78858386356696,
+            "seed": 404,
+            "stop_violations": 0,
+            "termination_reason": "timeout"
+          },
+          {
+            "abs_d_values": [
+              0.01506088749061227,
+              0.011150066009921683,
+              0.00283524767986422,
+              0.015817357212635226,
+              0.026649734769932563,
+              0.03599787813499722,
+              0.04385854083577562,
+              0.04954741405832275,
+              0.05295628587545459,
+              0.05404509183445083,
+              0.05259642403243053,
+              0.047160418646640334,
+              0.03956114205669875,
+              0.03472647194460077,
+              0.032486357257865306,
+              0.03156428113239795,
+              0.03175554725215113,
+              0.03244802171883032,
+              0.032102578819213745,
+              0.029993792249653817,
+              0.02601743135816076,
+              0.021326716576361315,
+              0.017607776371971362,
+              0.015632591800436135,
+              0.015702588402948248,
+              0.016657182781018243,
+              0.01670119081164062,
+              0.015012883235572982,
+              0.011628402516826394,
+              0.00860608961685134,
+              0.007992175674997654,
+              0.009538226862496524,
+              0.012292497461652969,
+              0.015594973767983938,
+              0.01946107043623128,
+              0.02384209007474001,
+              0.02864006790145704,
+              0.03326737753262548,
+              0.03517620772852029,
+              0.035790073545553254,
+              0.03598975033414401,
+              0.036055588192020316,
+              0.03607735344165832,
+              0.03608460229634152,
+              0.03644027080616671,
+              0.03924195398658523,
+              0.04309776962538879,
+              0.047138020985905735,
+              0.05062165566695352,
+              0.0532768672212691,
+              0.05487304886932198,
+              0.05510611958382672,
+              0.05285138857919902,
+              0.04607241326845779,
+              0.036959216807230355,
+              0.031062123935628794,
+              0.028136850429721694,
+              0.027561924811596805,
+              0.029412847958523836,
+              0.033057768784723995,
+              0.037294197558707776,
+              0.03938542227384079,
+              0.039163361714900535,
+              0.036830093130093555,
+              0.032407044046739886,
+              0.027123341710147963,
+              0.022730462118068617,
+              0.020045160846183352,
+              0.019391572052062767,
+              0.019619849721793425,
+              0.018936563535059348,
+              0.01652427378188759,
+              0.0121005041995641,
+              0.0070184402851773435,
+              0.0039776920970691415,
+              0.00415863540124888,
+              0.006910194259089234,
+              0.010818711660191866,
+              0.015373740489188334,
+              0.020443465000348892,
+              0.025966154851971547,
+              0.031831998668581545,
+              0.03786558884812605,
+              0.043855945338844286,
+              0.04957824178567253,
+              0.054814378442888584,
+              0.05936067129372156,
+              0.06302694573931879,
+              0.06564386007972813,
+              0.06705764267047694,
+              0.06669588670039417,
+              0.0633781046461439,
+              0.05631727741385806,
+              0.051309095166575114,
+              0.04863403581971082,
+              0.048090201881901606,
+              0.04968910141661098,
+              0.05237183091333675,
+              0.053386307489878826,
+              0.052163053688409455,
+              0.04847414512251946,
+              0.04401576971798038,
+              0.03829934767746712,
+              0.032485535064242566,
+              0.027920616445290314,
+              0.02520103058145584,
+              0.024493334995008942,
+              0.024320824617040993,
+              0.023048731085720142,
+              0.01997323031277709,
+              0.01493538555228735,
+              0.009382889734051547,
+              0.0048991481580857865,
+              0.0024081078504313387,
+              0.00311804888357265,
+              0.005902339976130194,
+              0.009399747014303402,
+              0.013192710190331984,
+              0.0172560777737295,
+              0.02167417933168043,
+              0.026484293697004325,
+              0.03162965014169987,
+              0.03696361768271384,
+              0.04228201819309153,
+              0.04736013720871684,
+              0.051972506635824825,
+              0.05590925307669651,
+              0.0589735971048289,
+              0.06099083696417292,
+              0.06180006187721232,
+              0.0604236224335436,
+              0.055471563590566375,
+              0.04836406018092654,
+              0.04114448516622643,
+              0.03733559550141241,
+              0.03602007742818075,
+              0.036370507704515165,
+              0.037915337821344264,
+              0.03973173732254026,
+              0.03988800179002355,
+              0.03809343547915689,
+              0.03430400142345902,
+              0.02854462547409875,
+              0.022290461010830043,
+              0.017102445473968886,
+              0.01368907982600559,
+              0.012376814350611609,
+              0.013193537101662545,
+              0.014595021332455216,
+              0.014918527874020315,
+              0.01366216013127544,
+              0.011476878522504617,
+              0.008663147812635164,
+              0.007057499234042068,
+              0.008571305750122757,
+              0.012627479973140846,
+              0.018032009602369656,
+              0.02423878777668581,
+              0.03091947464941546,
+              0.03780104106676737,
+              0.04463456782379679,
+              0.05117824378815457,
+              0.05721624045684305,
+              0.06254621341000167,
+              0.0669876250539719,
+              0.07037461405312335,
+              0.07255629627508221,
+              0.0730673086669888,
+              0.07098786666903484,
+              0.06449773271882159,
+              0.05570862000126908,
+              0.05003857970007625,
+              0.04729307197004928,
+              0.04689966347991237,
+              0.04904418150356893,
+              0.052782582693075675,
+              0.05486529084761815,
+              0.05476497721466411,
+              0.05258115184754075,
+              0.04831016811514788,
+              0.0431769292636226,
+              0.03893578087723415,
+              0.036404549692105104,
+              0.03590642929162757,
+              0.036290409338001206,
+              0.03576281022431821,
+              0.033505252925970064,
+              0.02923366882681494,
+              0.024100708284842565,
+              0.019855225566787038,
+              0.017464986405765753,
+              0.01819675450178346,
+              0.021230571399338982,
+              0.02498500128748126,
+              0.028874006100612463,
+              0.03277226682813751,
+              0.036718379954733524,
+              0.04077013138015399,
+              0.044940314235078396,
+              0.04917760576194083,
+              0.05337098441553975,
+              0.05737173030625884,
+              0.06100466394601214,
+              0.0640892018348788,
+              0.06644528439994836,
+              0.06790032822870837,
+              0.06829358158321132,
+              0.06739044833906238,
+              0.06388600151183343,
+              0.05812216848305107,
+              0.05132359889280824,
+              0.04409516702689387,
+              0.03707768031854086,
+              0.03330275581128617,
+              0.03225105399657635,
+              0.03325899960029033,
+              0.03557583552169841,
+              0.03661477633817656,
+              0.03567793885300685,
+              0.03273464579020802,
+              0.027741846944305815,
+              0.0219028444134286,
+              0.016950925758414837,
+              0.013698614096825823,
+              0.012472997714873202,
+              0.012128636483830002,
+              0.010873561874510829,
+              0.008341207257021359,
+              0.005094829523357909,
+              0.0025586459771706166,
+              0.0028308850206009784,
+              0.0058159914434519535,
+              0.010268751168384573,
+              0.01567189032567261,
+              0.021745428585317625,
+              0.02824254590351489,
+              0.03489819825809769,
+              0.04145107824501622,
+              0.04765262605460256,
+              0.053273392129260536,
+              0.05810681398693933,
+              0.0619779371501513,
+              0.06471132260471836,
+              0.06601595087973955,
+              0.06491592712455785,
+              0.060059062285199305,
+              0.05268828654429947,
+              0.04464895000476621,
+              0.039944492505186835,
+              0.03800672375442993
+            ],
+            "duck_crossing_steps": 7,
+            "duck_yield_steps": 5,
+            "forward_progress_m": 5.883041962676868,
+            "full_stops": 0,
+            "return": 21.899608109576807,
+            "seed": 505,
+            "stop_violations": 0,
+            "termination_reason": "timeout"
+          }
+        ],
+        "stop_compliance_rate": 1.0,
+        "stop_opportunities": 6,
+        "termination_counts": {
+          "timeout": 5
+        },
+        "timeout_rate": 1.0,
+        "total_failure_rate": 0.0
+      }
+    },
+    "stage": "M13-SARSA-analysis"
+  },
+  "local_explanations": [
+    {
+      "branch_invariants": {
+        "only_first_action_forced": true,
+        "same_manifest": true,
+        "same_policy_selected_action_at_branch": true,
+        "selected_and_foil_differ": true,
+        "teacher_active": false
+      },
+      "branch_valid": true,
+      "case_id": "sarsa_lane_correction",
+      "checkpoint_path": "artifacts/ablation/full_task/sarsa_teacher/q_table_best.npy",
+      "checkpoint_sha256": "0266ad6f6fdae71bf2dfb7c7121f66e038d16f75e214a931f8c9d50bc6ad3313",
+      "claim_scope": "simulator_based_interventional_counterfactual",
+      "counterfactual_physical_outcome": {
+        "brake_ratio": 0.0,
+        "brake_steps": 0,
+        "cumulative_steering_jerk": 82.5,
+        "duck_collision": false,
+        "elapsed_seconds": 6.0,
+        "forward_progress_m": 1.066061326134142,
+        "full_stops": 0,
+        "lane_departure": false,
+        "max_abs_heading_error_rad": 0.2958977235781396,
+        "max_abs_lateral_error_m": 0.06932930192610098,
+        "mean_abs_heading_error_rad": 0.11910610350307352,
+        "mean_abs_lateral_error_m": 0.04481881867886438,
+        "minimum_duck_clearance_m": null,
+        "other_collision": false,
+        "passed_stops": 0,
+        "primitive_sequence": [
+          "CruiseCurveLeft",
+          "LaneCorrectLeft",
+          "CruiseStraight",
+          "LaneCorrectLeft",
+          "CruiseStraight",
+          "LaneCorrectRight",
+          "CruiseStraight",
+          "CruiseCurveLeft",
+          "OscillatorySteering",
+          "LaneCorrectRight",
+          "OscillatorySteering",
+          "CruiseCurveLeft"
+        ],
+        "primitive_transition_steps": [
+          0,
+          1,
+          7,
+          11,
+          13,
+          17,
+          19,
+          20,
+          24,
+          25,
+          28,
+          29
+        ],
+        "steering_reversals": 2,
+        "steps": 30,
+        "stop_violations": 0,
+        "termination_reason": "in_progress"
+      },
+      "explanation_text": "Selected action: slow_left\nSelected primitive: LaneCorrectLeft\nContrast action: fast_straight\nContrast primitive: CruiseCurveLeft\n\nSimulator-based interventional outcome (not a probability):\n- selected discounted return: +4.014\n- contrast discounted return: +3.899\n- selected max |d|: 0.063 m\n- contrast max |d|: 0.069 m\n- selected termination: in_progress\n- contrast termination: in_progress\n\nSelected primitive sequence: LaneCorrectLeft -> CruiseStraight -> LaneCorrectLeft -> CruiseStraight -> LaneCorrectRight -> CruiseStraight -> CruiseCurveLeft -> OscillatorySteering -> LaneCorrectRight -> OscillatorySteering -> CruiseCurveLeft\nContrast primitive sequence: CruiseCurveLeft -> LaneCorrectLeft -> CruiseStraight -> LaneCorrectLeft -> CruiseStraight -> LaneCorrectRight -> CruiseStraight -> CruiseCurveLeft -> OscillatorySteering -> LaneCorrectRight -> OscillatorySteering -> CruiseCurveLeft",
+      "factual_physical_outcome": {
+        "brake_ratio": 0.0,
+        "brake_steps": 0,
+        "cumulative_steering_jerk": 75.0,
+        "duck_collision": false,
+        "elapsed_seconds": 6.0,
+        "forward_progress_m": 1.0682178368330688,
+        "full_stops": 0,
+        "lane_departure": false,
+        "max_abs_heading_error_rad": 0.29504378598020964,
+        "max_abs_lateral_error_m": 0.06332738095962526,
+        "mean_abs_heading_error_rad": 0.10871533660319851,
+        "mean_abs_lateral_error_m": 0.03738685666080494,
+        "minimum_duck_clearance_m": null,
+        "other_collision": false,
+        "passed_stops": 0,
+        "primitive_sequence": [
+          "LaneCorrectLeft",
+          "CruiseStraight",
+          "LaneCorrectLeft",
+          "CruiseStraight",
+          "LaneCorrectRight",
+          "CruiseStraight",
+          "CruiseCurveLeft",
+          "OscillatorySteering",
+          "LaneCorrectRight",
+          "OscillatorySteering",
+          "CruiseCurveLeft"
+        ],
+        "primitive_transition_steps": [
+          0,
+          4,
+          7,
+          11,
+          15,
+          17,
+          20,
+          24,
+          25,
+          28,
+          29
+        ],
+        "steering_reversals": 2,
+        "steps": 30,
+        "stop_violations": 0,
+        "termination_reason": "in_progress"
+      },
+      "foil_action": {
+        "action_id": 1,
+        "action_name": "fast_straight",
+        "omega_cmd": 0.0,
+        "solver": "sarsa",
+        "v_cmd": 0.41
+      },
+      "foil_action_label": "fast_straight",
+      "foil_discounted_return": 3.8993352692135153,
+      "foil_primitive": "CruiseCurveLeft",
+      "manifest_id": "ebe0b7d867830192fb25cfdc6c6fa5e01cace68b772ad838c8a8a4a199e79230",
+      "physical_delta_counterfactual_minus_factual": {
+        "brake_ratio": 0.0,
+        "cumulative_steering_jerk": 7.5,
+        "forward_progress_m": -0.00215651069892675,
+        "full_stops": 0.0,
+        "max_abs_heading_error_rad": 0.0008539375979299546,
+        "max_abs_lateral_error_m": 0.006001920966475727,
+        "mean_abs_heading_error_rad": 0.010390766899875004,
+        "mean_abs_lateral_error_m": 0.007431962018059436,
+        "minimum_duck_clearance_m": null,
+        "steering_reversals": 0.0,
+        "stop_violations": 0.0
+      },
+      "policy_mode": "greedy",
+      "q_margin": 11.424521684646606,
+      "reward_delta_counterfactual_minus_factual": {
+        "1": 0.05281338375534361,
+        "10": -0.09748745027015926,
+        "20": -0.08075553426055793,
+        "30": -0.1144258522368693,
+        "5": -0.022088565601234178
+      },
+      "scenario": "lane_correction",
+      "selected_action": {
+        "action_id": 3,
+        "action_name": "slow_left",
+        "omega_cmd": 1.5,
+        "solver": "sarsa",
+        "v_cmd": 0.17
+      },
+      "selected_action_label": "slow_left",
+      "selected_discounted_return": 4.0137611214503846,
+      "selected_primitive": "LaneCorrectLeft",
+      "solver": "sarsa",
+      "source_file": "runs/explanations/m13_sarsa/local/sarsa_lane_correction.json",
+      "state": {
+        "curvature": null,
+        "curvature_class": "curve_left",
+        "d": 0.02738600697734303,
+        "duck_active": null,
+        "duck_crossing_available": null,
+        "duck_lateral": null,
+        "duck_longitudinal": null,
+        "duck_present": false,
+        "duck_threat": "none",
+        "duck_v_lateral_relative": null,
+        "duck_v_longitudinal_relative": null,
+        "phi": 0.1221477231904018,
+        "source_index": null,
+        "source_representation": "q_raw_state",
+        "stop_distance": null,
+        "stop_hold_progress": 0.0,
+        "stop_present": false,
+        "stop_satisfied": false,
+        "v": 0.24575526791005411
+      },
+      "world_mode": "reactive_world"
+    },
+    {
+      "branch_invariants": {
+        "only_first_action_forced": true,
+        "same_manifest": true,
+        "same_policy_selected_action_at_branch": true,
+        "selected_and_foil_differ": true,
+        "teacher_active": false
+      },
+      "branch_valid": true,
+      "case_id": "sarsa_stop_hold",
+      "checkpoint_path": "artifacts/ablation/full_task/sarsa_teacher/q_table_best.npy",
+      "checkpoint_sha256": "0266ad6f6fdae71bf2dfb7c7121f66e038d16f75e214a931f8c9d50bc6ad3313",
+      "claim_scope": "simulator_based_interventional_counterfactual",
+      "counterfactual_physical_outcome": {
+        "brake_ratio": 0.1,
+        "brake_steps": 3,
+        "cumulative_steering_jerk": 67.5,
+        "duck_collision": false,
+        "elapsed_seconds": 6.0,
+        "forward_progress_m": 0.9643602403431116,
+        "full_stops": 1,
+        "lane_departure": false,
+        "max_abs_heading_error_rad": 0.27819613076374206,
+        "max_abs_lateral_error_m": 0.05460436257105927,
+        "mean_abs_heading_error_rad": 0.11287217709345798,
+        "mean_abs_lateral_error_m": 0.037677540670157425,
+        "minimum_duck_clearance_m": null,
+        "other_collision": false,
+        "passed_stops": 1,
+        "primitive_sequence": [
+          "DecelerateStop",
+          "StopHold",
+          "StopSatisfied",
+          "ResumeAfterStop",
+          "CruiseStraight",
+          "LaneCorrectRight",
+          "OscillatorySteering",
+          "CruiseCurveLeft",
+          "OscillatorySteering",
+          "LaneCorrectRight"
+        ],
+        "primitive_transition_steps": [
+          0,
+          1,
+          3,
+          4,
+          18,
+          21,
+          23,
+          24,
+          27,
+          28
+        ],
+        "steering_reversals": 2,
+        "steps": 30,
+        "stop_violations": 0,
+        "termination_reason": "in_progress"
+      },
+      "explanation_text": "Selected action: brake\nSelected primitive: StopHold\nContrast action: slow_straight\nContrast primitive: DecelerateStop\n\nSimulator-based interventional outcome (not a probability):\n- selected discounted return: +18.054\n- contrast discounted return: +18.007\n- selected max |d|: 0.065 m\n- contrast max |d|: 0.055 m\n- selected termination: in_progress\n- contrast termination: in_progress\n\nSelected primitive sequence: StopHold -> StopSatisfied -> ResumeAfterStop -> CruiseStraight -> LaneCorrectRight -> OscillatorySteering -> CruiseCurveLeft -> OscillatorySteering -> LaneCorrectRight\nContrast primitive sequence: DecelerateStop -> StopHold -> StopSatisfied -> ResumeAfterStop -> CruiseStraight -> LaneCorrectRight -> OscillatorySteering -> CruiseCurveLeft -> OscillatorySteering -> LaneCorrectRight",
+      "factual_physical_outcome": {
+        "brake_ratio": 0.1,
+        "brake_steps": 3,
+        "cumulative_steering_jerk": 67.5,
+        "duck_collision": false,
+        "elapsed_seconds": 6.0,
+        "forward_progress_m": 0.9372478988831099,
+        "full_stops": 1,
+        "lane_departure": false,
+        "max_abs_heading_error_rad": 0.27819917264962385,
+        "max_abs_lateral_error_m": 0.06542314781019311,
+        "mean_abs_heading_error_rad": 0.11814735805089298,
+        "mean_abs_lateral_error_m": 0.038124319723455084,
+        "minimum_duck_clearance_m": null,
+        "other_collision": false,
+        "passed_stops": 1,
+        "primitive_sequence": [
+          "StopHold",
+          "StopSatisfied",
+          "ResumeAfterStop",
+          "CruiseStraight",
+          "LaneCorrectRight",
+          "OscillatorySteering",
+          "CruiseCurveLeft",
+          "OscillatorySteering",
+          "LaneCorrectRight"
+        ],
+        "primitive_transition_steps": [
+          0,
+          2,
+          3,
+          18,
+          19,
+          21,
+          22,
+          25,
+          26
+        ],
+        "steering_reversals": 2,
+        "steps": 30,
+        "stop_violations": 0,
+        "termination_reason": "in_progress"
+      },
+      "foil_action": {
+        "action_id": 4,
+        "action_name": "slow_straight",
+        "omega_cmd": 0.0,
+        "solver": "sarsa",
+        "v_cmd": 0.17
+      },
+      "foil_action_label": "slow_straight",
+      "foil_discounted_return": 18.006772486561903,
+      "foil_primitive": "DecelerateStop",
+      "manifest_id": "b53d351b162b17495db12717d6d6f2f829498bcaadfd979c236116ca22ee1f1a",
+      "physical_delta_counterfactual_minus_factual": {
+        "brake_ratio": 0.0,
+        "cumulative_steering_jerk": 0.0,
+        "forward_progress_m": 0.027112341460001743,
+        "full_stops": 0.0,
+        "max_abs_heading_error_rad": -3.041885881793771e-06,
+        "max_abs_lateral_error_m": -0.010818785239133835,
+        "mean_abs_heading_error_rad": -0.005275180957434997,
+        "mean_abs_lateral_error_m": -0.00044677905329765927,
+        "minimum_duck_clearance_m": null,
+        "steering_reversals": 0.0,
+        "stop_violations": 0.0
+      },
+      "policy_mode": "greedy",
+      "q_margin": 22.142881393432617,
+      "reward_delta_counterfactual_minus_factual": {
+        "1": 0.04089360599753266,
+        "10": -0.49195650442225514,
+        "20": -0.22351162325718832,
+        "30": -0.04719774964813084,
+        "5": -0.15832434799266615
+      },
+      "scenario": "stop_hold",
+      "selected_action": {
+        "action_id": 6,
+        "action_name": "brake",
+        "omega_cmd": 0.0,
+        "solver": "sarsa",
+        "v_cmd": 0.0
+      },
+      "selected_action_label": "brake",
+      "selected_discounted_return": 18.053970236210034,
+      "selected_primitive": "StopHold",
+      "solver": "sarsa",
+      "source_file": "runs/explanations/m13_sarsa/local/sarsa_stop_hold.json",
+      "state": {
+        "curvature": null,
+        "curvature_class": "curve_left",
+        "d": 0.03399132808819769,
+        "duck_active": null,
+        "duck_crossing_available": null,
+        "duck_lateral": null,
+        "duck_longitudinal": null,
+        "duck_present": false,
+        "duck_threat": "none",
+        "duck_v_lateral_relative": null,
+        "duck_v_longitudinal_relative": null,
+        "phi": 0.16337687922939467,
+        "source_index": null,
+        "source_representation": "q_raw_state",
+        "stop_distance": 0.3146753517198784,
+        "stop_hold_progress": 0.0,
+        "stop_present": true,
+        "stop_satisfied": false,
+        "v": 0.1852498035394878
+      },
+      "world_mode": "reactive_world"
+    },
+    {
+      "branch_invariants": {
+        "only_first_action_forced": true,
+        "same_manifest": true,
+        "same_policy_selected_action_at_branch": true,
+        "selected_and_foil_differ": true,
+        "teacher_active": false
+      },
+      "branch_valid": true,
+      "case_id": "sarsa_pedestrian_yield",
+      "checkpoint_path": "artifacts/ablation/full_task/sarsa_teacher/q_table_best.npy",
+      "checkpoint_sha256": "0266ad6f6fdae71bf2dfb7c7121f66e038d16f75e214a931f8c9d50bc6ad3313",
+      "claim_scope": "simulator_based_interventional_counterfactual",
+      "counterfactual_physical_outcome": {
+        "brake_ratio": 0.2,
+        "brake_steps": 6,
+        "cumulative_steering_jerk": 37.5,
+        "duck_collision": false,
+        "elapsed_seconds": 6.0,
+        "forward_progress_m": 0.8639150994364861,
+        "full_stops": 0,
+        "lane_departure": false,
+        "max_abs_heading_error_rad": 0.3114357519229571,
+        "max_abs_lateral_error_m": 0.05422544524989337,
+        "mean_abs_heading_error_rad": 0.09453490477121014,
+        "mean_abs_lateral_error_m": 0.0335774365123872,
+        "minimum_duck_clearance_m": null,
+        "other_collision": false,
+        "passed_stops": 0,
+        "primitive_sequence": [
+          "YieldDecelerate",
+          "YieldHold",
+          "ResumeAfterYield",
+          "ApproachCrossing",
+          "CruiseCurveLeft",
+          "OscillatorySteering",
+          "LaneCorrectRight",
+          "OscillatorySteering",
+          "LaneCorrectLeft",
+          "CruiseCurveLeft"
+        ],
+        "primitive_transition_steps": [
+          0,
+          1,
+          7,
+          8,
+          15,
+          18,
+          19,
+          23,
+          24,
+          28
+        ],
+        "steering_reversals": 2,
+        "steps": 30,
+        "stop_violations": 0,
+        "termination_reason": "in_progress"
+      },
+      "explanation_text": "Selected action: brake\nSelected primitive: YieldHold\nContrast action: slow_straight\nContrast primitive: YieldDecelerate\n\nSimulator-based interventional outcome (not a probability):\n- selected discounted return: +3.117\n- contrast discounted return: +3.191\n- selected max |d|: 0.055 m\n- contrast max |d|: 0.054 m\n- selected termination: in_progress\n- contrast termination: in_progress\n\nSelected primitive sequence: YieldHold -> ResumeAfterYield -> ApproachCrossing -> LaneCorrectLeft -> CruiseCurveLeft -> OscillatorySteering -> LaneCorrectRight -> OscillatorySteering -> LaneCorrectLeft -> CruiseCurveLeft\nContrast primitive sequence: YieldDecelerate -> YieldHold -> ResumeAfterYield -> ApproachCrossing -> CruiseCurveLeft -> OscillatorySteering -> LaneCorrectRight -> OscillatorySteering -> LaneCorrectLeft -> CruiseCurveLeft",
+      "factual_physical_outcome": {
+        "brake_ratio": 0.23333333333333334,
+        "brake_steps": 7,
+        "cumulative_steering_jerk": 37.5,
+        "duck_collision": false,
+        "elapsed_seconds": 6.0,
+        "forward_progress_m": 0.8487503800839601,
+        "full_stops": 0,
+        "lane_departure": false,
+        "max_abs_heading_error_rad": 0.31143575827784664,
+        "max_abs_lateral_error_m": 0.05469752567021713,
+        "mean_abs_heading_error_rad": 0.09238107598914827,
+        "mean_abs_lateral_error_m": 0.034311634842634296,
+        "minimum_duck_clearance_m": null,
+        "other_collision": false,
+        "passed_stops": 0,
+        "primitive_sequence": [
+          "YieldHold",
+          "ResumeAfterYield",
+          "ApproachCrossing",
+          "LaneCorrectLeft",
+          "CruiseCurveLeft",
+          "OscillatorySteering",
+          "LaneCorrectRight",
+          "OscillatorySteering",
+          "LaneCorrectLeft",
+          "CruiseCurveLeft"
+        ],
+        "primitive_transition_steps": [
+          0,
+          7,
+          8,
+          15,
+          16,
+          19,
+          20,
+          24,
+          25,
+          28
+        ],
+        "steering_reversals": 2,
+        "steps": 30,
+        "stop_violations": 0,
+        "termination_reason": "in_progress"
+      },
+      "foil_action": {
+        "action_id": 4,
+        "action_name": "slow_straight",
+        "omega_cmd": 0.0,
+        "solver": "sarsa",
+        "v_cmd": 0.17
+      },
+      "foil_action_label": "slow_straight",
+      "foil_discounted_return": 3.191051155343523,
+      "foil_primitive": "YieldDecelerate",
+      "manifest_id": "40f8db3939250286471375aa017179ecb8582113c51f11db761a08040eadf49a",
+      "physical_delta_counterfactual_minus_factual": {
+        "brake_ratio": -0.033333333333333326,
+        "cumulative_steering_jerk": 0.0,
+        "forward_progress_m": 0.015164719352526057,
+        "full_stops": 0.0,
+        "max_abs_heading_error_rad": -6.3548895590237464e-09,
+        "max_abs_lateral_error_m": -0.00047208042032376163,
+        "mean_abs_heading_error_rad": 0.00215382878206187,
+        "mean_abs_lateral_error_m": -0.0007341983302470989,
+        "minimum_duck_clearance_m": null,
+        "steering_reversals": 0.0,
+        "stop_violations": 0.0
+      },
+      "policy_mode": "greedy",
+      "q_margin": 7.308406829833984,
+      "reward_delta_counterfactual_minus_factual": {
+        "1": 0.030681755807301994,
+        "10": 0.09715878072302248,
+        "20": 0.087638878780405,
+        "30": 0.07424108949019592,
+        "5": 0.09762210585630898
+      },
+      "scenario": "pedestrian_yield",
+      "selected_action": {
+        "action_id": 6,
+        "action_name": "brake",
+        "omega_cmd": 0.0,
+        "solver": "sarsa",
+        "v_cmd": 0.0
+      },
+      "selected_action_label": "brake",
+      "selected_discounted_return": 3.116810065853327,
+      "selected_primitive": "YieldHold",
+      "solver": "sarsa",
+      "source_file": "runs/explanations/m13_sarsa/local/sarsa_pedestrian_yield.json",
+      "state": {
+        "curvature": null,
+        "curvature_class": "straight",
+        "d": 0.03150430135482386,
+        "duck_active": true,
+        "duck_crossing_available": null,
+        "duck_lateral": null,
+        "duck_longitudinal": null,
+        "duck_present": true,
+        "duck_threat": "crossing_far",
+        "duck_v_lateral_relative": null,
+        "duck_v_longitudinal_relative": null,
+        "phi": 0.1152056123282551,
+        "source_index": null,
+        "source_representation": "q_raw_state",
+        "stop_distance": null,
+        "stop_hold_progress": 0.0,
+        "stop_present": false,
+        "stop_satisfied": false,
+        "v": 0.19829079566980018
+      },
+      "world_mode": "reactive_world"
+    }
+  ],
+  "policy": {
+    "checkpoint": "artifacts/ablation/full_task/sarsa_teacher/q_table_best.npy",
+    "explanation_and_evaluation": "greedy_teacher_free_lowest_id_tie_break",
+    "sha256": "0266ad6f6fdae71bf2dfb7c7121f66e038d16f75e214a931f8c9d50bc6ad3313",
+    "solver": "sarsa",
+    "training": "teacher_guided_sarsa"
+  },
+  "q_learning_sarsa_table_comparison": {
+    "greedy_action_agreement_rate": 0.9921111111111112,
+    "greedy_action_agreement_states": 8929,
+    "greedy_action_disagreement_states": 71,
+    "maximum_absolute_q_value_difference": 20.196138381958008,
+    "representable_states": 9000,
+    "tables_numerically_equal": false,
+    "tie_break": "lowest_action_id_via_numpy_argmax"
+  },
+  "schema_version": "1.0.0",
+  "scope": "frozen_tabular_sarsa_policy_in_fully_observable_mdp",
+  "stage": "M13-SARSA-explanation-extension",
+  "three_policy_behavioral_comparison": {
+    "acceptance": {
+      "behavioral_differences_are_findings_not_pipeline_failures": true,
+      "checks": {
+        "q_sarsa_action_traces_compared": true,
+        "q_sarsa_actions_identical_on_matched_rollouts": true,
+        "sac_actor_sampling_inactive": true,
+        "same_initial_poses_atol_1e_7": true,
+        "same_map_frame_skip_horizon": true,
+        "same_seeds": true,
+        "sarsa_checkpoint_hash_correct": true,
+        "surrogate_actions_unused": true,
+        "teacher_inactive": true,
+        "three_original_policies": true
+      },
+      "comparison_is_descriptive_not_solver_isolation": true,
+      "passed": true
+    },
+    "manifest": {
+      "frame_skip": 6,
+      "initial_poses": {
+        "q_learning": {
+          "20101": {
+            "heading_radians": 4.8596669279647235,
+            "position_xz": [
+              0.15841918943556288,
+              0.5925425047119084
+            ]
+          },
+          "20202": {
+            "heading_radians": 4.859047851591733,
+            "position_xz": [
+              0.11739284676108425,
+              0.8738489770778317
+            ]
+          },
+          "20303": {
+            "heading_radians": 4.630141120125504,
+            "position_xz": [
+              0.23202795355871847,
+              0.8166036887960934
+            ]
+          },
+          "20404": {
+            "heading_radians": 4.866172287990321,
+            "position_xz": [
+              0.2109030926619463,
+              1.0472897005377428
+            ]
+          },
+          "20505": {
+            "heading_radians": 4.56733744307571,
+            "position_xz": [
+              0.2236999681736342,
+              0.6390782012221139
+            ]
+          }
+        },
+        "sac": {
+          "20101": {
+            "heading_radians": 4.8596669279647235,
+            "position_xz": [
+              0.15841918943556288,
+              0.5925425047119084
+            ]
+          },
+          "20202": {
+            "heading_radians": 4.859047851591733,
+            "position_xz": [
+              0.11739284676108425,
+              0.8738489770778317
+            ]
+          },
+          "20303": {
+            "heading_radians": 4.630141120125504,
+            "position_xz": [
+              0.23202795355871847,
+              0.8166036887960934
+            ]
+          },
+          "20404": {
+            "heading_radians": 4.866172287990321,
+            "position_xz": [
+              0.2109030926619463,
+              1.0472897005377428
+            ]
+          },
+          "20505": {
+            "heading_radians": 4.56733744307571,
+            "position_xz": [
+              0.2236999681736342,
+              0.6390782012221139
+            ]
+          }
+        },
+        "sarsa": {
+          "20101": {
+            "heading_radians": 4.8596669279647235,
+            "position_xz": [
+              0.15841918943556288,
+              0.5925425047119084
+            ]
+          },
+          "20202": {
+            "heading_radians": 4.859047851591733,
+            "position_xz": [
+              0.11739284676108425,
+              0.8738489770778317
+            ]
+          },
+          "20303": {
+            "heading_radians": 4.630141120125504,
+            "position_xz": [
+              0.23202795355871847,
+              0.8166036887960934
+            ]
+          },
+          "20404": {
+            "heading_radians": 4.866172287990321,
+            "position_xz": [
+              0.2109030926619463,
+              1.0472897005377428
+            ]
+          },
+          "20505": {
+            "heading_radians": 4.56733744307571,
+            "position_xz": [
+              0.2236999681736342,
+              0.6390782012221139
+            ]
+          }
+        }
+      },
+      "map": "small_loop",
+      "max_physics_steps": 1500,
+      "method": "matched_original_policy_rollout",
+      "seeds": [
+        20101,
+        20202,
+        20303,
+        20404,
+        20505
+      ],
+      "shared_config": "runs/explanations/m12_policy_comparison/shared_comparison_config.yaml",
+      "teacher_active": false
+    },
+    "method": "matched original-policy behavioral comparison",
+    "policies": {
+      "q_learning": {
+        "checkpoint": "artifacts/ablation/full_task/q_learning_teacher/q_table_best.npy",
+        "mode": "greedy_teacher_free_lowest_id_tie_break",
+        "sha256": "59929f4e2c1968d274e9d3aa6c83ccb2cd7c915c632093cfaba6b544340906dd"
+      },
+      "sac": {
+        "checkpoint": "artifacts/sac/full_repeat_duck_5min/sac_best.pt",
+        "mode": "deterministic_actor_mean",
+        "sha256": "0b01447edd85e539de57f9a304fc287d26d5d7c4e73a5a51cd493fea2f4c4f2b"
+      },
+      "sarsa": {
+        "checkpoint": "artifacts/ablation/full_task/sarsa_teacher/q_table_best.npy",
+        "mode": "greedy_teacher_free_lowest_id_tie_break",
+        "sha256": "0266ad6f6fdae71bf2dfb7c7121f66e038d16f75e214a931f8c9d50bc6ad3313"
+      }
+    },
+    "q_sarsa_matched_action_comparison": {
+      "action_disagreements": 0,
+      "episodes": [
+        {
+          "action_disagreements": 0,
+          "actions_identical": true,
+          "paired_steps": 250,
+          "q_episode_id": "q_20101",
+          "same_length": true,
+          "sarsa_episode_id": "q_20101"
+        },
+        {
+          "action_disagreements": 0,
+          "actions_identical": true,
+          "paired_steps": 250,
+          "q_episode_id": "q_20202",
+          "same_length": true,
+          "sarsa_episode_id": "q_20202"
+        },
+        {
+          "action_disagreements": 0,
+          "actions_identical": true,
+          "paired_steps": 250,
+          "q_episode_id": "q_20303",
+          "same_length": true,
+          "sarsa_episode_id": "q_20303"
+        },
+        {
+          "action_disagreements": 0,
+          "actions_identical": true,
+          "paired_steps": 250,
+          "q_episode_id": "q_20404",
+          "same_length": true,
+          "sarsa_episode_id": "q_20404"
+        },
+        {
+          "action_disagreements": 0,
+          "actions_identical": true,
+          "paired_steps": 250,
+          "q_episode_id": "q_20505",
+          "same_length": true,
+          "sarsa_episode_id": "q_20505"
+        }
+      ],
+      "paired_steps": 1250
+    },
+    "stage": "M13-three-policy-comparison",
+    "summaries": {
+      "q_learning": {
+        "decision_steps": 1250,
+        "episodes": 5,
+        "first_stop_brake_distance": {
+          "max_m": 0.33584108003425023,
+          "mean_m": 0.3259045774702974,
+          "median_m": 0.33008533653131883,
+          "min_m": 0.29043840860516007,
+          "observations": 10
+        },
+        "mean_return": 44.6335088309222,
+        "pedestrian_active_steps": 35,
+        "pedestrian_yield_command_rate": 1.0,
+        "policy_mode": "greedy",
+        "primitive_durations": {
+          "ApproachCrossing": {
+            "max_steps": 25,
+            "mean_steps": 15.9,
+            "median_steps": 16.0,
+            "min_steps": 7,
+            "segments": 10
+          },
+          "CruiseCurveLeft": {
+            "max_steps": 9,
+            "mean_steps": 3.253012048192771,
+            "median_steps": 3.0,
+            "min_steps": 1,
+            "segments": 83
+          },
+          "CruiseStraight": {
+            "max_steps": 9,
+            "mean_steps": 4.0,
+            "median_steps": 3.0,
+            "min_steps": 2,
+            "segments": 44
+          },
+          "LaneCorrectLeft": {
+            "max_steps": 7,
+            "mean_steps": 3.3035714285714284,
+            "median_steps": 3.0,
+            "min_steps": 1,
+            "segments": 56
+          },
+          "LaneCorrectRight": {
+            "max_steps": 4,
+            "mean_steps": 2.5272727272727273,
+            "median_steps": 3.0,
+            "min_steps": 1,
+            "segments": 55
+          },
+          "OscillatorySteering": {
+            "max_steps": 2,
+            "mean_steps": 1.0116279069767442,
+            "median_steps": 1.0,
+            "min_steps": 1,
+            "segments": 86
+          },
+          "ResumeAfterStop": {
+            "max_steps": 16,
+            "mean_steps": 14.4,
+            "median_steps": 15.0,
+            "min_steps": 12,
+            "segments": 10
+          },
+          "ResumeAfterYield": {
+            "max_steps": 1,
+            "mean_steps": 1.0,
+            "median_steps": 1.0,
+            "min_steps": 1,
+            "segments": 5
+          },
+          "StopHold": {
+            "max_steps": 4,
+            "mean_steps": 4.0,
+            "median_steps": 4.0,
+            "min_steps": 4,
+            "segments": 10
+          },
+          "StopSatisfied": {
+            "max_steps": 1,
+            "mean_steps": 1.0,
+            "median_steps": 1.0,
+            "min_steps": 1,
+            "segments": 10
+          },
+          "YieldHold": {
+            "max_steps": 7,
+            "mean_steps": 7.0,
+            "median_steps": 7.0,
+            "min_steps": 7,
+            "segments": 5
+          }
+        },
+        "primitive_frequency": {
+          "ApproachCrossing": {
+            "count": 159,
+            "rate": 0.1272
+          },
+          "CruiseCurveLeft": {
+            "count": 270,
+            "rate": 0.216
+          },
+          "CruiseStraight": {
+            "count": 176,
+            "rate": 0.1408
+          },
+          "LaneCorrectLeft": {
+            "count": 185,
+            "rate": 0.148
+          },
+          "LaneCorrectRight": {
+            "count": 139,
+            "rate": 0.1112
+          },
+          "OscillatorySteering": {
+            "count": 87,
+            "rate": 0.0696
+          },
+          "ResumeAfterStop": {
+            "count": 144,
+            "rate": 0.1152
+          },
+          "ResumeAfterYield": {
+            "count": 5,
+            "rate": 0.004
+          },
+          "StopHold": {
+            "count": 40,
+            "rate": 0.032
+          },
+          "StopSatisfied": {
+            "count": 10,
+            "rate": 0.008
+          },
+          "YieldHold": {
+            "count": 35,
+            "rate": 0.028
+          }
+        },
+        "primitive_transitions": [
+          {
+            "count": 9,
+            "source": "ApproachCrossing",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 1,
+            "source": "ApproachCrossing",
+            "target": "LaneCorrectRight"
+          },
+          {
+            "count": 2,
+            "source": "CruiseCurveLeft",
+            "target": "ApproachCrossing"
+          },
+          {
+            "count": 1,
+            "source": "CruiseCurveLeft",
+            "target": "CruiseStraight"
+          },
+          {
+            "count": 31,
+            "source": "CruiseCurveLeft",
+            "target": "LaneCorrectLeft"
+          },
+          {
+            "count": 41,
+            "source": "CruiseCurveLeft",
+            "target": "OscillatorySteering"
+          },
+          {
+            "count": 5,
+            "source": "CruiseCurveLeft",
+            "target": "StopHold"
+          },
+          {
+            "count": 20,
+            "source": "CruiseStraight",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 16,
+            "source": "CruiseStraight",
+            "target": "LaneCorrectLeft"
+          },
+          {
+            "count": 6,
+            "source": "CruiseStraight",
+            "target": "LaneCorrectRight"
+          },
+          {
+            "count": 2,
+            "source": "CruiseStraight",
+            "target": "YieldHold"
+          },
+          {
+            "count": 3,
+            "source": "LaneCorrectLeft",
+            "target": "ApproachCrossing"
+          },
+          {
+            "count": 16,
+            "source": "LaneCorrectLeft",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 27,
+            "source": "LaneCorrectLeft",
+            "target": "CruiseStraight"
+          },
+          {
+            "count": 5,
+            "source": "LaneCorrectLeft",
+            "target": "StopHold"
+          },
+          {
+            "count": 3,
+            "source": "LaneCorrectLeft",
+            "target": "YieldHold"
+          },
+          {
+            "count": 10,
+            "source": "LaneCorrectRight",
+            "target": "CruiseStraight"
+          },
+          {
+            "count": 45,
+            "source": "LaneCorrectRight",
+            "target": "OscillatorySteering"
+          },
+          {
+            "count": 37,
+            "source": "OscillatorySteering",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 9,
+            "source": "OscillatorySteering",
+            "target": "LaneCorrectLeft"
+          },
+          {
+            "count": 40,
+            "source": "OscillatorySteering",
+            "target": "LaneCorrectRight"
+          },
+          {
+            "count": 4,
+            "source": "ResumeAfterStop",
+            "target": "CruiseStraight"
+          },
+          {
+            "count": 6,
+            "source": "ResumeAfterStop",
+            "target": "LaneCorrectRight"
+          },
+          {
+            "count": 5,
+            "source": "ResumeAfterYield",
+            "target": "ApproachCrossing"
+          },
+          {
+            "count": 10,
+            "source": "StopHold",
+            "target": "StopSatisfied"
+          },
+          {
+            "count": 10,
+            "source": "StopSatisfied",
+            "target": "ResumeAfterStop"
+          },
+          {
+            "count": 5,
+            "source": "YieldHold",
+            "target": "ResumeAfterYield"
+          }
+        ],
+        "schema_version": "1.0.0",
+        "solver": "q_learning",
+        "steering_response": {
+          "lane_error_omega_correlation": 0.7585761219532202,
+          "mean_abs_omega": 0.4797794117647059,
+          "straight_steps": 544
+        },
+        "stop_compliance_rate": 1.0,
+        "stop_opportunities": 10,
+        "stop_violations": 0,
+        "termination_counts": {
+          "timeout": 5
+        },
+        "undesirable_primitive_rate": 0.0696,
+        "unnecessary_brake_rate": 0.0,
+        "unsafe_proceed_rate": 0.0
+      },
+      "sac": {
+        "decision_steps": 1250,
+        "episodes": 5,
+        "first_stop_brake_distance": {
+          "max_m": 0.2671862928689193,
+          "mean_m": 0.25076832809053295,
+          "median_m": 0.25202916875333026,
+          "min_m": 0.23283286871939973,
+          "observations": 5
+        },
+        "mean_return": 17.82193614759312,
+        "pedestrian_active_steps": 35,
+        "pedestrian_yield_command_rate": 1.0,
+        "policy_mode": "deterministic_actor_mean",
+        "primitive_durations": {
+          "ApproachCrossing": {
+            "max_steps": 51,
+            "mean_steps": 28.7,
+            "median_steps": 33.0,
+            "min_steps": 7,
+            "segments": 20
+          },
+          "CruiseCurveLeft": {
+            "max_steps": 16,
+            "mean_steps": 4.463414634146342,
+            "median_steps": 2.0,
+            "min_steps": 1,
+            "segments": 41
+          },
+          "CruiseStraight": {
+            "max_steps": 18,
+            "mean_steps": 2.4166666666666665,
+            "median_steps": 1.5,
+            "min_steps": 1,
+            "segments": 24
+          },
+          "DecelerateLane": {
+            "max_steps": 1,
+            "mean_steps": 1.0,
+            "median_steps": 1.0,
+            "min_steps": 1,
+            "segments": 6
+          },
+          "DecelerateStop": {
+            "max_steps": 4,
+            "mean_steps": 3.2,
+            "median_steps": 3.0,
+            "min_steps": 3,
+            "segments": 5
+          },
+          "LaneCorrectLeft": {
+            "max_steps": 18,
+            "mean_steps": 4.9411764705882355,
+            "median_steps": 3.0,
+            "min_steps": 1,
+            "segments": 51
+          },
+          "LaneCorrectRight": {
+            "max_steps": 8,
+            "mean_steps": 4.304347826086956,
+            "median_steps": 4.0,
+            "min_steps": 1,
+            "segments": 23
+          },
+          "ResumeAfterStop": {
+            "max_steps": 1,
+            "mean_steps": 1.0,
+            "median_steps": 1.0,
+            "min_steps": 1,
+            "segments": 5
+          },
+          "ResumeAfterYield": {
+            "max_steps": 1,
+            "mean_steps": 1.0,
+            "median_steps": 1.0,
+            "min_steps": 1,
+            "segments": 5
+          },
+          "StopHold": {
+            "max_steps": 4,
+            "mean_steps": 3.4,
+            "median_steps": 3.0,
+            "min_steps": 3,
+            "segments": 5
+          },
+          "StopSatisfied": {
+            "max_steps": 1,
+            "mean_steps": 1.0,
+            "median_steps": 1.0,
+            "min_steps": 1,
+            "segments": 5
+          },
+          "YieldHold": {
+            "max_steps": 6,
+            "mean_steps": 6.0,
+            "median_steps": 6.0,
+            "min_steps": 6,
+            "segments": 5
+          }
+        },
+        "primitive_frequency": {
+          "ApproachCrossing": {
+            "count": 574,
+            "rate": 0.4592
+          },
+          "CruiseCurveLeft": {
+            "count": 183,
+            "rate": 0.1464
+          },
+          "CruiseStraight": {
+            "count": 58,
+            "rate": 0.0464
+          },
+          "DecelerateLane": {
+            "count": 6,
+            "rate": 0.0048
+          },
+          "DecelerateStop": {
+            "count": 16,
+            "rate": 0.0128
+          },
+          "LaneCorrectLeft": {
+            "count": 252,
+            "rate": 0.2016
+          },
+          "LaneCorrectRight": {
+            "count": 99,
+            "rate": 0.0792
+          },
+          "ResumeAfterStop": {
+            "count": 5,
+            "rate": 0.004
+          },
+          "ResumeAfterYield": {
+            "count": 5,
+            "rate": 0.004
+          },
+          "StopHold": {
+            "count": 17,
+            "rate": 0.0136
+          },
+          "StopSatisfied": {
+            "count": 5,
+            "rate": 0.004
+          },
+          "YieldHold": {
+            "count": 30,
+            "rate": 0.024
+          }
+        },
+        "primitive_transitions": [
+          {
+            "count": 1,
+            "source": "ApproachCrossing",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 5,
+            "source": "ApproachCrossing",
+            "target": "DecelerateStop"
+          },
+          {
+            "count": 9,
+            "source": "ApproachCrossing",
+            "target": "LaneCorrectLeft"
+          },
+          {
+            "count": 5,
+            "source": "ApproachCrossing",
+            "target": "YieldHold"
+          },
+          {
+            "count": 1,
+            "source": "CruiseCurveLeft",
+            "target": "ApproachCrossing"
+          },
+          {
+            "count": 1,
+            "source": "CruiseCurveLeft",
+            "target": "CruiseStraight"
+          },
+          {
+            "count": 31,
+            "source": "CruiseCurveLeft",
+            "target": "LaneCorrectLeft"
+          },
+          {
+            "count": 6,
+            "source": "CruiseCurveLeft",
+            "target": "LaneCorrectRight"
+          },
+          {
+            "count": 1,
+            "source": "CruiseStraight",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 2,
+            "source": "CruiseStraight",
+            "target": "DecelerateLane"
+          },
+          {
+            "count": 8,
+            "source": "CruiseStraight",
+            "target": "LaneCorrectLeft"
+          },
+          {
+            "count": 13,
+            "source": "CruiseStraight",
+            "target": "LaneCorrectRight"
+          },
+          {
+            "count": 5,
+            "source": "DecelerateLane",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 5,
+            "source": "DecelerateStop",
+            "target": "StopHold"
+          },
+          {
+            "count": 4,
+            "source": "LaneCorrectLeft",
+            "target": "ApproachCrossing"
+          },
+          {
+            "count": 26,
+            "source": "LaneCorrectLeft",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 17,
+            "source": "LaneCorrectLeft",
+            "target": "CruiseStraight"
+          },
+          {
+            "count": 4,
+            "source": "LaneCorrectLeft",
+            "target": "LaneCorrectRight"
+          },
+          {
+            "count": 8,
+            "source": "LaneCorrectRight",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 6,
+            "source": "LaneCorrectRight",
+            "target": "CruiseStraight"
+          },
+          {
+            "count": 4,
+            "source": "LaneCorrectRight",
+            "target": "DecelerateLane"
+          },
+          {
+            "count": 3,
+            "source": "LaneCorrectRight",
+            "target": "LaneCorrectLeft"
+          },
+          {
+            "count": 5,
+            "source": "ResumeAfterStop",
+            "target": "ApproachCrossing"
+          },
+          {
+            "count": 5,
+            "source": "ResumeAfterYield",
+            "target": "ApproachCrossing"
+          },
+          {
+            "count": 5,
+            "source": "StopHold",
+            "target": "StopSatisfied"
+          },
+          {
+            "count": 5,
+            "source": "StopSatisfied",
+            "target": "ResumeAfterStop"
+          },
+          {
+            "count": 5,
+            "source": "YieldHold",
+            "target": "ResumeAfterYield"
+          }
+        ],
+        "schema_version": "1.0.0",
+        "solver": "sac",
+        "steering_response": {
+          "lane_error_omega_correlation": 0.6550458888670132,
+          "mean_abs_omega": 0.5404088427721699,
+          "straight_steps": 592
+        },
+        "stop_compliance_rate": 1.0,
+        "stop_opportunities": 5,
+        "stop_violations": 0,
+        "termination_counts": {
+          "timeout": 5
+        },
+        "undesirable_primitive_rate": 0.0,
+        "unnecessary_brake_rate": 0.0,
+        "unsafe_proceed_rate": 0.0
+      },
+      "sarsa": {
+        "decision_steps": 1250,
+        "episodes": 5,
+        "first_stop_brake_distance": {
+          "max_m": 0.33584108003425023,
+          "mean_m": 0.3259045774702974,
+          "median_m": 0.33008533653131883,
+          "min_m": 0.29043840860516007,
+          "observations": 10
+        },
+        "mean_return": 44.6335088309222,
+        "pedestrian_active_steps": 35,
+        "pedestrian_yield_command_rate": 1.0,
+        "policy_mode": "greedy",
+        "primitive_durations": {
+          "ApproachCrossing": {
+            "max_steps": 25,
+            "mean_steps": 15.9,
+            "median_steps": 16.0,
+            "min_steps": 7,
+            "segments": 10
+          },
+          "CruiseCurveLeft": {
+            "max_steps": 9,
+            "mean_steps": 3.253012048192771,
+            "median_steps": 3.0,
+            "min_steps": 1,
+            "segments": 83
+          },
+          "CruiseStraight": {
+            "max_steps": 9,
+            "mean_steps": 4.0,
+            "median_steps": 3.0,
+            "min_steps": 2,
+            "segments": 44
+          },
+          "LaneCorrectLeft": {
+            "max_steps": 7,
+            "mean_steps": 3.3035714285714284,
+            "median_steps": 3.0,
+            "min_steps": 1,
+            "segments": 56
+          },
+          "LaneCorrectRight": {
+            "max_steps": 4,
+            "mean_steps": 2.5272727272727273,
+            "median_steps": 3.0,
+            "min_steps": 1,
+            "segments": 55
+          },
+          "OscillatorySteering": {
+            "max_steps": 2,
+            "mean_steps": 1.0116279069767442,
+            "median_steps": 1.0,
+            "min_steps": 1,
+            "segments": 86
+          },
+          "ResumeAfterStop": {
+            "max_steps": 16,
+            "mean_steps": 14.4,
+            "median_steps": 15.0,
+            "min_steps": 12,
+            "segments": 10
+          },
+          "ResumeAfterYield": {
+            "max_steps": 1,
+            "mean_steps": 1.0,
+            "median_steps": 1.0,
+            "min_steps": 1,
+            "segments": 5
+          },
+          "StopHold": {
+            "max_steps": 4,
+            "mean_steps": 4.0,
+            "median_steps": 4.0,
+            "min_steps": 4,
+            "segments": 10
+          },
+          "StopSatisfied": {
+            "max_steps": 1,
+            "mean_steps": 1.0,
+            "median_steps": 1.0,
+            "min_steps": 1,
+            "segments": 10
+          },
+          "YieldHold": {
+            "max_steps": 7,
+            "mean_steps": 7.0,
+            "median_steps": 7.0,
+            "min_steps": 7,
+            "segments": 5
+          }
+        },
+        "primitive_frequency": {
+          "ApproachCrossing": {
+            "count": 159,
+            "rate": 0.1272
+          },
+          "CruiseCurveLeft": {
+            "count": 270,
+            "rate": 0.216
+          },
+          "CruiseStraight": {
+            "count": 176,
+            "rate": 0.1408
+          },
+          "LaneCorrectLeft": {
+            "count": 185,
+            "rate": 0.148
+          },
+          "LaneCorrectRight": {
+            "count": 139,
+            "rate": 0.1112
+          },
+          "OscillatorySteering": {
+            "count": 87,
+            "rate": 0.0696
+          },
+          "ResumeAfterStop": {
+            "count": 144,
+            "rate": 0.1152
+          },
+          "ResumeAfterYield": {
+            "count": 5,
+            "rate": 0.004
+          },
+          "StopHold": {
+            "count": 40,
+            "rate": 0.032
+          },
+          "StopSatisfied": {
+            "count": 10,
+            "rate": 0.008
+          },
+          "YieldHold": {
+            "count": 35,
+            "rate": 0.028
+          }
+        },
+        "primitive_transitions": [
+          {
+            "count": 9,
+            "source": "ApproachCrossing",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 1,
+            "source": "ApproachCrossing",
+            "target": "LaneCorrectRight"
+          },
+          {
+            "count": 2,
+            "source": "CruiseCurveLeft",
+            "target": "ApproachCrossing"
+          },
+          {
+            "count": 1,
+            "source": "CruiseCurveLeft",
+            "target": "CruiseStraight"
+          },
+          {
+            "count": 31,
+            "source": "CruiseCurveLeft",
+            "target": "LaneCorrectLeft"
+          },
+          {
+            "count": 41,
+            "source": "CruiseCurveLeft",
+            "target": "OscillatorySteering"
+          },
+          {
+            "count": 5,
+            "source": "CruiseCurveLeft",
+            "target": "StopHold"
+          },
+          {
+            "count": 20,
+            "source": "CruiseStraight",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 16,
+            "source": "CruiseStraight",
+            "target": "LaneCorrectLeft"
+          },
+          {
+            "count": 6,
+            "source": "CruiseStraight",
+            "target": "LaneCorrectRight"
+          },
+          {
+            "count": 2,
+            "source": "CruiseStraight",
+            "target": "YieldHold"
+          },
+          {
+            "count": 3,
+            "source": "LaneCorrectLeft",
+            "target": "ApproachCrossing"
+          },
+          {
+            "count": 16,
+            "source": "LaneCorrectLeft",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 27,
+            "source": "LaneCorrectLeft",
+            "target": "CruiseStraight"
+          },
+          {
+            "count": 5,
+            "source": "LaneCorrectLeft",
+            "target": "StopHold"
+          },
+          {
+            "count": 3,
+            "source": "LaneCorrectLeft",
+            "target": "YieldHold"
+          },
+          {
+            "count": 10,
+            "source": "LaneCorrectRight",
+            "target": "CruiseStraight"
+          },
+          {
+            "count": 45,
+            "source": "LaneCorrectRight",
+            "target": "OscillatorySteering"
+          },
+          {
+            "count": 37,
+            "source": "OscillatorySteering",
+            "target": "CruiseCurveLeft"
+          },
+          {
+            "count": 9,
+            "source": "OscillatorySteering",
+            "target": "LaneCorrectLeft"
+          },
+          {
+            "count": 40,
+            "source": "OscillatorySteering",
+            "target": "LaneCorrectRight"
+          },
+          {
+            "count": 4,
+            "source": "ResumeAfterStop",
+            "target": "CruiseStraight"
+          },
+          {
+            "count": 6,
+            "source": "ResumeAfterStop",
+            "target": "LaneCorrectRight"
+          },
+          {
+            "count": 5,
+            "source": "ResumeAfterYield",
+            "target": "ApproachCrossing"
+          },
+          {
+            "count": 10,
+            "source": "StopHold",
+            "target": "StopSatisfied"
+          },
+          {
+            "count": 10,
+            "source": "StopSatisfied",
+            "target": "ResumeAfterStop"
+          },
+          {
+            "count": 5,
+            "source": "YieldHold",
+            "target": "ResumeAfterYield"
+          }
+        ],
+        "schema_version": "1.0.0",
+        "solver": "sarsa",
+        "steering_response": {
+          "lane_error_omega_correlation": 0.7585761219532202,
+          "mean_abs_omega": 0.4797794117647059,
+          "straight_steps": 544
+        },
+        "stop_compliance_rate": 1.0,
+        "stop_opportunities": 10,
+        "stop_violations": 0,
+        "termination_counts": {
+          "timeout": 5
+        },
+        "undesirable_primitive_rate": 0.0696,
+        "unnecessary_brake_rate": 0.0,
+        "unsafe_proceed_rate": 0.0
+      }
+    }
+  }
+}

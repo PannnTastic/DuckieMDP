@@ -78,6 +78,7 @@ temp/
 # Raw render output. Curated GIF/MP4 files under docs/assets/ remain tracked.
 raw_media/
 renders/
+videos/
 *.avi
 *.mkv
 *.webm

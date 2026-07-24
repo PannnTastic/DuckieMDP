@@ -1,0 +1,13 @@
+{
+  "cluster_coverage": 0.7623762376237624,
+  "collection_passed": true,
+  "counterfactual_passed": true,
+  "discovery_passed": true,
+  "engineering_passed": true,
+  "experiment": "eddp_v1_pilot",
+  "provenance_passed": true,
+  "scientific_decision": "GO_WITH_LIMITED_CLAIM",
+  "shared_clusters": 5,
+  "solver_specific_clusters": 1,
+  "valid_atom_fraction": 0.9735973597359736
+}

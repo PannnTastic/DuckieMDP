@@ -1,15 +1,15 @@
 {
   "primitive_schema_version": "1.0.1",
-  "freeze_date": "2026-07-20",
+  "freeze_date": "2026-07-24",
   "freeze_status": "content_hash_frozen",
-  "revision_note": "v1.0.1 makes an unsatisfied stop obligation outrank an inactive/side Duckie; active corridor risk still has highest safety precedence.",
+  "revision_note": "v1.0.1 behavior is unchanged. Freeze metadata was synchronized with the committed plan after documentation-only edits; primitive rules, thresholds, and tests are unchanged.",
   "lexicon_commit": null,
   "git_base_commit": "2f7b148a7b58126573e1fac75ee04375a6a05903",
   "git_note": "The workspace was intentionally not committed because it contains pre-existing user changes. The content hashes below are the binding freeze evidence.",
   "files": {
     "src/explainability/primitives.py": "93c11992568de85135885b55c2c4d3ee06f257f2e41edc53cb2e497a5df8a58a",
     "tests/test_explainability_primitives.py": "925d571bbe510446a6403b0d8b4a73e765097a5fd78fb55dc6c9c6cbe4ab3743",
-    "docs/explainable_mdp_policy_plan.md": "cbcccfc2bc13d3f922c725952d729530ca89533de312c133565cddd9a43eecb7"
+    "docs/explainable_mdp_policy_plan.md": "4593cde2682b27189db905165cff0be3fb3dd9bd64ccb53529d2eec0f9aa1cbd"
   },
   "threshold_config_sha256": "7e61509cd91ffd0f8e74e05230e611f17e5f58154a06b6e34a99b1fc4b86913f",
   "threshold_config": {
@@ -36,7 +36,7 @@
       "failed": 0
     },
     "full_regression": {
-      "passed": 101,
+      "passed": 183,
       "failed": 0
     },
     "rollout_coverage": {

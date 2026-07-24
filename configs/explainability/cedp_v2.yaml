@@ -1,0 +1,71 @@
+experiment:
+  name: certified_explanation_derived_primitives_v2
+  output_dir: runs/explanations/cedp_v2
+  shared_environment_config: runs/explanations/m12_policy_comparison/shared_comparison_config.yaml
+  m2_lexicon: docs/primitive_lexicon_v1.freeze.json
+
+policies:
+  q_learning:
+    checkpoint: artifacts/ablation/full_task/q_learning_teacher/q_table_best.npy
+    training_config: configs/small_loop_stop_duck_q.yaml
+    evaluation_mode: greedy_teacher_free
+  sarsa:
+    checkpoint: artifacts/ablation/full_task/sarsa_teacher/q_table_best.npy
+    training_config: configs/small_loop_stop_duck_sarsa.yaml
+    evaluation_mode: greedy_teacher_free
+  sac:
+    checkpoint: artifacts/sac/full_repeat_duck_5min/sac_best.pt
+    training_config: artifacts/sac/full_repeat_duck_5min/config.yaml
+    evaluation_mode: deterministic_actor_mean
+
+explanation_artifacts:
+  m6_response_curves: runs/explanations/m6_response_curves/m6_summary.json
+  m7_metamorphic: runs/explanations/m7_metamorphic/m7_summary.json
+  m8_exact_q: runs/explanations/m8_exact_q/m8_summary.json
+  m9_sac_internal: runs/explanations/m9_sac_internal/m9_summary.json
+  m10_rules: runs/explanations/m10_rule_extraction/m10_summary.json
+  m11_bottom_up: runs/explanations/m11_bottom_up_clustering/m11_summary.json
+  m12_unified: runs/explanations/m12_unified_report/unified_explanation_report.json
+  m13_sarsa: runs/explanations/m13_sarsa/m13_sarsa_explanation_report.json
+
+baselines_not_main_input:
+  eddp_v1_acceptance: docs/eddp_v1_acceptance.json
+  eddp_v1_results: docs/explanation_derived_driving_primitives_results.md
+
+collection:
+  seeds: [20101, 20202, 20303, 20404, 20505]
+  episodes_per_seed: 5
+  episode_seed_stride: 100000
+  max_decisions: 250
+  minimum_certified_instances_per_solver: 1000
+
+counterfactual:
+  max_horizon: 15
+  fixed_horizons: [1, 5, 10, 15]
+  event_horizon: false
+
+segmentation:
+  development_seed_count: 3
+  distance_quantile: 0.85
+  minimum_duration: 3
+  primary: change_point
+  fixed_window_baselines: [3, 5]
+
+discovery:
+  development_seed_count: 3
+  radius_multiplier: 1.25
+
+certification:
+  minimum_support: 12
+  minimum_seeds: 3
+  minimum_bootstrap_ari: 0.70
+  maximum_outcome_coherence_ratio: 0.80
+  require_full_trajectory: true
+  require_all_member_certificates: true
+
+ablation:
+  include_legacy_sparse_baseline: true
+  include_fixed_windows: true
+  include_decision_only: true
+  include_without_verification: true
+  include_without_temporal: true

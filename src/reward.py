@@ -36,6 +36,15 @@ class RewardConfig:
     unnecessary_stop: float = 0.0
     idle_speed: float = 0.04
     stop_exemption_distance: float = 0.45
+    # Dense stop-approach shaping, mirroring the pedestrian-yield shaping above.
+    # Zero distance keeps it fully disabled so every existing policy (SAC,
+    # tabular, prior TD3) is byte-identical; the TD3 stop curriculum enables it
+    # to give the deterministic actor a per-step gradient toward slowing at the
+    # sign instead of only the sparse binary full_stop event.
+    stop_approach_distance: float = 0.0
+    stop_approach_speed: float = 0.02
+    stop_approach_yield: float = 0.0
+    stop_approach_unsafe: float = 0.0
     # Penalti action-conditioned khusus ruas lurus. Nilai nol menjaga seluruh
     # baseline lama identik; eksperimen warm-start mengaktifkannya dari YAML.
     straight_steer_penalty: float = 0.0
@@ -65,6 +74,7 @@ class RewardBreakdown:
     time: float
     pedestrian: float
     stagnation: float
+    stop_approach: float
     steering: float
     events: float
     total: float
@@ -172,15 +182,33 @@ def compute_reward(
     pedestrian = 0.0
     if crossing:
         pedestrian = cfg.duck_yield if state.v < cfg.duck_yield_speed else cfg.duck_unsafe
+    # Zona bebas-penalti-diam melebar mengikuti jarak approach shaping agar
+    # kedua term tidak saling melawan pada pita jarak yang sama.
+    stop_hold_zone = max(cfg.stop_exemption_distance, cfg.stop_approach_distance)
     must_stop = (
         state.d_stop is not None
-        and state.d_stop <= cfg.stop_exemption_distance
+        and state.d_stop <= stop_hold_zone
         and not state.sigma_stop
     )
     # Hilangkan reward hacking berupa brake di state normal. Diam tetap sah
     # selama crossing atau ketika kewajiban stop belum dipenuhi.
     unnecessary_idle = state.v < cfg.idle_speed and not crossing and not must_stop
     stagnation = cfg.unnecessary_stop if unnecessary_idle else 0.0
+    # Shaping approach padat, cermin dari term pedestrian: dalam jarak approach
+    # dari stop yang belum dipenuhi, pelan diberi kredit dan membawa kecepatan
+    # dihukum, sehingga melambat menuju garis punya gradien yang bisa diikuti.
+    stop_approach = 0.0
+    if (
+        cfg.stop_approach_distance > 0.0
+        and state.d_stop is not None
+        and state.d_stop <= cfg.stop_approach_distance
+        and not state.sigma_stop
+    ):
+        stop_approach = (
+            cfg.stop_approach_yield
+            if state.v < cfg.stop_approach_speed
+            else cfg.stop_approach_unsafe
+        )
     # phi menghukum HASIL ketika heading sudah melenceng. Suku ini menghukum
     # PENYEBAB lebih awal: perintah steer besar pada geometri jalan lurus.
     # Curvature berasal dari s_t, sehingga reward tetap berbentuk R(s, a, s').
@@ -202,7 +230,10 @@ def compute_reward(
         + cfg.full_stop * events.full_stop
         + cfg.goal * events.goal
     )
-    total = progress + lateral + heading + time + pedestrian + stagnation + steering + event
+    total = (
+        progress + lateral + heading + time + pedestrian
+        + stagnation + stop_approach + steering + event
+    )
     return RewardBreakdown(
         progress=progress,
         lateral=lateral,
@@ -210,6 +241,7 @@ def compute_reward(
         time=time,
         pedestrian=pedestrian,
         stagnation=stagnation,
+        stop_approach=stop_approach,
         steering=steering,
         events=event,
         total=total,

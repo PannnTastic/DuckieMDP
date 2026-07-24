@@ -14,9 +14,15 @@ class SolverKind(str, Enum):
     Q_LEARNING = "q_learning"
     SARSA = "sarsa"
     SAC = "sac"
+    TD3 = "td3"
 
 
 TABULAR_SOLVERS = frozenset({SolverKind.Q_LEARNING, SolverKind.SARSA})
+# Solvers that consume the metric continuous observation and produce a
+# (v_cmd, omega_cmd) action. Their counterfactuals, projection, and validation
+# share the same continuous representation, so pipeline branches use this set
+# rather than testing SolverKind.SAC directly.
+CONTINUOUS_SOLVERS = frozenset({SolverKind.SAC, SolverKind.TD3})
 
 
 class PolicyMode(str, Enum):

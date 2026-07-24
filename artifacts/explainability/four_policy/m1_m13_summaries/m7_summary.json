@@ -1,0 +1,101 @@
+{
+  "acceptance": {
+    "all_pairs_manifold_valid": true,
+    "all_preconditions_applicable": true,
+    "policy_failures_are_findings_not_pipeline_failures": true
+  },
+  "anchor": {
+    "anchor_decision_step": 5,
+    "anchor_scenario": "lane",
+    "anchor_seed": 701,
+    "anchor_source": "runs/explanations/m6_response_curves/m6_summary.json",
+    "state": {
+      "curvature": 0.0,
+      "curvature_class": "straight",
+      "d": -0.045203041289607504,
+      "duck_active": null,
+      "duck_crossing_available": null,
+      "duck_lateral": null,
+      "duck_longitudinal": null,
+      "duck_present": false,
+      "duck_threat": null,
+      "duck_v_lateral_relative": null,
+      "duck_v_longitudinal_relative": null,
+      "phi": -0.2774665101153032,
+      "source_index": null,
+      "source_representation": "sac_continuous_state",
+      "stop_distance": null,
+      "stop_hold_progress": 0.0,
+      "stop_present": false,
+      "stop_satisfied": false,
+      "v": 0.05971938649088236
+    }
+  },
+  "counts": {
+    "all_pairs_manifold_valid": true,
+    "by_solver": {
+      "q_learning": {
+        "FAIL": 3,
+        "PASS": 21
+      },
+      "sac": {
+        "FAIL": 9,
+        "PASS": 15
+      }
+    },
+    "by_solver_relation": {
+      "q_learning/MR-CURVATURE": {
+        "PASS": 6
+      },
+      "q_learning/MR-LANE-SYMMETRY": {
+        "FAIL": 3,
+        "PASS": 3
+      },
+      "q_learning/MR-PEDESTRIAN": {
+        "PASS": 6
+      },
+      "q_learning/MR-STOP": {
+        "PASS": 6
+      },
+      "sac/MR-CURVATURE": {
+        "FAIL": 3,
+        "PASS": 3
+      },
+      "sac/MR-LANE-SYMMETRY": {
+        "FAIL": 5,
+        "PASS": 1
+      },
+      "sac/MR-PEDESTRIAN": {
+        "FAIL": 1,
+        "PASS": 5
+      },
+      "sac/MR-STOP": {
+        "PASS": 6
+      }
+    },
+    "not_applicable": 0,
+    "total": 48
+  },
+  "files": [
+    "runs/explanations/m7_metamorphic/m7_metamorphic_results.json",
+    "runs/explanations/m7_metamorphic/m7_metamorphic_results.csv"
+  ],
+  "method": "LEGIBLE-inspired metamorphic policy testing",
+  "policy_checkpoints": {
+    "q_learning": {
+      "path": "artifacts/ablation/full_task/q_learning_teacher/q_table_best.npy",
+      "sha256": "59929f4e2c1968d274e9d3aa6c83ccb2cd7c915c632093cfaba6b544340906dd"
+    },
+    "sac": {
+      "path": "artifacts/sac/full_repeat_duck_5min/sac_best.pt",
+      "sha256": "0b01447edd85e539de57f9a304fc287d26d5d7c4e73a5a51cd493fea2f4c4f2b"
+    }
+  },
+  "relations": [
+    "MR-CURVATURE",
+    "MR-LANE-SYMMETRY",
+    "MR-PEDESTRIAN",
+    "MR-STOP"
+  ],
+  "stage": "M7"
+}

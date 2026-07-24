@@ -1,0 +1,39 @@
+experiment:
+  name: eddp_v1_pilot
+  output_dir: runs/explanations/eddp_v1
+  shared_environment_config: runs/explanations/m12_policy_comparison/shared_comparison_config.yaml
+  primitive_lexicon: docs/primitive_lexicon_v1.freeze.json
+
+policies:
+  q_learning:
+    checkpoint: artifacts/ablation/full_task/q_learning_teacher/q_table_best.npy
+    training_config: configs/small_loop_stop_duck_q.yaml
+    evaluation_mode: greedy_teacher_free
+  sarsa:
+    checkpoint: artifacts/ablation/full_task/sarsa_teacher/q_table_best.npy
+    training_config: configs/small_loop_stop_duck_sarsa.yaml
+    evaluation_mode: greedy_teacher_free
+  sac:
+    checkpoint: artifacts/sac/full_repeat_duck_5min/sac_best.pt
+    training_config: artifacts/sac/full_repeat_duck_5min/config.yaml
+    evaluation_mode: deterministic_actor_mean
+
+collection:
+  seeds: [20101, 20202, 20303, 20404, 20505]
+  development_seed_count: 3
+  contexts: [duck, stop, lane, nominal]
+  blocks_per_context: 2
+  block_length: 3
+  minimum_block_gap: 8
+  max_decisions: 250
+
+counterfactual:
+  max_horizon: 15
+  fixed_horizons: [1, 5, 10, 15]
+  event_horizon: false
+
+discovery:
+  minimum_atoms_per_segment: 2
+  minimum_development_variance: 1.0e-12
+  hdbscan_primary: true
+  kmeans_sensitivity: true

@@ -387,6 +387,50 @@ iteration konvergen secara numerik, tetapi policy 100% off-road karena model
 tidak mencakup state-action yang diperlukan. Artefaknya disimpan sebagai
 failure ablation, bukan diklaim sebagai solver berhasil.
 
+## Explainable MDP policy: empat solver
+
+Pipeline explanation membandingkan Q-learning, SARSA, SAC, dan TD3 memakai
+policy deterministik saat evaluasi. Setiap keputusan dijelaskan dengan empat
+bagian:
+
+1. **Why** — state counterfactual yang mengubah keputusan;
+2. **What-if** — factual action dan foil action dijalankan dari branch simulator
+   yang sama;
+3. **Verification** — hasil metamorphic/safety relation disimpan sebagai
+   `PASS`, `FAIL`, `ABSTAIN`, atau tidak berlaku;
+4. **Temporal** — explanation berurutan digabung menjadi perilaku yang dapat
+   dibaca manusia.
+
+Hasil deskriptifnya adalah empat keluarga driving primitive:
+`LaneKeeping`, `CurveNegotiation`, `StopCompliance`, dan `PedestrianYield`.
+Label tersebut tidak menggantikan data explanation; setiap primitive tetap
+membawa bukti Why, What-if, Verification, dan temporal arc.
+
+Paket Git memuat checkpoint empat policy, ringkasan M1–M13, paired outcomes,
+bukti primitive nyata, config kanonis, dan hash manifest. Video serta output
+mentah tetap berada di `runs/`/`videos/` dan sengaja tidak di-push.
+
+```bash
+# Verifikasi clone, checkpoint, hash, Q-shape, policy adapter, dan hasil beku
+./scripts/reproduce_explanation_pipeline.sh verify
+
+# Tes regression explanation
+./scripts/reproduce_explanation_pipeline.sh test
+
+# Branch satu explanation untuk masing-masing dari empat solver
+./scripts/reproduce_explanation_pipeline.sh smoke
+
+# Reproduksi penuh; mahal dan resumable melalui instance_shards/
+./scripts/reproduce_explanation_pipeline.sh full
+```
+
+Panduan lengkap dan batas klaim tersedia di
+[explanation reproducibility guide](docs/explanation_reproducibility.md).
+Data paper-facing berada di
+[four-policy explanation artifacts](artifacts/explainability/four_policy/README.md).
+Audit support-aware cluster certification disimpan sebagai analisis opsional,
+bukan hasil utama primitive deskriptif.
+
 ## Memakai policy terbaik
 
 ```bash
@@ -412,6 +456,8 @@ python scripts/make_demo_gifs.py
 ```text
 duckie-mdp/
 ├── artifacts/ablation/     # Q-table, config, CSV, dan evaluasi terpilih
+├── artifacts/explainability/ # bukti explanation yang dibekukan untuk Git
+├── artifacts/policies/     # checkpoint SAC/TD3 kanonis untuk reproduksi
 ├── configs/                # config aktif dan reproducible workflow
 ├── docs/assets/gifs/       # GIF individual dan comparison
 ├── docs/assets/videos/     # MP4 720p terkompresi

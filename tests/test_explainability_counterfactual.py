@@ -63,6 +63,25 @@ def test_stop_absence_and_satisfaction_dependencies_are_repaired():
     assert "cleared dependent stop fields" in record.repair_notes
 
 
+def test_unsatisfied_stop_intervention_resets_full_hold_progress():
+    anchor = _sac_anchor(
+        stop_present=True,
+        stop_distance=0.2,
+        stop_satisfied=True,
+        stop_hold_progress=1.0,
+    )
+    record = make_counterfactual(
+        anchor,
+        SolverKind.SAC,
+        "unsatisfy_stop",
+        {"stop_satisfied": False},
+    )
+    assert record.validation.valid
+    assert record.state.stop_satisfied is False
+    assert record.state.stop_hold_progress < 1.0
+    assert "hold progress reset for unsatisfied stop" in record.repair_notes
+
+
 def test_stop_hold_progress_projects_lossily_for_q_learning():
     anchor = _sac_anchor(stop_present=True, stop_distance=0.2)
     partial = make_counterfactual(

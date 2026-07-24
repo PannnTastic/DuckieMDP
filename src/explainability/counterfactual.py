@@ -13,7 +13,7 @@ from typing import Any, Dict, Mapping, Optional, Sequence, Tuple
 
 from ..continuous_state import ContinuousStateConfig, continuous_observation_space
 from ..discretizer import discretize
-from .schema import CanonicalState, SolverKind, to_dict
+from .schema import CONTINUOUS_SOLVERS, CanonicalState, SolverKind, to_dict
 from .semantic_state import (
     encode_canonical_for_sac,
     raw_state_from_canonical,
@@ -191,7 +191,7 @@ def validate_state(
             _issue(issues, "DUCK_ABSENT_ACTIVE", "duck_active", "absent Duckie cannot be active")
         if state.duck_crossing_available not in (None, False):
             _issue(issues, "DUCK_ABSENT_AVAILABLE", "duck_crossing_available", "absent Duckie cannot be armed")
-    elif solver == SolverKind.SAC:
+    elif solver in CONTINUOUS_SOLVERS:
         if any(value is None for value in geometry):
             _issue(issues, "DUCK_PRESENT_NO_GEOMETRY", "duck_present", "SAC Duckie requires metric geometry")
         else:
@@ -222,7 +222,7 @@ def validate_state(
 
     encoded_valid: Optional[bool] = None
     try:
-        if solver == SolverKind.SAC:
+        if solver in CONTINUOUS_SOLVERS:
             encoded = encode_canonical_for_sac(state, continuous_config)
             encoded_valid = bool(continuous_observation_space().contains(encoded))
             if not encoded_valid:
@@ -273,7 +273,7 @@ def project_state_for_solver(
     solver = SolverKind(solver)
     values = dict(state.__dict__)
     values["source_index"] = None
-    if solver == SolverKind.SAC:
+    if solver in CONTINUOUS_SOLVERS:
         values["source_representation"] = "sac_counterfactual_projection"
         values["duck_threat"] = None
         if not values["duck_present"]:
@@ -363,6 +363,12 @@ def make_counterfactual(
         values["stop_present"] = True
         values["stop_hold_progress"] = 1.0
         repairs.append("full hold progress set for satisfied stop")
+    if (
+        changes.get("stop_satisfied") is False
+        and float(values.get("stop_hold_progress") or 0.0) >= 1.0
+    ):
+        values["stop_hold_progress"] = 0.0
+        repairs.append("hold progress reset for unsatisfied stop")
 
     if changes.get("duck_present") is False:
         _absent_duck(values)

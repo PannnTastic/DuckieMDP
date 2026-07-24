@@ -50,6 +50,13 @@ class ContinuousStateConfig:
     max_duck_distance: float = 2.0
     max_relative_speed: float = 0.50
     curvature_samples: int = 33
+    # Gerbang deteksi Duckie opsional. Default None mempertahankan perilaku
+    # lama (Duckie selalu terlihat) demi kompatibilitas checkpoint SAC.
+    # Diisi agar paritas informasi dengan classify_duck tabular: hanya
+    # Duckie di koridor depan dan di dalam rentang yang dilaporkan.
+    duck_detection_range: Optional[float] = None
+    duck_detection_corridor_width: Optional[float] = None
+    duck_detection_forward_only: bool = False
 
 @dataclass(frozen=True)
 class DuckRelativeState:
@@ -227,6 +234,34 @@ def duck_relative_state(
     )
 
 
+def gate_duck_visibility(
+    duck: DuckRelativeState,
+    cfg: ContinuousStateConfig,
+) -> DuckRelativeState:
+    """Terapkan gerbang deteksi opsional pada geometri Duckie.
+
+    Tanpa gerbang, Duckie terdekat selalu dilaporkan berapa pun jaraknya,
+    sehingga policy kontinu menerima informasi yang tidak tersedia bagi
+    solver tabular (classify_duck memetakan Duckie di luar koridor/rentang
+    menjadi NONE). Gerbang ini menyamakan semantik deteksinya.
+    """
+
+    if not duck.present:
+        return duck
+    if cfg.duck_detection_forward_only and duck.longitudinal < 0.0:
+        return DuckRelativeState()
+    if (
+        cfg.duck_detection_corridor_width is not None
+        and abs(duck.lateral) > cfg.duck_detection_corridor_width
+    ):
+        return DuckRelativeState()
+    if cfg.duck_detection_range is not None:
+        distance = float(np.hypot(duck.longitudinal, duck.lateral))
+        if distance > cfg.duck_detection_range:
+            return DuckRelativeState()
+    return duck
+
+
 def build_continuous_state(
     env: Any,
     raw: RawState,
@@ -235,7 +270,9 @@ def build_continuous_state(
     controller: Any = None,
     stop_hold_progress: float = 0.0,
 ) -> ContinuousState:
-    duck = duck_relative_state(env, raw.v, controller)
+    duck = gate_duck_visibility(
+        duck_relative_state(env, raw.v, controller), continuous_cfg
+    )
     return ContinuousState(
         d=raw.d,
         phi=raw.phi,

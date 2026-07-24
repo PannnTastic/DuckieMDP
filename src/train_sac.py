@@ -28,6 +28,7 @@ REWARD_COMPONENTS = (
     "time",
     "pedestrian",
     "stagnation",
+    "stop_approach",
     "steering",
     "events",
     "total",

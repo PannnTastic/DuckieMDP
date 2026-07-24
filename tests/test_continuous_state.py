@@ -90,3 +90,33 @@ def test_duck_geometry_and_controller_phase_are_exposed():
     assert result.v_lateral_relative == 0.02
     assert result.active
     assert not result.crossing_available
+
+
+def test_duck_detection_gate_mirrors_tabular_visibility():
+    from src.continuous_state import (
+        ContinuousStateConfig,
+        DuckRelativeState,
+        gate_duck_visibility,
+    )
+
+    gated = ContinuousStateConfig(
+        duck_detection_range=1.20,
+        duck_detection_corridor_width=0.60,
+        duck_detection_forward_only=True,
+    )
+    near_ahead = DuckRelativeState(
+        present=True, longitudinal=0.50, lateral=0.10, active=True
+    )
+    far_ahead = DuckRelativeState(present=True, longitudinal=1.60, lateral=0.10)
+    behind = DuckRelativeState(present=True, longitudinal=-0.30, lateral=0.10)
+    wide = DuckRelativeState(present=True, longitudinal=0.50, lateral=0.90)
+
+    assert gate_duck_visibility(near_ahead, gated) is near_ahead
+    assert gate_duck_visibility(far_ahead, gated).present is False
+    assert gate_duck_visibility(behind, gated).present is False
+    assert gate_duck_visibility(wide, gated).present is False
+
+    # Default config keeps legacy always-visible behaviour for SAC checkpoints.
+    legacy = ContinuousStateConfig()
+    assert gate_duck_visibility(far_ahead, legacy) is far_ahead
+    assert gate_duck_visibility(behind, legacy) is behind

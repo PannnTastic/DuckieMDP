@@ -86,6 +86,33 @@ def test_unnecessary_stop_penalty_exempts_crossing_and_required_stop():
     assert required_stop.stagnation == pytest.approx(0.0)
 
 
+def test_stop_approach_shaping_is_off_by_default_and_penalises_speed_when_enabled():
+    # Disabled by default: no distance configured -> no shaping for any policy.
+    off = compute_reward(state(v=0.30, stop=0.4, sigma=False), EventFlags())
+    assert off.stop_approach == pytest.approx(0.0)
+
+    cfg = RewardConfig(
+        stop_approach_distance=0.60,
+        stop_approach_speed=0.02,
+        stop_approach_yield=1.0,
+        stop_approach_unsafe=-5.0,
+        unnecessary_stop=-0.5,
+    )
+    # Carrying speed toward an unsatisfied stop is penalised...
+    fast = compute_reward(state(v=0.30, stop=0.4, sigma=False), EventFlags(), cfg)
+    assert fast.stop_approach == pytest.approx(-5.0)
+    # ...being at the full-stop speed earns credit...
+    stopped = compute_reward(state(v=0.0, stop=0.4, sigma=False), EventFlags(), cfg)
+    assert stopped.stop_approach == pytest.approx(1.0)
+    # ...it stops once the stop is satisfied, and never fires outside the zone.
+    satisfied = compute_reward(state(v=0.0, stop=0.4, sigma=True), EventFlags(), cfg)
+    assert satisfied.stop_approach == pytest.approx(0.0)
+    far = compute_reward(state(v=0.30, stop=1.5, sigma=False), EventFlags(), cfg)
+    assert far.stop_approach == pytest.approx(0.0)
+    # The widened zone also exempts the slow agent from the idle penalty.
+    assert stopped.stagnation == pytest.approx(0.0)
+
+
 def test_straight_steering_penalty_uses_action_but_exempts_curves():
     cfg = RewardConfig(straight_steer_penalty=0.5, max_steer_command=1.5)
     straight = compute_reward(

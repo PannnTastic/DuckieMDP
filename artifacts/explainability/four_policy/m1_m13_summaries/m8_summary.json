@@ -1,0 +1,1345 @@
+{
+  "acceptance": {
+    "all_states_enumerated_once": true,
+    "enumerated_states": 9000,
+    "expected_states": 9000,
+    "policy_violations_are_findings_not_pipeline_failures": true,
+    "q_shape_unchanged": true,
+    "safety_properties_checked_exhaustively": {
+      "P-DUCK-CROSSING-NEAR-NO-FAST": {
+        "reachable": {
+          "applicable": 20,
+          "violation_rate": 0.2,
+          "violations": 4
+        },
+        "reached_only": {
+          "applicable": 20,
+          "violation_rate": 0.2,
+          "violations": 4
+        },
+        "representable": {
+          "applicable": 1800,
+          "violation_rate": 0.9861111111111112,
+          "violations": 1775
+        },
+        "supported": {
+          "applicable": 10,
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        "unknown": {
+          "applicable": 1780,
+          "violation_rate": 0.994943820224719,
+          "violations": 1771
+        },
+        "valid_manifold": {
+          "applicable": 1575,
+          "violation_rate": 0.9841269841269841,
+          "violations": 1550
+        }
+      },
+      "P-STOP-NEAR-UNSATISFIED-NO-FAST": {
+        "reachable": {
+          "applicable": 8,
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        "reached_only": {
+          "applicable": 8,
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        "representable": {
+          "applicable": 1125,
+          "violation_rate": 0.9857777777777778,
+          "violations": 1109
+        },
+        "supported": {
+          "applicable": 4,
+          "violation_rate": 0.0,
+          "violations": 0
+        },
+        "unknown": {
+          "applicable": 1117,
+          "violation_rate": 0.9928379588182632,
+          "violations": 1109
+        },
+        "valid_manifold": {
+          "applicable": 1125,
+          "violation_rate": 0.9857777777777778,
+          "violations": 1109
+        }
+      }
+    }
+  },
+  "checkpoint": {
+    "path": "artifacts/ablation/full_task/q_learning_teacher/q_table_best.npy",
+    "sha256": "59929f4e2c1968d274e9d3aa6c83ccb2cd7c915c632093cfaba6b544340906dd",
+    "shape": [
+      5,
+      5,
+      3,
+      3,
+      4,
+      2,
+      5,
+      7
+    ],
+    "teacher_active_during_m8": false,
+    "trained_with_teacher_guidance": true
+  },
+  "config": "configs/small_loop_stop_duck_q.yaml",
+  "evaluation_reach_manifest": {
+    "base_seeds": [
+      101,
+      202,
+      303,
+      404,
+      505
+    ],
+    "decision_states_counted": 7241,
+    "episodes": 30,
+    "episodes_manifest": [
+      {
+        "episode": 0,
+        "length": 250,
+        "seed": 101,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 1,
+        "length": 250,
+        "seed": 203,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 2,
+        "length": 250,
+        "seed": 305,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 3,
+        "length": 250,
+        "seed": 407,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 4,
+        "length": 250,
+        "seed": 509,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 5,
+        "length": 250,
+        "seed": 106,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 6,
+        "length": 250,
+        "seed": 208,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 7,
+        "length": 250,
+        "seed": 310,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 8,
+        "length": 250,
+        "seed": 412,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 9,
+        "length": 250,
+        "seed": 514,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 10,
+        "length": 250,
+        "seed": 111,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 11,
+        "length": 250,
+        "seed": 213,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 12,
+        "length": 250,
+        "seed": 315,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 13,
+        "length": 250,
+        "seed": 417,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 14,
+        "length": 213,
+        "seed": 519,
+        "termination_reason": "offroad"
+      },
+      {
+        "episode": 15,
+        "length": 28,
+        "seed": 116,
+        "termination_reason": "offroad"
+      },
+      {
+        "episode": 16,
+        "length": 250,
+        "seed": 218,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 17,
+        "length": 250,
+        "seed": 320,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 18,
+        "length": 250,
+        "seed": 422,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 19,
+        "length": 250,
+        "seed": 524,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 20,
+        "length": 250,
+        "seed": 121,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 21,
+        "length": 250,
+        "seed": 223,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 22,
+        "length": 250,
+        "seed": 325,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 23,
+        "length": 250,
+        "seed": 427,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 24,
+        "length": 250,
+        "seed": 529,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 25,
+        "length": 250,
+        "seed": 126,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 26,
+        "length": 250,
+        "seed": 228,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 27,
+        "length": 250,
+        "seed": 330,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 28,
+        "length": 250,
+        "seed": 432,
+        "termination_reason": "timeout"
+      },
+      {
+        "episode": 29,
+        "length": 250,
+        "seed": 534,
+        "termination_reason": "timeout"
+      }
+    ],
+    "mean_episode_length": 241.36666666666667,
+    "policy_mode": "greedy_teacher_free_lowest_id_tie_break",
+    "termination_counts": {
+      "offroad": 2,
+      "timeout": 28
+    },
+    "unique_states_reached": 201
+  },
+  "exact_characterization": {
+    "one_bin": {
+      "curvature_bin/reachable": {
+        "comparisons": 116,
+        "flip_rate": 0.41379310344827586,
+        "flips": 48
+      },
+      "curvature_bin/representable": {
+        "comparisons": 12000,
+        "flip_rate": 0.03783333333333333,
+        "flips": 454
+      },
+      "curvature_bin/supported": {
+        "comparisons": 86,
+        "flip_rate": 0.4883720930232558,
+        "flips": 42
+      },
+      "curvature_bin/valid_manifold": {
+        "comparisons": 10500,
+        "flip_rate": 0.043238095238095235,
+        "flips": 454
+      },
+      "d_bin/reachable": {
+        "comparisons": 168,
+        "flip_rate": 0.08333333333333333,
+        "flips": 14
+      },
+      "d_bin/representable": {
+        "comparisons": 14400,
+        "flip_rate": 0.035277777777777776,
+        "flips": 508
+      },
+      "d_bin/supported": {
+        "comparisons": 104,
+        "flip_rate": 0.019230769230769232,
+        "flips": 2
+      },
+      "d_bin/valid_manifold": {
+        "comparisons": 12600,
+        "flip_rate": 0.040317460317460314,
+        "flips": 508
+      },
+      "duck_threat_bin/reachable": {
+        "comparisons": 136,
+        "flip_rate": 0.11764705882352941,
+        "flips": 16
+      },
+      "duck_threat_bin/representable": {
+        "comparisons": 14400,
+        "flip_rate": 0.029861111111111113,
+        "flips": 430
+      },
+      "duck_threat_bin/supported": {
+        "comparisons": 92,
+        "flip_rate": 0.10869565217391304,
+        "flips": 10
+      },
+      "duck_threat_bin/valid_manifold": {
+        "comparisons": 12600,
+        "flip_rate": 0.034126984126984124,
+        "flips": 430
+      },
+      "speed_bin/reachable": {
+        "comparisons": 206,
+        "flip_rate": 0.05825242718446602,
+        "flips": 12
+      },
+      "speed_bin/representable": {
+        "comparisons": 12000,
+        "flip_rate": 0.0185,
+        "flips": 222
+      },
+      "speed_bin/supported": {
+        "comparisons": 128,
+        "flip_rate": 0.0,
+        "flips": 0
+      },
+      "speed_bin/valid_manifold": {
+        "comparisons": 10500,
+        "flip_rate": 0.021142857142857144,
+        "flips": 222
+      },
+      "stop_distance_bin/reachable": {
+        "comparisons": 18,
+        "flip_rate": 0.0,
+        "flips": 0
+      },
+      "stop_distance_bin/representable": {
+        "comparisons": 13500,
+        "flip_rate": 0.04133333333333333,
+        "flips": 558
+      },
+      "stop_distance_bin/supported": {
+        "comparisons": 8,
+        "flip_rate": 0.0,
+        "flips": 0
+      },
+      "stop_distance_bin/valid_manifold": {
+        "comparisons": 11250,
+        "flip_rate": 0.0496,
+        "flips": 558
+      },
+      "stop_satisfied_bin/reachable": {
+        "comparisons": 24,
+        "flip_rate": 1.0,
+        "flips": 24
+      },
+      "stop_satisfied_bin/representable": {
+        "comparisons": 9000,
+        "flip_rate": 0.059555555555555556,
+        "flips": 536
+      },
+      "stop_satisfied_bin/supported": {
+        "comparisons": 8,
+        "flip_rate": 1.0,
+        "flips": 8
+      },
+      "stop_satisfied_bin/valid_manifold": {
+        "comparisons": 6750,
+        "flip_rate": 0.011555555555555555,
+        "flips": 78
+      },
+      "tracking_error_bin/reachable": {
+        "comparisons": 226,
+        "flip_rate": 0.7699115044247787,
+        "flips": 174
+      },
+      "tracking_error_bin/representable": {
+        "comparisons": 14400,
+        "flip_rate": 0.04541666666666667,
+        "flips": 654
+      },
+      "tracking_error_bin/supported": {
+        "comparisons": 140,
+        "flip_rate": 0.7714285714285715,
+        "flips": 108
+      },
+      "tracking_error_bin/valid_manifold": {
+        "comparisons": 12600,
+        "flip_rate": 0.051904761904761905,
+        "flips": 654
+      }
+    },
+    "primitive_distribution": {
+      "reachable": {
+        "ApproachCrossing": 74,
+        "CruiseCurveLeft": 8,
+        "CruiseCurveRight": 3,
+        "CruiseStraight": 8,
+        "DecelerateLane": 3,
+        "DecelerateStop": 6,
+        "EmergencyLaneRecovery": 5,
+        "LaneCorrectLeft": 22,
+        "LaneCorrectRight": 19,
+        "ResumeAfterStop": 19,
+        "StopHold": 8,
+        "UnsafeProceed": 4,
+        "YieldDecelerate": 2,
+        "YieldHold": 20
+      },
+      "representable": {
+        "ApproachCrossing": 2250,
+        "ApproachStop": 2001,
+        "CruiseCurveLeft": 18,
+        "CruiseCurveRight": 15,
+        "CruiseStraight": 9,
+        "DecelerateLane": 3,
+        "DecelerateStop": 9,
+        "EmergencyLaneRecovery": 115,
+        "LaneCorrectLeft": 126,
+        "LaneCorrectRight": 27,
+        "LaneDeparture": 137,
+        "ResumeAfterStop": 675,
+        "StopHold": 15,
+        "UnsafeProceed": 3562,
+        "YieldDecelerate": 3,
+        "YieldHold": 35
+      },
+      "supported": {
+        "ApproachCrossing": 50,
+        "CruiseCurveLeft": 7,
+        "CruiseCurveRight": 3,
+        "CruiseStraight": 7,
+        "DecelerateLane": 2,
+        "DecelerateStop": 5,
+        "EmergencyLaneRecovery": 1,
+        "LaneCorrectLeft": 17,
+        "LaneCorrectRight": 14,
+        "ResumeAfterStop": 14,
+        "StopHold": 4,
+        "YieldHold": 14
+      },
+      "valid_manifold": {
+        "ApproachCrossing": 1800,
+        "ApproachStop": 2001,
+        "CruiseCurveLeft": 9,
+        "CruiseCurveRight": 6,
+        "CruiseStraight": 9,
+        "DecelerateLane": 3,
+        "DecelerateStop": 9,
+        "EmergencyLaneRecovery": 61,
+        "LaneCorrectLeft": 45,
+        "LaneCorrectRight": 27,
+        "LaneDeparture": 65,
+        "ResumeAfterStop": 675,
+        "StopHold": 15,
+        "UnsafeProceed": 3112,
+        "YieldDecelerate": 3,
+        "YieldHold": 35
+      }
+    },
+    "provenance_counts": {
+      "reached_only": 201,
+      "unknown": 8799
+    },
+    "q_margin": {
+      "reachable": {
+        "count": 201,
+        "low_margin_boundary_rate": 0.05970149253731343,
+        "mean": 5.384881064773014,
+        "median": 5.378309547901154,
+        "near_boundary_rate": 0.5970149253731343,
+        "one_bin_action_boundary_any_rate": 1.0,
+        "one_bin_supported_action_boundary_rate": 0.5373134328358209,
+        "p05": 0.0011701248586177826,
+        "p95": 12.916900634765625,
+        "tie_rate": 0.04477611940298507
+      },
+      "representable": {
+        "count": 9000,
+        "low_margin_boundary_rate": 0.9664444444444444,
+        "mean": 0.13602928850946774,
+        "median": 0.0,
+        "near_boundary_rate": 0.9784444444444444,
+        "one_bin_action_boundary_any_rate": 0.15811111111111112,
+        "one_bin_supported_action_boundary_rate": 0.012,
+        "p05": 0.0,
+        "p95": 0.0,
+        "tie_rate": 0.9654444444444444
+      },
+      "supported": {
+        "count": 138,
+        "low_margin_boundary_rate": 0.007246376811594203,
+        "mean": 6.355128019670214,
+        "median": 5.883342400193214,
+        "near_boundary_rate": 0.7898550724637681,
+        "one_bin_action_boundary_any_rate": 1.0,
+        "one_bin_supported_action_boundary_rate": 0.782608695652174,
+        "p05": 1.8628227308392526,
+        "p95": 15.13108350634575,
+        "tie_rate": 0.0
+      },
+      "valid_manifold": {
+        "count": 7875,
+        "low_margin_boundary_rate": 0.9616507936507936,
+        "mean": 0.15546204401082026,
+        "median": 0.0,
+        "near_boundary_rate": 0.9753650793650793,
+        "one_bin_action_boundary_any_rate": 0.15161904761904763,
+        "one_bin_supported_action_boundary_rate": 0.013714285714285714,
+        "p05": 0.0,
+        "p95": 0.0,
+        "tie_rate": 0.9605079365079365
+      }
+    },
+    "safety_properties": {
+      "P-DUCK-CROSSING-NEAR-NO-FAST": {
+        "breakdown": {
+          "reachable": {
+            "applicable": 20,
+            "violation_rate": 0.2,
+            "violations": 4
+          },
+          "reached_only": {
+            "applicable": 20,
+            "violation_rate": 0.2,
+            "violations": 4
+          },
+          "representable": {
+            "applicable": 1800,
+            "violation_rate": 0.9861111111111112,
+            "violations": 1775
+          },
+          "supported": {
+            "applicable": 10,
+            "violation_rate": 0.0,
+            "violations": 0
+          },
+          "unknown": {
+            "applicable": 1780,
+            "violation_rate": 0.994943820224719,
+            "violations": 1771
+          },
+          "valid_manifold": {
+            "applicable": 1575,
+            "violation_rate": 0.9841269841269841,
+            "violations": 1550
+          }
+        },
+        "specification": {
+          "description": "A near crossing pedestrian forbids fast macro-actions.",
+          "expectation": "action in {slow_left, slow_straight, slow_right, brake}",
+          "precondition": "duck_threat == CROSSING_NEAR",
+          "property_id": "P-DUCK-CROSSING-NEAR-NO-FAST"
+        },
+        "violation_examples_first_20": [
+          {
+            "action_id": 2,
+            "action_name": "fast_right",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": false
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              1,
+              1,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              2,
+              1,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              3,
+              1,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": false
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              1,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              1,
+              1,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              2,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              2,
+              1,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              3,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              3,
+              1,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              2,
+              0,
+              1,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": false
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              2,
+              1,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              2,
+              1,
+              1,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          }
+        ]
+      },
+      "P-STOP-NEAR-UNSATISFIED-NO-FAST": {
+        "breakdown": {
+          "reachable": {
+            "applicable": 8,
+            "violation_rate": 0.0,
+            "violations": 0
+          },
+          "reached_only": {
+            "applicable": 8,
+            "violation_rate": 0.0,
+            "violations": 0
+          },
+          "representable": {
+            "applicable": 1125,
+            "violation_rate": 0.9857777777777778,
+            "violations": 1109
+          },
+          "supported": {
+            "applicable": 4,
+            "violation_rate": 0.0,
+            "violations": 0
+          },
+          "unknown": {
+            "applicable": 1117,
+            "violation_rate": 0.9928379588182632,
+            "violations": 1109
+          },
+          "valid_manifold": {
+            "applicable": 1125,
+            "violation_rate": 0.9857777777777778,
+            "violations": 1109
+          }
+        },
+        "specification": {
+          "description": "A near unsatisfied stop line forbids fast macro-actions.",
+          "expectation": "action in {slow_left, slow_straight, slow_right, brake}",
+          "precondition": "stop_distance_bin == NEAR and stop_satisfied == false",
+          "property_id": "P-STOP-NEAR-UNSATISFIED-NO-FAST"
+        },
+        "violation_examples_first_20": [
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              0
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              1
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              2
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              3
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              0,
+              3,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              3,
+              0,
+              0
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              3,
+              0,
+              1
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              3,
+              0,
+              2
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              3,
+              0,
+              3
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              1,
+              3,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              2,
+              3,
+              0,
+              0
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              2,
+              3,
+              0,
+              1
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              2,
+              3,
+              0,
+              2
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              2,
+              3,
+              0,
+              3
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              0,
+              2,
+              3,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              1,
+              0,
+              3,
+              0,
+              0
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              1,
+              0,
+              3,
+              0,
+              1
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              1,
+              0,
+              3,
+              0,
+              2
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              1,
+              0,
+              3,
+              0,
+              3
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          },
+          {
+            "action_id": 0,
+            "action_name": "fast_left",
+            "evaluation_reach_count": 0,
+            "index": [
+              0,
+              0,
+              1,
+              0,
+              3,
+              0,
+              4
+            ],
+            "provenance_status": "unknown",
+            "supported": false,
+            "valid_manifold": true
+          }
+        ]
+      }
+    },
+    "state_counts": {
+      "reachable": 201,
+      "representable": 9000,
+      "supported": 138,
+      "valid_manifold": 7875
+    }
+  },
+  "files": {
+    "evaluation_reach_counts": "runs/explanations/m8_exact_q/evaluation_reach_counts.npy",
+    "one_bin_flips": "runs/explanations/m8_exact_q/one_bin_action_flips.csv",
+    "policy_map": "runs/explanations/m8_exact_q/exact_policy_map.csv",
+    "safety_violations": "runs/explanations/m8_exact_q/safety_property_violations.csv"
+  },
+  "method": "exact finite Q-policy characterization and verification",
+  "policy_mode": "greedy_teacher_free_lowest_id_tie_break",
+  "stage": "M8",
+  "support_contract": {
+    "historical_proxy": "evaluation_reach_count >= 3",
+    "proxy_is_not_training_visitation": true,
+    "training_visit_count": null,
+    "training_visit_counts_available": false
+  }
+}

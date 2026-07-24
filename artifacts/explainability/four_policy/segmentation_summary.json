@@ -1,0 +1,37 @@
+{
+  "deterministic": true,
+  "development_seeds": {
+    "q_learning": [
+      20101,
+      20202,
+      20303
+    ],
+    "sac": [
+      20101,
+      20202,
+      20303
+    ],
+    "sarsa": [
+      20101,
+      20202,
+      20303
+    ],
+    "td3": [
+      20101,
+      20202,
+      20303
+    ]
+  },
+  "full_trajectory_only": true,
+  "instances": 4000,
+  "method": "change_point",
+  "per_solver_distance_threshold": {
+    "q_learning": 8.243005001533414,
+    "sac": 9.755246844463787,
+    "sarsa": 8.497325700385662,
+    "td3": 12.29405371593066
+  },
+  "segments": 415,
+  "stage": "CEDP3-CEDP4",
+  "trajectories": 20
+}

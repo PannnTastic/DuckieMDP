@@ -1,0 +1,65 @@
+experiment:
+  name: certified_explanation_derived_primitives_v2_td3_pilot
+  output_dir: runs/explanations/cedp_v2_td3_pilot
+  # Gated shared environment so TD3 sees the same restricted Duckie observation
+  # it was trained under (the main cedp_v2 shared config is ungated).
+  shared_environment_config: configs/explainability/shared_gated_duck_config.yaml
+  m2_lexicon: docs/primitive_lexicon_v1.freeze.json
+
+policies:
+  td3:
+    checkpoint: runs/td3_full_consolidate/td3_final.pt
+    training_config: runs/td3_full_consolidate/config.yaml
+    evaluation_mode: deterministic_actor_mean
+
+explanation_artifacts:
+  m6_response_curves: runs/explanations/m6_response_curves/m6_summary.json
+  m7_metamorphic: runs/explanations/m7_metamorphic/m7_summary.json
+  m8_exact_q: runs/explanations/m8_exact_q/m8_summary.json
+  m9_sac_internal: runs/explanations/m9_sac_internal/m9_summary.json
+  m10_rules: runs/explanations/m10_rule_extraction/m10_summary.json
+  m11_bottom_up: runs/explanations/m11_bottom_up_clustering/m11_summary.json
+  m12_unified: runs/explanations/m12_unified_report/unified_explanation_report.json
+  m13_sarsa: runs/explanations/m13_sarsa/m13_sarsa_explanation_report.json
+
+baselines_not_main_input:
+  eddp_v1_acceptance: docs/eddp_v1_acceptance.json
+  eddp_v1_results: docs/explanation_derived_driving_primitives_results.md
+
+collection:
+  seeds: [20101]
+  episodes_per_seed: 1
+  episode_seed_stride: 100000
+  max_decisions: 50
+  minimum_certified_instances_per_solver: 1
+
+counterfactual:
+  max_horizon: 15
+  fixed_horizons: [1, 5, 10, 15]
+  event_horizon: false
+
+segmentation:
+  development_seed_count: 1
+  distance_quantile: 0.85
+  minimum_duration: 3
+  primary: change_point
+  fixed_window_baselines: [3, 5]
+
+discovery:
+  development_seed_count: 1
+  radius_multiplier: 1.25
+
+certification:
+  minimum_support: 4
+  minimum_seeds: 1
+  minimum_bootstrap_ari: 0.70
+  maximum_outcome_coherence_ratio: 0.80
+  require_full_trajectory: true
+  require_all_member_certificates: true
+
+ablation:
+  include_legacy_sparse_baseline: false
+  include_fixed_windows: true
+  include_decision_only: true
+  include_without_verification: true
+  include_without_temporal: true
